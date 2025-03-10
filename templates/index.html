@@ -1,0 +1,445 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script></script>
+
+<!----BANNER------->
+{% if not current_user.is_authenticated %}
+<!--    <div  class="banner-container">-->
+
+<!--        <div style="" class="banner-animator">-->
+<!--            <img alt="young-hustlers-climbing-for-success" src="static/images/young-people-helping-others-mount.JPG" />-->
+<!--        <div class="banner-caption"></div>-->
+<!--        </div>-->
+
+<!--        <div style="animation-delay:0.5s;z-index:701" class="banner-cap anim-banner">-->
+<!--            <h2 style="font-size:45px;color:white" >THE HUSTLERS TIME, </h2>-->
+<!--            <div class="grid-div">-->
+<!--                <h1 style="font-size:250%;color:white">Welcome to the <br> <span  class="spans">Grind</span></h1>-->
+<!--                <div class="img-div"><img src="/static/icons/Eswatini-43.svg" /></div>-->
+<!--            </div>-->
+<!--            <a  href="sign_up"><button style="padding:10px" class="btns" id="join_btn">Join Community</button></a>-->
+<!--        </div>-->
+
+<!--    </div>-->
+{% endif %}
+
+<!----------------------CHECK OUT THE BANNER--------------------->
+
+
+
+<!--------------------------BANNER END--------------------------->
+<style>
+    .profile-sections{
+        display:none;
+    }
+    .next-btns{
+       font-size:40px;
+       color:white;
+    }
+    @media all and (max-width: 575px) {
+        .not-on-mobile{display:none;}
+        .h1-tag{font-size:26px;}
+        .topics{padding:5px;}
+        .tags{margin-top:-20px;
+    }
+</style>
+
+<div class="tags">
+
+          <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for  category, message in messages %}
+                            <div class="flash-messages alert-{{category}}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+          </div>
+
+<!--    <div style="position:relative;" >-->
+<!--        <div class="skateboarding">-->
+<!--            <i class="fa-solid fa-compass"></i>-->
+<!--            <i class="fa-solid fa-bars"></i>-->
+<!--        </div>-->
+      <div id="swipe-cont" style="width:100%">
+          <section style="background-color:" class="flex-justify-align profile-sections">
+                 <div style="position:" class="topics">
+                      <div style="background-color:"  class="paras-subtopics  caption">
+                          <h1 id="main-welcome-h1" class="h1-tag"><span class="spans">At THE HUSTLERS TIME,</span><br>We are nurturing a generation of young professionals through practical
+                              and innovative ideas </h1>
+                      </div>
+                     <div class="not-on-mobile"><a  href="sign_up"><button style="padding:10px" class="btns not-on-mobile" id="join_btn">Join Community</button></a></div>
+        <!--              <div  style="position:"  class="paras-subtopics  caption">-->
+        <!--                  <h1><span class="spans">Get Employability Skills</span> through <br> Are you looking for a Job but no experience, we are your plug!</h1>-->
+        <!--              </div>-->
+        <!--              <div style="position:"  class="paras-subtopics  caption">-->
+        <!--                  <h1><span class="spans">Gain Entreprenuership Skills</span> through <br> Short-term, Remote & Freelance Jobs, Today!</h1>-->
+        <!--              </div>-->
+                  </div>
+
+                  <div id="not-on-mobile" style=""  class="optimise-mobile trim-edges anim not-on-mobile">
+                      <img style="height:inherit" class="inherent" alt="young-hustlers-climbing-for-success" src="static/images/young-people-helping-others-mount.jpeg" />
+<!--                       <img class="inherent" alt="the-hustlers-time-young-professionals" src="static/icons/young-people-analysing-jobs-online.png" />-->
+                  </div>
+
+<!--              <button class="next-btns"  onclick="showNextSection()"> + </button>-->
+
+          </section>
+          <section style="background-color:" class="flex-justify-align profile-sections">
+<!--                  <button class="next-btns"  onclick="showPreviousSection()"> - </button>-->
+                  <div style="position:" class="topics">
+                      <div style="background-color:"  class="paras-subtopics  caption">
+                          <h1 class="h1-tag">Advocating for Remote Job Opportunities
+                              to Empower Professionals with<br><span class="spans"> Disabilities and Enhance Equality</span></h1>
+                      </div>
+                  </div>
+                  <div style="background-color:"  class="optimise-mobile anim">
+                       <img id="disabled-img" class="inherent" alt="the-hustlers-time-young-professionals" src="static/icons/88xl_7f7e_230817.jpg" />
+                  </div>
+<!--                  <button class="next-btns"  onclick="showNextSection()"> + </button>-->
+          </section>
+          <section style="background-color:" class="flex-justify-align profile-sections">
+<!--                  <button class="next-btns"  onclick="showPreviousSection()"> - </button>-->
+                  <div style="position:" class="topics">
+                      <div style="background-color:"  class="paras-subtopics  caption">
+                          <h1 class="h1-tag"><span class="spans">Generating Work Experience</span><br> for the Youth through Short-term, Remote & Freelance Jobs.</h1>
+                      </div>
+                  </div>
+
+                  <div style="background-color:"  class="optimise-mobile anim">
+                       <img class="inherent" alt="the-hustlers-time-young-professionals" src="static/icons/young-people-analysing-jobs-online.png" />
+                  </div>
+<!--                  <button class="next-btns"  onclick="showNextSection()"> + </button>-->
+          </section>
+      </div><br><div style="margin-top:20px;"></div>
+        <div class="btns-cont">
+            <div id="icon1" onclick="showNextSection(event, 'icon1')" class="sel-icon"></div>
+            <div id="icon2" onclick="showNextSection(event, 'icon2')" class="sel-icon"></div>
+            <div id="icon3" onclick="showNextSection(event, 'icon3')" class="sel-icon"></div>
+        </div><div style="margin-top:50px;"></div>
+
+      <a class="btn-how" href="/how_does_it_work">See How Does It Work?</a>
+
+      <div class="marginise"></div>
+<!--    <div>This initiative is a community service developed by Tech Xolutions to partner with local companies, institutions and individuals to create innovative-->
+<!--        and timely solutions for youth to thrive in their career endeavours, breaking the traditional barriers that limit them from getting jobs, starting successfull businesses and promoting thier talents.</div>-->
+      <fieldset style="font-size:25px;color:#006769;border:2px solid #006769;padding:3% 2%;border-radius:15px;height:100%;" class="paras"><legend><span><img  style="width:80px" alt="thehustlerstime-partnering-with-companies" src="static/icons/handshake-01.svg" /></span></legend>
+          “This community service initiative, developed by Tech Xolutions, aims to collaborate with local & international companies,  institutions,
+          and individuals to create innovative and timely solutions that empower youth in Eswatini to excel in their career pursuits. By breaking traditional barriers that
+          hinder their ability to secure jobs, establish successful businesses, and showcase their talents, we strive to support and uplift the next generation”
+      </fieldset><br>
+
+<!--      <div style="display:flex;justify-content:center"><h2 style="font-weight:600;color:#006769;">Join our community and showcase your potential to local companies</h2></div>-->
+
+<!--      <p style="font-size:25px;" class="paras-subtopics">Join the Large Community of Eswatini's Young People and make the most of your skills and abilities.-->
+<!--              Showcase your skills and become an integral part of Eswatini's future prospects;-->
+<!--              Companies and Institutions are waiting to see what you have got.-->
+<!--      </p>-->
+<!--  <div class="actions">-->
+<!--    <a  href="sign_up"><button class="btns-margin btns" id="join_btn">Join Community</button> </a>-->
+<!--  </div>-->
+
+        <div class="home-content">
+            <div class='home-img-div'  style="background-color:;border:none"><img class="prf-image" alt="thehustlerstime-project-images" src="/static/images/young-builder-applying-for-jobs-eswatini.jpg" /></div>
+            <div class='home-tags' style="">
+                <p><span style="font-size:1.5em" >Show The World What You Have</span><br>Improve your chances to get employed, show the world your potentiality.</p>
+            </div>
+        </div>
+
+        <div class="home-content">
+            <div class='home-tags' style="margin-left:;">
+                <p><span style="font-size:1.5em" >Unlock Your Dream Prospects</span><br>Unleash Your Full Potential, Improve Your Skills & Work Experience while still waiting for your Dream Job.</p>
+            </div>
+            <div class='home-img-div'  style="background-color:;border:none"><img class="prf-image" alt="thehustlerstime-project-images-eswatini" src="/static/images/virtual-assistant-conducting-business-analytics-at-home.jpg"/></div>
+        </div>
+
+        <div class="home-content">
+            <div class='home-img-div'  style="background-color:;border:none"><img class="prf-image" src="/static/images/Entrepreneurs-collaborating-on-skill-development.jpg"/></div>
+            <div class='home-tags' style="margin-left:;">
+                <p><span style="font-size:1.5em" >Maximize Your Potential</span><br> Ignite Your Career with Must Have Skills for Innovative Entrepreneurial skills.</p>
+            </div>
+        </div>
+        <br><br><br>
+
+
+        <div style="width:100%;" class="row-flex">
+            <div  class="big-btns"><a style="padding:40px;" href="/job_ads"><span class="notif-numb-div-ad">{{count_jobs}}</span> Jobs you can for Today!!</a>
+            <img style="position:absolute;left:45px;bottom:0px;height:50px" class="" src="static/icons/jobs_icon.png"/>
+            </div>
+            <div  class="big-btns-invtd"><a style="padding:40px;" href="/users">Hire Job Seekers</a>
+                <img style="position:absolute;left:45px;bottom:0px;height:50px" src="static/icons/tht_logo_icon.png"/>
+            </div>
+            <div  class="big-btns"><a style="padding:40px;" href="/sign_up">Register Today!!</a>
+                <img style="position:absolute;left:45px;bottom:0px;height:100px" src="static/icons/sign_up_icon.png"/>
+            </div>
+        </div>
+
+<!---   Temporally Closed
+        <div style="margin-top:150px" >
+            <div style="display:flex;align-items:center;width:100%;font-size:20px;"><h1 style="color:#006769">Testimonials</h1><div class="title-strokes" style="background-color:#23aeb2;height:4px;width:550px;"></div></div>
+            <div class="home-content-why-hot">
+
+                <div style="" class="home-cont-items testm_style anim">
+                    <div class="center-testm-img">
+                        <div style="" class="img-testm-cont">
+                              <img class="prf-image" src="static/images/default.jpg">
+                        </div>
+                    </div>
+                    <label><span style="font-weight:600 !important;font-size:22px;color:#006769">Thuli Madonsela</span> <br>
+                        <span style="font-weight:500 !important;font-size:17px;color:#909090">Accountant,</span><br>
+                        <span style="font-weight:500 !important;font-size:17px;color:#909090">Swaziland Revenue Authory</span></label>
+                    <div class="line-separator"></div>
+                    <p class="" style="width:90%;"><span>"</span>Look! Self-directed learning and proactive skill development are highly valuable in demonstrating your commitment, growth mindset, and adaptability to potential employers.
+                        By staying ahead and continuously updating your skills, you enhance your chances of standing out in the competitive job market. Good luck!<span>"</span>
+                    </p>
+                </div>
+
+                <div style="" class="home-cont-items testm_style anim" >
+                    <div class="center-testm-img">
+                        <div style="" class="img-testm-cont">
+                              <img class="prf-image" src="static/images/default.jpg">
+                        </div>
+                    </div>
+                    <label><span style="font-weight:600 !important;font-size:22px;color:#006769">Thembi Mahlalela</span> <br>
+                        <span style="font-weight:500 !important;font-size:17px;color:#909090">Attendant,</span><br>
+                        <span style="font-weight:500 !important;font-size:17px;color:#909090">Ezulwini Total Energies</span></label>
+                    <div class="line-separator"></div>
+                    <p class="" style="width:90%;"><span>"</span>Look! Self-directed learning and proactive skill development are highly valuable in demonstrating your commitment, growth mindset, and adaptability to potential employers.
+                        By staying ahead and continuously updating your skills, you enhance your chances of standing out in the competitive job market. Good luck!<span>"</span>
+                    </p>
+                </div>
+
+                <div style="" class="home-cont-items testm_style anim" >
+                    <div class="center-testm-img">
+                        <div style="" class="img-testm-cont">
+                              <img class="prf-image" src="static/images/default.jpg">
+                        </div>
+                    </div>
+                    <label><span style="font-weight:600 !important;font-size:22px;color:#006769">Sifiso Nkambule</span> <br><span style="font-weight:500 !important;font-size:17px;color:#909090">Communications Officer,</span><br>
+                        <span style="font-weight:500 !important;font-size:17px;color:#909090">Swaziland Revenue Authory</span></label>
+                    <div class="line-separator"></div>
+                    <p class="" style="width:90%;"><span>"</span>Look! Self-directed learning and proactive skill development are highly valuable in demonstrating your commitment, growth mindset, and adaptability to potential employers.
+                        By staying ahead and continuously updating your skills, you enhance your chances of standing out in the competitive job market. Good luck!<span>"</span>
+                    </p>
+
+                </div>
+            </div>
+        </div>-->
+
+        <div class="width-fill-scrn" >
+            <div style="width:70%;margin:0 auto;">
+                <div style="display:flex;align-items:center;width:100%;font-size:20px;"><h1 style="color:#006769">Eswatini Companies are Joining Hands to Empower Youth </h1><div class="title-strokes" style="background-color:coral;height:4px;width:550px;"></div></div>
+                <div id="" style="" class="flex-justify-align">
+                    <p> This initiative empowers young people with industry-ready skills and chances, fostering equal opportunities for talented individuals to find employment and build their careers.</p>
+                    <p>By offering training and support, you can equip them with safe, healthy, and successful lives whilst giving back to the community.</p>
+                    <p>It’s inspiring to see local companies not only providing job opportunities, but also creating a pathway for learning and earning before settling for a permanent job.</p>
+                </div>
+                <h2 style="margin-bottom:0px;">Let's work to empower young people and make a positive impact!</h2>
+<!--                <div class="actions">-->
+<!--                    <a  href="sign_up">Join Community</a>-->
+<!--                </div>-->
+            </div>
+      </div><br><br>
+
+
+      {% if comp_len != 0 %}
+            <h1 style="margin-top:;color:coral;font-weight:600">Partnering Companies for Youth Empowerment</h1>
+<!--      <fieldset style="font-size:25px;color:#006769;border:2px solid #006769;padding:3% 2%;border-radius:15px;height:100%;" class="paras-subtopics"><legend><h1 style="margin-top:80px;color:coral">Partnering Companies</h1>-->
+          <div style="" class="companies-cont  compns-cont">
+                {%for cmp in companies_ls %}
+                <div style="position:relative;padding:30px;border-radius:10px;border:2px solid #eee" class="companies-chd-cont">
+                    {% if cmp.image == "default.jpg" %}
+                        <a class="img-link" href="/"><div class="img-comp border_none"></div></a>
+                    {% else %}
+                        <a class="img-link" href="/"><div class="img-comp border_none"><img class="prf-image" src="static/images/{{cmp.image}}"></div></a>
+                    {% endif %}
+                    <div><h4 style="font-weight:600;text-align:center;width:100%;color:#006769;margin-bottom:-2px;">{{cmp.name}}</h4></div>
+                    <a href="tel:{{cmp.company_contacts}}"><div style="background-color:;margin:2px;" class="">Contact</div></a>
+                    <div style="min-width:100px;max-width:150px;background-color:;padding:4px 100px;border:none;" class="flex-gap-align hide-scrollbar">
+                        <p></p>
+                        {% if cmp.email %}
+                            <a href="mailto:{{cmp.company_contacts}}"><div style="background-color:;margin:2px;" class=""><img class="social-icon sized" src="static/icons/email_icon.png" /></div></a>
+                        {% endif %}
+                        {% if cmp.company_contacts %}
+
+                        {% endif %}
+                        {% if cmp.web_link %}
+                            <a href="{{cmp.web_link}}"><i style="font-size:25px;color:#bbb;background-color:;padding:5px 10px" class="material-symbols-rounded a-hover">language</i></a>
+                        {% endif %}
+                        {% if cmp.fb_link %}
+                            <a href="{{cmp.fb_link}}" ><div style="background-color:;margin:2px;" class=""><img class="social-icon sized" src="static/icons/fb_icon.png" /></div></a>
+                        {% endif %}
+                        {% if cmp.twitter_link %}
+                            <a href="{{cmp.twitter_link}}"><div style="background-color:;margin:2px;" class=""><img class="social-icon sized" src="static/icons/x_icon.png" /></div></a>
+                        {% endif %}
+                        {% if cmp.youtube %}
+                            <a href="{{cmp.youtube}}"><div style="background-color:;margin:2px;" class=""><img class="social-icon sized" src="static/icons/youtube_icon.png" /></div></a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+          </div>
+        {% endif %}
+
+
+      <div style="display:flex;flex-direction:column;margin-top:100px;">
+            <div style="display:flex;align-items:center;width:100%;font-size:20px;"><div style="background-color:coral;height:4px;width:550px;" class="title-strokes"></div><h1 style="" >The Hustlers Time Project</h1></div>
+
+<!--            <div style="margin-top:20px;" >-->
+<!--                <p>T.H.T is highly interested in finding alternative ways for the unemployed youth of Eswatini to consecutively get short-term job opportunities from various employers.-->
+<!--                    The sole purpose (beyond earning) is to help them gain work experience and increase their potential so that they eventually be employable and be empowered to develop new ideas to start their own businesses, though not permanently employed. The Hustlers Time is an ongoing project, as the name implies,-->
+<!--                we want to turn the other side of the coin and explore other alternatives that be put in place to curb unemployment rate and at the same time produce a workforce that will be game-changer in the industry.-->
+<!--                We want to stress out need to also focus on effectively matching individuals with the right opportunities based on their skills, interests, and potential they are practically showcasing.</p>-->
+<!--                <p>-->
+<!--                    By emphasizing potential and merit over other constraints, we are helping to create a more equitable job market and increase the chances for young individuals to succeed in their careers.-->
+<!--                    This can involve thorough assessments, interviews, and understanding the needs of both job-seekers and employers.-->
+<!--                </p>-->
+<!--            </div>-->
+
+            <div class="flex-justify-align">
+
+                    <div style="padding:70px 10px;margin:10px;" class="home-ads anim">
+                       <p style="width:90%;color:#006769;font-weight:500">Are you jobless and finding it hard to get employed? Join the T.H.T (The Hustlers Time) Network and to explore other alternatives to increase your changes
+                            of employment, today. Stop looking for adverts and starts adverting yourself, make companies start to chase you!</p>
+                    </div>
+
+                    <div style="padding:70px 10px;margin:10px;" class="home-ads anim">
+                       <p style="width:90%;color:#006769;font-weight:500"> We are offering this services free of charge (to young people) to prioritize placing individuals in positions of preference based on their potential in the industry.
+                           This approach can be beneficial in promoting equal, urgent job opportunities for talented individuals who may have experienced some barriers due to a number of issues.</p>
+                    </div>
+
+            </div>
+
+      </div>
+
+
+
+      <div style="margin-top:30px;" class="actions">
+<!--            <a  href="sign_up"><button class="btns-margin btns" id="join_btn">Join T.H.T</button> </a>-->
+      </div>
+
+
+      <div class="footer" style="" >
+            <div style="width:100%;">
+
+               <!--- <div style="" class="flex-justify-align">
+                  <div style="" class="flex-column">
+                      <a href="#">Home</a>
+                      <a href="#">About</a>
+                      <a href="#">Contacts</a>
+                      <a href="#">Jobs</a>
+                  </div>
+
+                  <div style="" class="flex-column">
+                      <a href="#">Email Us</a>
+                      <a href="#">Login</a>
+                      <a href="#">Sign-up</a>
+                      <a href="#">Company Sign-up</a>
+
+                  </div>
+
+                  <div  class="flex-column">
+                      <a href="#">Home</a>
+                      <a href="#">About</a>
+                      <a href="#">Contacts</a>
+                      <a href="#">Jobs</a>
+                  </div>
+
+
+                </div>--->
+                <div class="footer-cap" style="display:flex;justify-content:center;width:100%;font-size:30px;"><h3 style="color:white">2023, The Hustlers Time (T.H.T) - All Rights Reserved </h3></div>
+            </div>
+      </div>
+
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<script>
+
+    var sections = document.querySelectorAll(".profile-sections");
+    var selIcon = document.querySelectorAll(".sel-icon");
+    var currentSectionIndex = 0;
+    var firstSection = sections[0];
+    var noSections = sections.length;
+
+    if (currentSectionIndex == 0){
+        firstSection.style.display = "flex";
+        selIcon[currentSectionIndex].classList.toggle("sel-icon-bg");
+        }else{
+            firstSection.style.display = "none";
+    };
+
+function showNextSection(event, clickedId) {
+    event.preventDefault(); // Prevent reloading
+
+    console.log("Clicked ID: ", clickedId);
+
+    for (let i = 0; i < sections.length; i++) {
+        if (clickedId == "icon1" && i === 0) {
+            sections[i].style.display = "flex";
+            selIcon[i].classList.add("sel-icon-bg");
+            console.log("Clicked ID: ", clickedId,i);
+        } else if (clickedId == "icon2" && i === 1) {
+            sections[i].style.display = "flex";
+            selIcon[i].classList.add("sel-icon-bg");
+            console.log("Clicked ID: ", clickedId,i);
+        } else if (clickedId == "icon3" && i === 2) {
+            sections[i].style.display = "flex";
+            selIcon[i].classList.add("sel-icon-bg");
+            console.log("Clicked ID: ", clickedId,i);
+        } else {
+            selIcon[i].classList.remove("sel-icon-bg");
+            //selIcon[i].style.background = "#eee"; // Reset style for non-clicked icons
+            sections[i].style.display = "none"; // Hide sections not clicked
+            console.log("Not Clicked ID: ",i);
+        }
+    }
+}
+
+var currentIndex = 0; // Initialize the current section index
+
+// Get the element to which the swipe functionality will be added
+var swipeContainer = document.getElementById('swipe-cont');
+
+// Create a new instance of Hammer for the swipe container
+var hammertime = new Hammer(swipeContainer);
+
+// Add a swipe event listener
+hammertime.on('swipe', function(ev) {
+    // Handle the swipe based on the direction
+    if (ev.direction === Hammer.DIRECTION_LEFT) {
+        // Handle swipe left
+        console.log('Swiped left!');
+        if (currentIndex < sections.length - 1) {
+            sections[currentIndex].style.display = "none";
+            sections[currentIndex + 1].style.display = "flex";
+            selIcon[currentIndex].classList.remove("sel-icon-bg");
+            selIcon[currentIndex+1].classList.add("sel-icon-bg");
+            currentIndex++;
+            console.log("Current Section Index: " + currentIndex);
+        } else {
+            console.log("Reached the last section, cannot swipe left.");
+        }
+    } else if (ev.direction === Hammer.DIRECTION_RIGHT) {
+        // Handle swipe right
+        console.log('Swiped right!');
+        if (currentIndex > 0) {
+            sections[currentIndex].style.display = "none";
+            sections[currentIndex - 1].style.display = "flex";
+            selIcon[currentIndex].classList.remove("sel-icon-bg");
+            selIcon[currentIndex-1].classList.add("sel-icon-bg");
+            currentIndex--;
+            console.log("Current Section Index: " + currentIndex);
+        } else {
+            console.log("Reached the first section, cannot swipe right.");
+        }
+    }
+});
+</script>
+
+
+
+
+{% endblock %}

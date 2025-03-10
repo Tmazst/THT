@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="tags">
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for  category, message in messages %}
+                    <div class="flash-messages alert-{{category}}"> {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <br><br>
+    <h1 >Welcome, On Board! <br><span class="spans">Create Account</span></h1>
+
+  <p class="paras-subtopics">Join the Large Community of Eswatini's Young People and Showcase Your Skills & Abilities Today;</p>
+  <p style="color:coral;" class="paras-subtopics">To Register a Company Account, Please follow this link;<a  href="company_sign_up"> <u>Register Company</u></a></p>
+    <!--    <a  href="company_sign_up"><button class="btns-margin btns" id="join_btn3">Register Company</button> </a>-->
+    <!----FORM----->
+
+  <div id="login-page" class="general-flex">
+          <div style="max-width:600px;background-color:3ab;" class="form_container anim">
+                <div class="card">
+                    <div style="width:100%;" class="card-body py-md-4">
+                            <h2  style="padding-left:8%;padding-top:8%" class="card-title text-center">Register</h2>
+                            <form _lpchecked="1" action="" method="post">
+
+                                <div class="group">
+                                    {{register.hidden_tag()}}
+                                    {{ register.name(class="form-control",placeholder="Name")}}
+                                    {% if register.name.errors %}
+                                        {% for error in register.name.errors %}
+                                            <span class="span-error" >*Password {{error}}</span>
+                                        {% endfor %}
+                                     {% endif %}
+
+                                   <!--<input type="text" class="form-control" id="name" name="nm" placeholder="Name">-->
+                                </div>
+                                <div class="group">
+                                      {{ register.email(class="form-control",placeholder="Email")}}
+                                      {% if register.email.errors %}
+                                        {% for error in register.email.errors %}
+                                            <span class="span-error" >*{{error}}</span>
+                                        {% endfor %}
+                                     {% endif %}
+
+                                    <!--<input type="email" class="form-control" id="email" name="email" placeholder="Email">-->
+                                </div>
+                                <div class="group">
+
+<!--                                    <input class="form-control" type="text" id="pass_word" placeholder="Type Strong Password" name="password" />-->
+
+                                     {{ register.password(id="password", class="form-control",placeholder="Type Strong Password (e.g W4@%kg&.ew)")}}
+                                     {% if register.password.errors %}
+                                        {% for error in register.password.errors %}
+                                            <span class="span-error" >*Password {{error}}</span>
+                                        {% endfor %}
+                                     {% endif %}
+                                   <!--<input type="password" class="form-control" id="password" name="passw" placeholder="Password">-->
+                                </div>
+<!--                                <label for=""> Strength of password</label>-->
+                                    <div class="power-container">
+                                        <div id="power-point" class="power-point"></div>
+                                    </div><br>
+
+                                <div class="group">
+                                    <!--<input type="password" class="form-control" id="confirm-password" name="confirm_pass" placeholder="confirm-password">-->
+                                     {{ register.confirm(class="form-control",placeholder="Confirm Password")}}
+                                     {% if register.confirm.errors %}
+                                        {% for error in register.confirm.errors %}
+                                            <span class="span-error" >*Passwords that not match</span>
+                                        {% endfor %}
+                                     {% endif %}
+
+
+                                </div><br>
+
+                                <div style="" class="group">
+                                     <div style="padding-left:;width:100%;background-color:339ab3" class="d-flex">
+                                         <div>{{ register.submit(class="btns user-btns") }}</div><br>
+                                         <!--<input class="btns" type="submit" value="Create Account" />-->
+                                         <div><a class="links" href="login">Login instead?</a></div>
+                                    </div>
+                                </div><br>
+                                <small style="font-size:11px"> <span style="color:coral;font-weight:bold">Tip:</span>
+                                    Password should include at least One of the following; <span style="font-weight:bold">Capital Letter, Special Character, Number, Lower-case</span>
+                                </small>
+
+                            </form>
+                       </div>
+                    </div>
+
+      </div>
+      <div class="login-img-cont anim">
+                  <img src="static/icons/signup-img_Artboard.svg" />
+             </div>
+      </div><br>
+
+      <br><br><br><br><br><br><br><br>
+</div>
+<script>
+//Password Checker
+let password = document.getElementById("password");
+let power = document.getElementById("power-point");
+confirm_password = document.getElementById("confirm_password");
+
+if (password && power) {
+    password.oninput = function () {
+        let point = 0;
+        let value = password.value;
+        let widthPower =
+            ["1%", "25%", "50%", "75%", "100%"];
+        let colorPower =
+            ["#D73F40", "#DC6551", "#F2B84F", "#BDE952", "#3ba62f"];
+
+        if (value.length >= 6) {
+            let arrayTest =
+                [/[0-9]/, /[a-z]/, /[A-Z]/, /[^0-9a-zA-Z]/];
+            arrayTest.forEach((item) => {
+                if (item.test(value)) {
+                    point += 1;
+                }
+            });
+        }
+        power.style.width = widthPower[point];
+        power.style.backgroundColor = colorPower[point];
+    };
+}
+</script>
+{% endblock %}

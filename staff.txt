@@ -1,0 +1,78 @@
+             <!-------Application Details--------->
+<!--             <div class="group">-->
+
+<!--                 {{ job_ad_form.application_details.label(class="labels")}}-->
+<!--                  {{ job_ad_form.application_details(class="form-control",placeholder="Application Details")}}-->
+<!--                  {% if job_ad_form.application_details.errors %}-->
+<!--                    {% for error in job_ad_form.application_details.errors %}-->
+<!--                        <span class="span-error" >*{{error}}</span>-->
+<!--                    {% endfor %}-->
+<!--                 {% endif %}-->
+<!--             </div>-->
+
+
+Older Jobs Scrpits
+<!------ OLDER JOBS ------>
+        <p style="background-color:#eee;padding:10px;font-weight:500;border-radius:10px;margin:80px 0  40px 0;width:40%">Older Jobs Ads</p>
+        <div style="background-color:ae23a3;position:relative" class="general-flex-x">
+            {% for older_job in job_ads_older%}
+            <!----FORM----->
+
+            <div style="display:flex;flex-direction:column;width:300px;" class="new_job_ad_style anim">
+
+                        <div style="" class="center-prl-img">
+                            <div style="margin:15px auto 0px auto;"  class="img-cont">
+                              {% if db.session.query(company_user).get(older_job.job_posted_by) %}
+                                    {% if not db.session.query(company_user).get(older_job.job_posted_by).image == None %}
+                                        <img class="prf-image" src="{{url_for('static', filename='images/' + db.session.query(company_user).get(older_job.job_posted_by).image)}}"/>
+                                    {% endif %}
+                              {% else %}
+                                    <img class="prf-image" src="static/images/default.jpg"/>
+                              {% endif %}
+                            </div>
+                        </div>
+
+                        <h2 style="margin-bottom:0px;margin-top:0px;">{{db.session.query(company_user).get(older_job.job_posted_by).name}}<br>
+                        <span><small style="color:#aaa" >{{db.session.query(company_user).get(older_job.job_posted_by).name}}</small></span></h2>
+
+                        <!-------JOB TITLE--------->
+                        <p class="job-title">{{older_job.job_title}}</p>
+                            <small class="" style="color:#999;font-size:11px;margin-top:-10px">{{older_job.date_posted.strftime("%d %B %y  | %H:%M")}}</small>
+                        <p style="color:#006769;font-weight:600;font-size:13px">{{older_job.category}}</p>
+
+                        <div class="job-sub-title">
+
+                            <!---------JOB TYPE--------->
+                            <div class="job-info">
+                                <p class="centralise_font size-it"><span class="material-icons ">work</span>    Job Type</p>
+                                <label style="margin-top:-10px" class="centralise_font">{{older_job.job_type}}</label>
+                            </div>
+
+                            <!--------------DEADLINE-------------->
+                            <div class="job-info">
+                                <p  id="" class="centralise_font size-it" ><span class="material-icons ">calendar_month</span>    Project Due</p>
+                                <label id="" class="centralise_font" style="font-size:10;margin-top:-10px">{{older_job.application_deadline.strftime("%d %b %y")}}</label>
+                                <small id="" class="" style="color:#999;font-size:11px;margin-top:-10px"></small>
+                            </div>
+
+                        </div>
+
+                         <!-------------RESPONSIBILITIES--------->
+                        <div class="">
+                             <p class="centralise_font size-it" ><span class="material-icons">place</span></p>
+                             <div style="margin-top:-10px" class="centralise_font" ><label>{{db.session.query(company_user).get(older_job.job_posted_by).company_address}}</label></div>
+                        </div>
+
+                        <div style="background-color:ea2a30;flex-grow:5;" >
+                             <p class="centralise_font"></p>
+                        </div>
+
+                        <!------------VIEW BUTTON-------------->
+                        <div style="dispaly:block">
+                             <!--<input class="btns" type="submit" value="Create Account" />-->
+                             <a onclick="checkDate()" class="view_job"  href="/job_ad_opened?id={{ser.dumps({'data':older_job.job_id})}}">View</a>
+                        </div>
+
+            </div>
+            {% endfor %}
+        </div>
