@@ -19,7 +19,7 @@ import rsa
 # from flask_security import Security,SQLAlchemyUserDatastore
 import pyotp
 # ......for local DB
-import MySQLdb
+# import MySQLdb
 from sqlalchemy import text
 from flask_sqlalchemy import SQLAlchemy
 # from flask_migrate import Migrate
@@ -31,7 +31,7 @@ from datetime import datetime, date, timedelta
 import time
 import itsdangerous
 import calendar
-from flask_sitemap import Sitemap
+# from flask_sitemap import Sitemap
 from BLOG_CLASS import blog_class
 from werkzeug.utils import secure_filename
 import platform
