@@ -72,6 +72,8 @@ db.init_app(app)
 
 pub,priv = rsa.newkeys(128)
 
+application = app
+
 # Login Manager
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
