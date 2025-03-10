@@ -36,7 +36,7 @@ from BLOG_CLASS import blog_class
 from werkzeug.utils import secure_filename
 import platform
 import base64
-from bs4 import BeautifulSoup as b_soup
+# from bs4 import BeautifulSoup as b_soup
 import requests
 
 # from models.user import get_reset_token, very_reset_token
