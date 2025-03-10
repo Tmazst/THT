@@ -84,7 +84,7 @@ httpx-sse==0.4.0
 idna==2.10
 infi.win32service==0.1.9
 ipykernel
-ipython==8.29.0
+ipython
 isodate==0.6.1
 isoduration==20.11.0
 itsdangerous==2.1.2
