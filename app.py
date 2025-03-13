@@ -1929,6 +1929,11 @@ def delete_post():
 
     return f''
 
+@app.route("/download_app")
+def downloadapp():
+
+    return render_template('download_app.html')
+
 
 @app.route("/users")
 def users():
