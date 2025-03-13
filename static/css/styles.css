@@ -1068,6 +1068,16 @@ a{
 
 }
 
+.lower-nav{
+    min-height:200px
+}
+
+.lower-nav .labels{
+    color:#3a3a3a;
+    font-weight:600;
+}
+
+.filler{flex-grow:1}
 
 ul.paras-subtopics{
     font-size:0.9em;
@@ -1075,9 +1085,8 @@ ul.paras-subtopics{
 }
 
 .tags h1,h2,h3{
-    margin: 35px 0;
+    
     color:#404040;
-    //line-height:1x;
 }
 .spans{
     color:#006769;
