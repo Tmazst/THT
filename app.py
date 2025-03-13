@@ -177,6 +177,10 @@ app.jinja_env.globals['url_for'] = my_url_for
 def inject_ser():
     ser = Serializer(app.config['SECRET_KEY'])  # Define or retrieve the value for 'ser'
     count_jobs = count_ads()
+    
+    with app.app_context():
+        db.create_all()
+
     return dict(ser=ser, count_jobs=count_jobs)
 
 def save_pic(picture, size_x=300, size_y=300):
@@ -189,6 +193,7 @@ def save_pic(picture, size_x=300, size_y=300):
     output_size = (size_x, size_y)
     i = Image.open(picture)
     h, w = i.size
+
     if h > 400 and w > 400:
         # downsize the image with an ANTIALIAS filter (gives the highest quality)
         img = i.resize(i.size, Image.LANCZOS)
