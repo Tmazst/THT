@@ -7,7 +7,7 @@ from flask import Flask, render_template, url_for, redirect, request, flash, ses
 from sqlalchemy.orm import sessionmaker
 from flask_bcrypt import Bcrypt
 from flask_login import login_user, LoginManager, current_user, logout_user, login_required
-from Forms import Register, Login, Contact_Form, Update_account_form, Reset, Reset_Request, Two_FactorAuth_Form
+from Forms import *
 from Tokeniser import Tokenise
 from flask_mail import Mail, Message
 from Advert_Forms import Job_Ads_Form, Company_Register_Form, Company_Login, Company_UpdateAcc_Form, Freelance_Ads_Form, \
@@ -23,8 +23,7 @@ import pyotp
 from sqlalchemy import text
 from flask_sqlalchemy import SQLAlchemy
 # from flask_migrate import Migrate
-from models import db, user, company_user, job_user, Jobs_Ads, Applications, Freelance_Jobs_Ads, Email_Verifications, \
-    FreeL_Applications, Freelancers, users_tht_portfolio, hired, Esw_Freelancers, Hire_Freelancer
+from models import *
 from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 from wtforms.validators import ValidationError
 from datetime import datetime, date, timedelta
@@ -939,6 +938,31 @@ class jo_id_cls:
     id_ = None
 
 
+@app.route("/post_job",methods=["POST","GET"])
+def post_job():
+
+    form = JobPostForm()
+
+    if request.method=="POST":
+        job = jobs_posted(
+            details = form.details.data,
+            deadline = form.deadline.data,
+            link = form.link.data,
+            timepstamp = datetime.now()
+        )
+        print("CHECH IMAGE: ",form.advert_image.data)
+        if form.advert_image.data:
+            print("IMAGE FOUND: ",form.advert_image.data)
+            job.advert_image = save_pic(form.advert_image.data)
+            print("IMAGE SAVED: ",job.advert_image)
+
+        db.session.add(job)
+        db.session.commit()
+        flash("Upload Successful!","success")
+
+    return render_template('post-a-job-form.html',form=form)
+
+
 @app.route("/edit_job_ads_form", methods=["POST", "GET"])
 @login_required
 def eidt_job_ads_form():
@@ -1474,7 +1498,9 @@ def job_adverts():
 @app.route("/")
 def home():
 
-    return render_template("job_ads_gui.html")
+    posted_jobs = jobs_posted.query.all()
+
+    return render_template("job_ads_gui.html",posted_jobs=posted_jobs)
 
 
 @app.route("/job_ad_opened", methods=["GET", "POST"])

@@ -96,6 +96,15 @@ class user_experince_entries(db.Model, UserMixin): #A table form filling prior t
     what_do_you_do = db.Column(db.String(1000))
 
 
+class jobs_posted(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    advert_image = db.Column(db.String(120))
+    details = db.Column(db.String(60))
+    deadline = db.Column(db.Date)
+    timepstamp = db.Column(db.DateTime)
+    link = db.Column(db.String(150))
+
+
 class Esw_Freelancers(db.Model, UserMixin): #A table form filling prior tht experience
 
     __table_name__ = 'esw_freelancers'

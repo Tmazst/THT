@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField, TextAreaField,BooleanField,DateField
-from wtforms.validators import DataRequired,Length,Email, EqualTo, ValidationError
+from wtforms import StringField,PasswordField,SubmitField, TextAreaField,BooleanField,DateField,URLField
+from wtforms.validators import DataRequired,Length,Email, EqualTo, ValidationError, Optional
 from flask_login import current_user
 from flask_wtf.file import FileField , FileAllowed
 
@@ -25,6 +25,12 @@ class Register(FlaskForm):
             raise ValidationError(f"This email is already registered in this platform")
 
 
+class JobPostForm(FlaskForm):
+    advert_image = FileField("Upload Advert Image")
+    details = TextAreaField('Additional Info', validators=[Optional()])
+    deadline = DateField('Deadline',validators=[DataRequired()])
+    link = URLField('Paste Link here',validators=[DataRequired(),Length(min=8, max=64)])
+    publish = SubmitField('Post')
 
 class Login(FlaskForm):
 

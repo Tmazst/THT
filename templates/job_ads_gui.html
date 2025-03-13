@@ -256,6 +256,26 @@
             <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/indeed_logo.png"/>
         </div></a>
     </div>
-</div><br><br>
+</div><br>
+
+
+{% if posted_jobs%}
+<div class="other-jb-section">
+    <h1 class="">Other Job Adverts</h1>
+    <h2 style="margin-top: -10px;">Other Featured Job Opportunities</h2>
+    {%for job in posted_jobs%}
+    {%if job.advert_image%}
+    <div class="job-cont-cont gen-flex-col">
+        <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
+        <div class="details">{{job.details}}<br>
+            <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
+        </div>
+        <a href="{{job.link}}" target="_blank"><div class="link btns">Apply</div></a>
+    </div>
+    {%endif%}
+    {%endfor%}
+</div>
+{%endif%}
+<br>
 
 {% endblock %}
