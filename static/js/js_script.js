@@ -19,6 +19,66 @@
 //  }
 //}
 
+function sideNavFunc(event){
+  console.log("Side Nav");
+  let sideNavBg = document.querySelector('#side-navig-bg');
+  let sideNavCont = document.querySelector("#side-navig-cont");
+  sideNavBg.classList.toggle("show-popup");
+  sideNavCont.classList.toggle("show-menu");
+  };
+
+function closeSideNavFunc(){
+  console.log("Side Nav1");
+  let sideNavBg = document.querySelector('#side-navig-bg');
+  let sideNavCont = document.querySelector("#side-navig-cont");
+
+      sideNavBg.classList.remove("show-popup");
+      sideNavCont.classList.remove("show-menu");
+
+  };
+
+
+var navParent = document.querySelectorAll(".saas-nav-item");
+navParent.forEach(nav => {
+    nav.addEventListener('click', function(){
+        console.log("Nav item clicked");
+
+        // First, hide all child elements
+        navParent.forEach(item => {
+            var childNav = document.querySelector("#nav-chld-" + item.id.split('-')[1]);
+            if (childNav) {
+                childNav.classList.remove('reveal');
+            }
+        });
+
+        // Show the specific child nav for the clicked item
+        if (nav.id === "nav-1"){
+            var navOneChild = document.querySelector("#nav-chld-1");
+            navOneChild.classList.toggle('reveal'); // Use toggle to show/hide
+        }else if(nav.id === "nav-2"){
+            var navOneChild = document.querySelector("#nav-chld-2");
+            navOneChild.classList.toggle('reveal');
+        }else if(nav.id === "nav-3"){
+            var navOneChild = document.querySelector("#nav-chld-3");
+            navOneChild.classList.toggle('reveal');
+        }else if(nav.id === "nav-4"){
+            var navOneChild = document.querySelector("#nav-chld-4");
+            navOneChild.classList.toggle('reveal');
+        }else if(nav.id === "nav-5"){
+            var navOneChild = document.querySelector("#nav-chld-5");
+            navOneChild.classList.toggle('reveal');
+        }else if(nav.id === "nav-6"){
+            var navOneChild = document.querySelector("#nav-chld-6");
+            navOneChild.classList.toggle('reveal');
+        }else if(nav.id === "nav-7"){
+            var navOneChild = document.querySelector("#nav-chld-7");
+            navOneChild.classList.toggle('reveal');
+        }else if(nav.id === "nav-8"){
+            var navOneChild = document.querySelector("#nav-chld-8");
+            navOneChild.classList.toggle('reveal');
+        }
+    });
+});
 
 //Navigation Dropdown
 const navSlide = () => {

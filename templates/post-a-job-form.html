@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    .flash-messages{
+        border:none !important;
+    }
+</style>
 
 <div  style="margin-bottom:700px" class="tags">
     <div class="flash-messages" class="btns">
@@ -21,9 +26,9 @@
     <div class="col-md-5">
      <div style="padding-left:30px;padding-right:30px;display:;"  class="card">
 
-        <h2 class="card-title text-center">Share Job Details</h2>
+        <h2 class="card-title text-center">Share Job Advert</h2>
         <form style="background-color:f8db5a;width:;"  _lpchecked="1" action="" method="post" enctype="multipart/form-data">
-            <small style="font-weight:600;" class="paras-subtopics "><span style="color:coral">Tip:</span></span> Tick Fields with boxes to include them on the Job Advert</small><br><br>
+            <small style="font-weight:600;" class="paras-subtopics "><span style="color:coral">Note:</span></span> Take a screenshot of the job advert & paste it on the link below.</small><br><br>
              <div style="background-color: f8f95a;" class="job-ad-group marginise-bottom">
                   {{form.hidden_tag()}}
                  {{form.csrf_token}}
@@ -46,7 +51,7 @@
             <!-------DETAILS-------->
              <div class="job-ad-group marginise-bottom">
                  {{ form.details.label(class="labels")}}<br>
-                  {{ form.details(class="form-control adj-width-60", style="min-height:70px",placeholder="")}}
+                  {{ form.details(class="form-control adj-width-60", style="min-height:70px",placeholder="Additional Info")}}
                   {% if form.details.errors %}
                     {% for error in form.details.errors %}
                         <span class="span-error" >*{{error}}</span>

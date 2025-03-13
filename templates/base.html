@@ -18,7 +18,12 @@
 <!--    <div class="main">-->
 
         <div class="title-bar-cont">
-            <div style="background-color:;width:100%" class="titles">
+            <div style="width:100%" class="titles">
+                <div style=""  onclick="sideNavFunc(event)" class="menu-icon">
+                  <div class="stroke"></div>
+                  <div class="stroke"></div>
+                  <div class="stroke"></div>
+              </div>
                 <img style="height:60px" class="social-icon-main" src="static/icons/tht_logo_icon.png" />
                 <div  id="title"><span></span>The Hustlers Time <br><span style="font-size:11px;font-weight:600"></span></div>
             </div>
@@ -26,7 +31,129 @@
             </div>
         </div>
 
+        <div  id="side-navig-bg" class="side-nav-bg ">
+        <div id="side-navig-cont" class="side-nav-cont move-to-appear gen-flex-col">
+            <!-- <div class="close-btn"><div class="stroke"></div></div> -->
+            <div class="general-flex"><img style="height:50px" src="static/icons/the-hustlers-time-logo.png" /><h3 style="color:white;text-align: left;"></h3></div>
+            <div style="display: flex;flex-wrap: wrap;height:100vh;position:relative">
+
+            <div class="nav-scroll">
+              <div style="align-self:;" id="float-nav" class="sidenav-list">
+                <div style="position: relative;" class="">
+
+                  <!-- Jobs  -->
+                  <div id="nav-1" class="saas-nav-item gen-flex">
+                    <img class="nav-ico" src="static/icons/briefcase-icon.png" />
+                    <span>Jobs</span>
+                  </div>
+                  <div id="nav-chld-1" class="pop-nav-cont">
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://jobs.eswazi.org/find-a-job/">Jobs Eswatini</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.linkedin.com/jobs/jobs-in-eswatini/?currentJobId=3946680377&originalSubdomain=sz">
+                        LinkedIn Jobs</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.indeed.com/q-swaziland-jobs.html?vjk=d9da936268eed4c9">
+                        Indeed Jobs</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.indeed.com/jobs?q=&l=Remote&from=searchOnDesktopSerp&vjk=3976da2b5cd2e699">
+                        Indeed Jobs Remote</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.developmentaid.org/jobs/search?sort=highlighted.desc,relevance.desc&searchedText=eswatini">
+                        Development Aid</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.glassdoor.com/Job/south-africa-jobs-SRCH_IL.0,12_IN211.htm?remoteWorkType=1">
+                        Glass Door</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.monster.com/jobs/q-work-from-home-jobs?page=4&et=REMOTE&so=p.h.p">
+                        Monster Jobs</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.ziprecruiter.co.uk/Jobs-/Remote?utm_source=zr_trending_hp">
+                        Ziprecruiter</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.reed.co.uk/jobs/work-from-home-jobs">
+                        Reed.co.uk</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.simplyhired.com/search?q=work+from+home">
+                        Simplyhired</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.flexjobs.com/search?joblocations=remote&usecLocation=true&Loc.LatLng=0%2C0&Loc.Radius=30">
+                        FlexJobs</a>
+                    </li>
+                  </div>
+                  <div class="line-sep"></div>
+
+                  <!-- Internships  -->
+                  <div id="nav-2" class="saas-nav-item gen-flex">
+                    <img class="nav-ico" src="static/icons/internship-icon.png" />
+                    <span>Internships</span>
+                  </div>
+                  <div id="nav-chld-2" class="pop-nav-cont">
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.kone.com/en/careers/students-and-graduates/?rdrsrc=/en/careers/students-and-graduates/international-trainee-program/&rdrtrg=/en/careers/students-and-graduates/?utm_source=goabroad.com&utm_medium=referral&utm_campaign=article-feature">
+                        Kone</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.goldmansachs.com/careers/students/programs/index.html">
+                        goldmansachs</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.deloitte.com/ie/en/careers/explore-your-fit/students.html">
+                        Deloitte</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.oysterworldwide.com/search?s_term=internship">
+                        Oysterworldwide</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://career.hm.com/sg-en/blog/job-family/student-early-career/">
+                        hm</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.worldbank.org/en/about/careers/programs-and-internships/internship?utm_source=goabroad.com&utm_medium=referral&utm_campaign=article-feature">
+                        World Bank</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.kpmguscareers.com/early-career/">
+                        kpmg</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.google.com/about/careers/applications/students/">
+                        Google</a>
+                    </li>
+                    <li id="" class="saas-nav-item-chld">
+                      <a class="nav-link" href="https://www.indeed.com/jobs?q=internship+abroad+2024&sc=0kf%3Aattr%28DSQF7%29%3B&vjk=170db211504117c2">
+                        indeed</a>
+                    </li>
+                    
+                  </div>
+                  <div id="" class="saas-nav-item gen-flex">
+                    <img class="nav-ico" src="static/icons/featured-icon.png" />
+                    <a href="/#featured_jobs"><span style="color:black">Featured Jobs</span></a>
+                  </div>
+                  <div id="" class="saas-nav-item gen-flex">
+                    <img class="nav-ico" src="static/icons/post_icon.png" />
+                    <a href="/post_job"><span style="color:black">Post A Job</span></a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
+        <div  class="close-btn"><img onclick="closeSideNavFunc()" style="height: 45px;" src="static/icons/tx-sales-trend-upwards-add-btn.png" /> </div>
+      </div>
 
 
     {% if current_user.is_authenticated and current_user.role== 'company_user' %}

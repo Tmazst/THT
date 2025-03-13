@@ -1914,6 +1914,7 @@ def delete_entry():
 
 
 @app.route("/delete_post", methods=["GET", "POST"])
+@login_required
 def delete_post():
     if request.method == 'GET':
         pid = ser.loads(request.args.get("pstid"))['data']
