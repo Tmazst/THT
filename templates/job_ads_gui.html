@@ -263,19 +263,21 @@
 <div class="other-jb-section">
     <h1 class="">Other Job Adverts</h1>
     <h2 style="margin-top: -10px;">Other Featured Job Opportunities</h2>
-    {%for job in posted_jobs%}
-    {%if job.advert_image%}
-    <div class="job-cont-cont gen-flex-col">
-        <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
-        <div class="details">{{job.details}}<br>
-            {%if job.deadline%}
-                <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
-            {%endif%}
+    <div style="width:inherit;flex-wrap: wrap;" class="gen-flex">
+        {%for job in posted_jobs%}
+        {%if job.advert_image%}
+        <div class="job-cont-cont gen-flex-col">
+            <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
+            <div class="details">{{job.details}}<br>
+                {%if job.deadline%}
+                    <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
+                {%endif%}
+            </div>
+            <a href="{{job.link}}" target="_blank"><div class="link btns">Apply</div></a>
         </div>
-        <a href="{{job.link}}" target="_blank"><div class="link btns">Apply</div></a>
+        {%endif%}
+        {%endfor%}
     </div>
-    {%endif%}
-    {%endfor%}
 </div>
 {%endif%}
 <br>
