@@ -177,7 +177,7 @@ app.jinja_env.globals['url_for'] = my_url_for
 def inject_ser():
     ser = Serializer(app.config['SECRET_KEY'])  # Define or retrieve the value for 'ser'
     count_jobs = count_ads()
-    
+
     with app.app_context():
         db.create_all()
 
@@ -1895,6 +1895,21 @@ def delete_entry():
         flash("Successfully Deleted!!", "success")
 
         return redirect(url_for("job_adverts"))
+
+    return f''
+
+@app.route("/delete_post", methods=["GET", "POST"])
+def delete_post():
+    if request.method == 'GET':
+        pid = ser.loads(request.args.get("pstid"))['data']
+        post = jobs_posted.query.get(pid)
+
+        db.session.delete(post)
+        db.session.commit()
+
+        flash("Successfully Deleted!!", "success")
+
+        return redirect(url_for("home"))
 
     return f''
 
