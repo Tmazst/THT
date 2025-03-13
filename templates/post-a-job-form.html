@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div  style="margin-bottom:700px" class="tags">
+    <div class="flash-messages" class="btns">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for  category, message in messages %}
+                    <div class="flash-messages alert-{{category}}"> {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+  <!--<h3>Password Reset<br> <span class="spans"></span></h3>--->
+
+    <!----FORM----->
+  <div style="background-color:" class="form_container">
+     <div class="row justify-content-center">
+    <div class="col-md-5">
+     <div style="padding-left:30px;padding-right:30px;display:;"  class="card">
+
+        <h2 class="card-title text-center">Share Job Details</h2>
+        <form style="background-color:f8db5a;width:;"  _lpchecked="1" action="" method="post" enctype="multipart/form-data">
+            <small style="font-weight:600;" class="paras-subtopics "><span style="color:coral">Tip:</span></span> Tick Fields with boxes to include them on the Job Advert</small><br><br>
+             <div style="background-color: f8f95a;" class="job-ad-group marginise-bottom">
+                  {{form.hidden_tag()}}
+                 {{form.csrf_token}}
+             </div>
+
+
+
+            <!-------IMAGE-------->
+            <div class="job-ad-group marginise-bottom">
+
+            {{ form.advert_image.label(class="labels")}}<br>
+                {{ form.advert_image(class="form-control adj-width-60", style="",placeholder="")}}
+                {% if form.advert_image.errors %}
+                {% for error in form.advert_image.errors %}
+                    <span class="span-error" >*{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+            <!-------DETAILS-------->
+             <div class="job-ad-group marginise-bottom">
+                 {{ form.details.label(class="labels")}}<br>
+                  {{ form.details(class="form-control adj-width-60", style="min-height:70px",placeholder="")}}
+                  {% if form.details.errors %}
+                    {% for error in form.details.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                 {% endif %}
+             </div>
+
+            <!-------DEADLINE--------->
+             <div class="job-ad-group marginise-bottom">
+                 {{ form.deadline.label(class="labels")}}<br>
+                  {{ form.deadline(class="form-control adj-width-60", style="",placeholder="Deadline")}}
+                  {% if form.deadline.errors %}
+                    {% for error in form.deadline.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                 {% endif %}
+             </div>
+
+            <!-------LINK--------->
+            <div class="job-ad-group marginise-bottom">
+            {{ form.link.label(class="labels")}}<br>
+                {{ form.link(class="form-control adj-width-60", style="",placeholder="Job link")}}
+                {% if form.link.errors %}
+                {% for error in form.link.errors %}
+                    <span class="span-error" >*{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.publish(class="btns") }}
+        </div>
+
+         </form>
+       </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+{% endblock %}
