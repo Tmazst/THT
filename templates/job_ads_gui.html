@@ -274,7 +274,10 @@
                 {%endif%}
             </div>
             <a href="{{job.link}}" target="_blank"><div class="link btns">Apply</div></a>
-            <a href="/delete_post?pstid={{ser.dumps({'data':job.id})}}"><div class="link join_btn3">Delete</div></a>
+            
+            {%if current_user.is_authenticated%}
+                <a href="/delete_post?pstid={{ser.dumps({'data':job.id})}}"><div class="link join_btn3">Delete</div></a>
+            {%endif%}
         </div>
         {%endif%}
         {%endfor%}
