@@ -285,7 +285,7 @@ def sign_up():
             hashd_pwd = encry_pw.generate_password_hash(register.password.data).decode('utf-8')
             user1 = job_user(name=register.name.data, email=register.email.data, password=hashd_pwd,
                              confirm_password=hashd_pwd, image="default.jpg",
-                             time_stamp=datetime.utcnow())
+                             time_stamp=datetime.now())
 
             try:
                 db.session.add(user1)
@@ -443,6 +443,23 @@ def account():
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    login = Login()
+    if request.method == 'POST':
+
+        if login.validate_on_submit():
+
+            user_login = user.query.filter_by(email=login.email.data).first()
+            login_user(user_login)
+
+    return render_template('login_form.html', title='Login', login=login)
+
+
+@app.route("/log_in", methods=["POST", "GET"])
+def login_():
     login = Login()
 
     if current_user.is_authenticated:
@@ -456,10 +473,7 @@ def login():
 
             if user_login:
                 arg_token = user_class().get_reset_token(user_login.id)
-                # flash(f"Token {arg_token}", "success")
-            # else:
-            #     flash(f"Something Wrong, Do you mean! {user_login.name.title()} ", "error")
-            # Stay sign in
+
             if user_login:
                 session['user_id'] = user_login.id
             if request.form.get('stay_signed_in'):
@@ -1897,6 +1911,7 @@ def delete_entry():
         return redirect(url_for("job_adverts"))
 
     return f''
+
 
 @app.route("/delete_post", methods=["GET", "POST"])
 def delete_post():
