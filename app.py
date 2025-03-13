@@ -1,7 +1,7 @@
 import secrets
 import random
 import requests
-from flask import Flask, render_template, url_for, redirect, request, flash, session, make_response, send_from_directory,jsonify
+from flask import Flask, render_template, url_for, redirect, request, flash, session, make_response, send_from_directory,jsonify, send_file
 # from flask_basicauth import BasicAuth
 # from alchemy_db import engine
 from sqlalchemy.orm import sessionmaker
@@ -1932,7 +1932,9 @@ def delete_post():
 @app.route("/download_app")
 def downloadapp():
 
-    return render_template('download_app.html')
+    file_path = "https://techxolutions.com/public_html/thehustlerstime.apk"  # Full file path to the APK
+
+    return send_file(file_path, as_attachment=True, download_name='TheHustlersTime.apk')
 
 
 @app.route("/users")
