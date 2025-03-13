@@ -268,7 +268,9 @@
     <div class="job-cont-cont gen-flex-col">
         <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
         <div class="details">{{job.details}}<br>
-            <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
+            {%if job.deadline%}
+                <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
+            {%endif%}
         </div>
         <a href="{{job.link}}" target="_blank"><div class="link btns">Apply</div></a>
     </div>

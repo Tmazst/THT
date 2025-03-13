@@ -28,7 +28,7 @@ class Register(FlaskForm):
 class JobPostForm(FlaskForm):
     advert_image = FileField("Upload Advert Image")
     details = TextAreaField('Additional Info', validators=[Optional()])
-    deadline = DateField('Deadline',validators=[DataRequired()])
+    deadline = DateField('Deadline',validators=[Optional()])
     link = URLField('Paste Link here',validators=[DataRequired(),Length(min=8, max=64)])
     publish = SubmitField('Post')
 
