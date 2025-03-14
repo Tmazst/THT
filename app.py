@@ -1935,7 +1935,7 @@ def downloadapp():
     return render_template("download_app.html")
 
 @app.route("/download_apk")
-def downloadapp():
+def downloadapk():
 
     file_path = "/home/techtlnf/public_html/public_html/thehustlerstime.apk" # Full file path to the APK
 
