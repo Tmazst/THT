@@ -1932,7 +1932,7 @@ def delete_post():
 @app.route("/download_app")
 def downloadapp():
 
-    file_path = '/home/techtlnf/THT/thehustlerstime.apk' # Full file path to the APK
+    file_path = "/home/techtlnf/public_html/public_html/thehustlerstime.apk" # Full file path to the APK
 
     return send_file(file_path, as_attachment=True, download_name='TheHustlersTime.apk')
 
