@@ -7,20 +7,11 @@
 <div class="download-app-page gen-flex-col">
     <img style="height:70px" src="static/icons/android-icon.png" />
     <h4 style="text-align: center;" class="">The Hustlers Time - Android App</h4>
-    <div id="downloadButton" class="btns">Download</div><br>
+    <a href="/download_apk"><div id="downloadButton" class="btns">Download</div></a> <br>
     <small style="font-weight:600;max-width: 700px;" class="paras-subtopics ">
         <span style="color:coral">Note:</span></span>You will need to enable the 'Unknown Sources' feature on your mobile phone, as the app is not sourced directly from the Google Play Store, 
         but from The Hustlers Time official website.</small>
 </div>
-<script>
-    // JavaScript to trigger the download directly
-    document.getElementById('downloadButton').addEventListener('click', function() {
-        // Set the URL of the APK file
-        const fileURL = 'https://techxolutions.com/public_html/thehustlerstime.apk';
-        
-        // Open the URL in the browser, which will start the download
-        window.location.href = fileURL;
-    });
-</script>
+
 
 {%endblock%}
