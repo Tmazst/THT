@@ -454,8 +454,9 @@ def login():
     if request.method == 'POST':
 
         if login.validate_on_submit():
+            user_login = user.query.filter_by(email=login.email.data).first()
             if user_login and encry_pw.check_password_hash(user_login.password, login.password.data):
-                user_login = user.query.filter_by(email=login.email.data).first()
+                
                 login_user(user_login)
 
                 req_page = request.args.get('next')
