@@ -105,6 +105,46 @@ class jobs_posted(db.Model):
     link = db.Column(db.String(150))
 
 
+class easyapply(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, ForeignKey('user.id'))
+    letter = db.Column(db.String(120))
+    company_email =  db.Column(db.String(120))
+    cv = db.Column(db.String(120))
+    portfolio_link = db.Column(db.String(120))
+    resume = db.Column(db.String(120))
+    other_doc = db.Column(db.String(120))
+    other_doc1 = db.Column(db.String(120))
+    other_doc2 = db.Column(db.String(120))
+    other_doc3 = db.Column(db.String(120))
+    timestamp = db.Column(db.DateTime)
+    tracking_ids = relationship("Tracking", backref='easyapply', lazy=True)
+    certificate_ids = relationship("Certificate", backref='easyapply', lazy=True)
+
+
+class Certificate(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ea_id = db.Column(db.Integer, ForeignKey('easyapply.id'))
+    cert_file = db.Column(db.String(120))
+
+
+class Tracking(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, ForeignKey('user.id'))
+    appl_id = db.Column(db.Integer, ForeignKey('apply.id'))
+    unique_id = db.Column(db.String(120))
+    recipient = db.Column(db.String(120))
+    timestamp = db.Column(db.DateTime)
+    status = db.Column(db.String(120))
+    last_seen = db.Column(db.DateTime)
+    other = db.Column(db.String(120))
+    other1 = db.Column(db.String(120))
+
+
+
+
 class Esw_Freelancers(db.Model, UserMixin): #A table form filling prior tht experience
 
     __table_name__ = 'esw_freelancers'

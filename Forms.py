@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField, TextAreaField,BooleanField,DateField,URLField
+from wtforms import StringField,PasswordField,SubmitField, TextAreaField,BooleanField,DateField,URLField,MultipleFileField
 from wtforms.validators import DataRequired,Length,Email, EqualTo, ValidationError, Optional
 from flask_login import current_user
 from flask_wtf.file import FileField , FileAllowed
@@ -31,6 +31,19 @@ class JobPostForm(FlaskForm):
     deadline = DateField('Deadline',validators=[Optional()])
     link = URLField('Paste Link here',validators=[DataRequired(),Length(min=8, max=64)])
     publish = SubmitField('Post')
+
+
+class EasyApplyForm(FlaskForm):
+    company_email = StringField('Company Email', validators=[DataRequired(),Email()])
+    my_email = StringField('My Email', validators=[DataRequired(),Email()])
+    subject = StringField('Subject *Title of Job', validators=[DataRequired()])
+    body = TextAreaField('Message', validators=[DataRequired()])
+    letter = FileField('Attach Letter *PDF / MSWORD', validators=[DataRequired()])
+    cv = FileField('Attach CV *PDF / MSWORD', validators=[DataRequired()])
+    portfolio_link = FileField('Paste Portfolio Link', validators=[DataRequired()])
+    certificates = MultipleFileField('Attach Certificates *PDF / MSWORD', validators=[DataRequired()])
+    legal = FileField('Attach ID', validators=[DataRequired()])
+
 
 class Login(FlaskForm):
 

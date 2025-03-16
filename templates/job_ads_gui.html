@@ -258,32 +258,30 @@
     </div>
 </div><br>
 
-
 {% if posted_jobs%}
 <div id="featured_jobs" class="other-jb-section">
     <h1 class="">Other Job Adverts</h1>
     <h2 style="margin-top: -10px;">Other Featured Job Opportunities</h2>
     <div style="width:inherit;flex-wrap: wrap;gap:15px" class="gen-flex">
         {%for job in posted_jobs%}
-        {%if job.advert_image%}
-        <div class="job-cont-cont gen-flex-col">
-            <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
-            <div class="details">{{job.details}}<br>
-                {%if job.deadline%}
-                    <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
+            {%if job.advert_image%}
+            <div class="job-cont-cont gen-flex-col">
+                <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
+                <div class="details">{{job.details}}...<br>
+                    {%if job.deadline%}
+                        <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
+                    {%endif%}
+                </div>
+                <a href="{{job.link}}" target="_blank"><div class="link btns">Apply</div></a>
+                {%if current_user.is_authenticated%}
+                    <a href="/delete_post?pstid={{ser.dumps({'data':job.id})}}"><div class="link join_btn3">Delete</div></a>
                 {%endif%}
             </div>
-            <a href="{{job.link}}" target="_blank"><div class="link btns">Apply</div></a>
-            
-            {%if current_user.is_authenticated%}
-                <a href="/delete_post?pstid={{ser.dumps({'data':job.id})}}"><div class="link join_btn3">Delete</div></a>
             {%endif%}
-        </div>
-        {%endif%}
         {%endfor%}
     </div>
 </div>
 {%endif%}
-<br>
 
+<br>
 {% endblock %}

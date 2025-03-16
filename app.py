@@ -37,6 +37,9 @@ import platform
 import base64
 # from bs4 import BeautifulSoup as b_soup
 import requests
+import sendgrid
+from sendgrid.helpers.mail import Mail
+import io
 
 # from models.user import get_reset_token, very_reset_token
 # DB sessions
@@ -216,7 +219,7 @@ def delete_img(file_name):
 def save_pdf(pdf_file):
     _file_name, _ext = os.path.splitext(pdf_file.filename)
     gen_random = secrets.token_hex(8)
-    new_file_name_ext = _file_name + gen_random + _ext
+    new_file_name_ext = _file_name + "_" + gen_random + _ext
 
     file_path = os.path.join(app.root_path, 'static/files', new_file_name_ext)
 
@@ -1929,17 +1932,128 @@ def delete_post():
 
     return f''
 
-@app.route("/download_app")
+
+def log_email_delivery(recipient_email,user_id,token=None, status=None):
+    # Create a new log entry
+    new_log = Tracking(
+        uid = user_id,
+        recipient=recipient_email,
+        delivery_status=status,
+        last_seen=None,  # Set to None by default
+        unique_id = token 
+    )
+
+    db.session.add(new_log)
+    db.session.commit()
+
+
+def update_last_seen(log_entry):
+    # log_entry = Tracking.query.filter_by(company_email=recipient_email).order_by(Tracking.id.desc()).first()
+    if log_entry:
+        log_entry.last_seen = datetime.now()  # Update to the current UTC time
+        db.session.commit()
+
+
+@app.route('/track_email_open/<token>', methods=['GET'])
+def track_email_open(token):
+    log_entry = Tracking.query.filter_by(unique_id=token).first()
+    if log_entry:
+        # Update last seen timestamp on email open
+        update_last_seen(log_entry)
+        
+        # Send back a transparent 1x1 GIF
+        # This is a simple transparent pixel
+        pixel_data = io.BytesIO()
+        pixel_data.write(b'\x47\x38\x39\x61\x01\x00\x01\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00')
+        pixel_data.seek(0)
+        return send_file(pixel_data, mimetype='image/gif')
+    else:
+        return '', 404
+
+
+app.config['MAIL_SERVER'] = 'smtp.example.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = 'your_email@example.com'
+app.config['MAIL_PASSWORD'] = 'your_password'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+mail = Mail(app)
+
+
+@app.route("/easy_apply", methods=["GET", "POST"])
+@login_required
+def easy_apply():
+
+    form = EasyApplyForm()
+
+    if request.method =="POST":
+        application = easyapply(
+            uid = current_user.id,
+            company_email  = form.company_email.data,
+            portfolio_link  = form.portfolio_link.data,timestamp = datetime.now()
+        )
+
+        if form.letter.data:
+            application.letter = save_pdf(form.letter.data)
+
+        if form.cv.data:
+            application.cv = save_pdf(form.cv.data)
+
+        db.session.add(application)
+        db.session.commit()
+
+        ea_obj = easyapply.query.filter_by(uid=current_user).first()
+
+        if form.certificates.data:
+            files = form.certificates.data
+            for file in files:
+                cert = Certificate (
+                    ea_id = ea_obj.id
+                )
+                cert.cert_file = save_pdf(file)
+                db.session.add(cert)
+            db.session.commit()
+
+        # Send Email And Track Delivery 
+        recipient_email = form.company_email.data
+        subject = form.subject.data
+        body = form.subject.data
+        token = secrets.token_urlsafe(32) 
+
+                # Create the tracking pixel URL
+        pixel_url = url_for('track_email_open', token=token, _external=True)
+
+        body =+ f"""<br><img src="{pixel_url}" width="1" height="1" alt="" style="display:none;" />"""
+
+        def send_email(recipient_email, subject, body):
+            msg = Message(subject, sender='your_email@example.com', recipients=[recipient_email])
+            # msg.body = body
+            msg.html = body
+            try:
+                mail.send(msg)
+                log_email_delivery(recipient_email,current_user.id,token=token,status='Sent')  # Log email delivery status
+                flash("Email Sent Successfully!", "success")
+            except Exception as e:
+                log_email_delivery(recipient_email, 'Failed')  # Log failure status
+                print(f'Error sending email: {e}')
+
+        send_email(recipient_email, subject, body)
+        
+
+    return render_template("easy_apply.html", form=form)
+
+
+@app.route("/download_")
 def downloadapp():
 
     return render_template("download_app.html")
 
-@app.route("/download_apk")
+@app.route("/download_app")
 def downloadapk():
 
     file_path = "/home/techtlnf/public_html/public_html/thehustlerstime.apk" # Full file path to the APK
 
-    return send_file(file_path, as_attachment=True, download_name='TheHustlersTime.apk')
+    return send_file(file_path, as_attachment=True, download_name='thehustlerstime.apk')
 
 
 @app.route("/users")
