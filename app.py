@@ -454,12 +454,16 @@ def login():
     if request.method == 'POST':
 
         if login.validate_on_submit():
+            if user_login and encry_pw.check_password_hash(user_login.password, login.password.data):
+                user_login = user.query.filter_by(email=login.email.data).first()
+                login_user(user_login)
 
-            user_login = user.query.filter_by(email=login.email.data).first()
-            login_user(user_login)
-
-            req_page = request.args.get('next')
-            return redirect(req_page) if req_page else redirect(url_for('home'))
+                req_page = request.args.get('next')
+                flash("Login Successful!")
+                return redirect(req_page) if req_page else redirect(url_for('home'))
+            else:
+                flash("Login Access Denied! Check your password and email")
+                return redirect('login')
 
     return render_template('login_form.html', title='Login', login=login)
 
@@ -474,8 +478,9 @@ def login_():
     if request.method == 'POST':
 
         if login.validate_on_submit():
-
             user_login = user.query.filter_by(email=login.email.data).first()
+            
+            
 
             if user_login:
                 arg_token = user_class().get_reset_token(user_login.id)
