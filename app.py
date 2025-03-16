@@ -458,6 +458,9 @@ def login():
             user_login = user.query.filter_by(email=login.email.data).first()
             login_user(user_login)
 
+            req_page = request.args.get('next')
+            return redirect(req_page) if req_page else redirect(url_for('home'))
+
     return render_template('login_form.html', title='Login', login=login)
 
 
