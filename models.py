@@ -133,7 +133,7 @@ class Tracking(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, ForeignKey('user.id'))
-    appl_id = db.Column(db.Integer, ForeignKey('apply.id'))
+    appl_id = db.Column(db.Integer, ForeignKey('easyapply.id'))
     unique_id = db.Column(db.String(120))
     recipient = db.Column(db.String(120))
     timestamp = db.Column(db.DateTime)
