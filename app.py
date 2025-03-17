@@ -1529,7 +1529,8 @@ def job_adverts():
 @app.route("/")
 def home():
 
-    posted_jobs = jobs_posted.query.all()
+    posted_jobs = jobs_posted.query.all().order_by(
+                desc(jobs_posted.timepstamp))
 
     return render_template("job_ads_gui.html",posted_jobs=posted_jobs)
 
