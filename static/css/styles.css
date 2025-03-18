@@ -350,7 +350,7 @@ a{
 
 
 .flash-messages{
-    border:1px solid #006769 !important;
+    /* border:1px solid #006769 !important; */
     border-radius:15px !important;
 }
 
@@ -638,9 +638,6 @@ a{
 }
 #nav-div-cont li{
      display:flex;
-     //margin:10px;
-     text-style-list:none;
-     //background:blue;
     /*display: inline-block;*/
 }
 
@@ -897,7 +894,6 @@ a{
 
 
 .flash-messages{
-        //height:40px;
         padding:10px;
 }
 
@@ -3171,13 +3167,10 @@ display:none
 
 
 .flash-messages{
-    //position:absolute !important;
     z-index:3;
-    //bottom:600 !important;
     height:20vw !important;
     margin-bottom:5% !important;
     width:90% !important;
-   // box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
 }
 
 .work-days{
@@ -3187,20 +3180,14 @@ display:none
 .user{
     display:flex;
     justify-content:center;
-    //background-color: purple;
     width:100%;
     padding:5px;
     margin:0 !important;
-    //margin-top:-15px;
-    //rgba(255, 255, 255, 0.8) !important;
-    //backdrop-filter: blur(15px) !important;
 }
 
 .navbar-nav-user{
     display:flex;
-    //justify-content:flex-end;
     width:50% !important;
-    //background-color: orange;
     margin:0;
 }
 
@@ -3212,9 +3199,7 @@ display:none
 
 
 .navbar-nav{
-    //display:block;
     height:70px !important;
-    //margin-left:-25px !important;
     width:100% !important;
     background:none;
     padding-left:20px !important;
@@ -3223,8 +3208,6 @@ display:none
 
 .navbar-nav li{
     margin:0 auto !important;
-    //background-color:coral !important;
-    //width:50%;
     display:flex;
     justify-content:center;
     background:none;
@@ -3240,8 +3223,6 @@ display:none
     flex-direction:column;
     justify-content:center;
     background:none !important;
-    //flex-wrap:
-    //padding:5px 0px;
     width:100%;
     height:80px;
     margin-top:15px;
@@ -3251,7 +3232,6 @@ display:none
 
 .home-cont-items p{
         font-size:5vw !important;
-        //font-weight:bold;
     }
 
 .invite-cards{
@@ -3281,7 +3261,6 @@ display:none
     background-color:#eee;
     margin-top:-100px !important;
     width:100%;
-    //margin-left:-10px;
     margin-bottom:80px;
     height:100vh !important;
     }

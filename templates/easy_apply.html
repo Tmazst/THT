@@ -1,0 +1,124 @@
+
+<!-- Easy Apply  -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .flash-messages{
+        border:none !important;
+    }
+    h1,h2,h3{
+        font-weight: 600;
+    }
+
+    .card{
+        padding:5px;
+        padding-bottom: 15px;
+    }
+</style>
+
+<div  style="margin-bottom:700px" class="tags">
+    <div class="flash-messages" class="btns">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for  category, message in messages %}
+                    <div class="flash-messages alert-{{category}}"> {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
+    <!----FORM----->
+  <div style="background-color:" class="form_container">
+     <div class="row justify-content-center">
+    <div class="col-md-5">
+     <div style="padding-left:30px;padding-right:30px;display:;"  class="card">
+
+        <h2 class="card-title text-center">Share Job Advert</h2>
+        <form style="background-color:f8db5a;width:;"  _lpchecked="1" action="" method="post" enctype="multipart/form-data">
+            <small style="font-weight:600;" class="paras-subtopics "><span style="color:coral">Note:</span></span> Take a screenshot of the job advert & paste it on the link below.</small><br><br>
+            <div style="background-color: f8f95a;" class="job-ad-group marginise-bottom">
+                  {{form.hidden_tag()}}
+                 {{form.csrf_token}}
+            </div>
+
+            <!-------COMP EMAIL-------->
+            <div class="job-ad-group marginise-bottom">
+                {{ form.company_email.label(class="labels")}}<br>
+                    {{ form.company_email(class="form-control adj-width-60", style="",placeholder="")}}
+                    {% if form.company_email.errors %}
+                    {% for error in form.company_email.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-------SUBJECT-------->
+             <div class="job-ad-group marginise-bottom">
+                 {{ form.subject.label(class="labels")}}<br>
+                  {{ form.subject(class="form-control adj-width-60", style="",placeholder="Subject / Title")}}
+                  {% if form.subject.errors %}
+                    {% for error in form.subject.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                 {% endif %}
+             </div>
+
+            <!-------BODY--------->
+             <div class="job-ad-group marginise-bottom">
+                 {{ form.body.label(class="labels")}}<br>
+                  {{ form.body(class="form-control adj-width-60", style="min-height:85px",placeholder="Good day, ....")}}
+                  {% if form.body.errors %}
+                    {% for error in form.body.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                 {% endif %}
+             </div>
+
+            <!-------LINK--------->
+            <div class="job-ad-group marginise-bottom">
+                {{ form.portfolio_link.label(class="labels")}}<br>
+                    {{ form.portfolio_link(class="form-control adj-width-60", style="",placeholder="Job portfolio_link")}}
+                    {% if form.portfolio_link.errors %}
+                    {% for error in form.portfolio_link.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-------LETTER--------->
+            <div class="job-ad-group marginise-bottom">
+                {{ form.letter.label(class="labels")}}<br>
+                    {{ form.letter(class="form-control adj-width-60", style="")}}
+                    {% if form.letter.errors %}
+                    {% for error in form.letter.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-------CV--------->
+            <div class="job-ad-group marginise-bottom">
+                {{ form.cv.label(class="labels")}}<br>
+                    {{ form.cv(class="form-control adj-width-60", style="")}}
+                    {% if form.cv.errors %}
+                    {% for error in form.cv.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+        <div>
+            {{ form.submit(class="btns") }}
+        </div>
+
+         </form>
+       </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+{% endblock %}

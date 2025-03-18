@@ -38,7 +38,7 @@ import base64
 # from bs4 import BeautifulSoup as b_soup
 import requests
 import sendgrid
-from sendgrid.helpers.mail import Mail
+# from sendgrid.helpers.mail import Mail
 import io
 
 # from models.user import get_reset_token, very_reset_token
@@ -69,6 +69,12 @@ app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['BASIC_AUTH_USERNAME'] = 'tmaz'
 app.config['BASIC_AUTH_PASSWORD'] = 'tmaz'
+
+app.config['MAIL_SERVER'] = "smtp.googlemail.com"
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = 'seeker.eswatini@gmail.com' #os.getenv("MAIL") #
+app.config['MAIL_PASSWORD'] = 'qcwqtochvppknpbk' #os.getenv("PWD") # 
+app.config['MAIL_USE_TLS'] = True
 
 db.init_app(app)
 
@@ -463,7 +469,7 @@ def login():
                 flash("Login Successful!")
                 return redirect(req_page) if req_page else redirect(url_for('home'))
             else:
-                flash("Login Access Denied! Check your password and email")
+                flash("Login Access Denied! Check your password and email","error")
                 return redirect('login')
 
     return render_template('login_form.html', title='Login', login=login)
@@ -548,8 +554,8 @@ def send_otp(otp_code,arg_token):
     app.config["MAIL_SERVER"] = "smtp.googlemail.com"
     app.config["MAIL_PORT"] = 587
     app.config["MAIL_USE_TLS"] = True
-    em = app.config["MAIL_USERNAME"] = os.environ.get("EMAIL")
-    app.config["MAIL_PASSWORD"] = os.environ.get("PWD")
+    # em = app.config["MAIL_USERNAME"] = os.environ.get("EMAIL")
+    # app.config["MAIL_PASSWORD"] = os.environ.get("PWD")
 
     mail = Mail(app)
 
@@ -697,8 +703,8 @@ def contact_us():
                 app.config["MAIL_SERVER"] = "smtp.googlemail.com"
                 app.config["MAIL_PORT"] = 587
                 app.config["MAIL_USE_TLS"] = True
-                em = app.config["MAIL_USERNAME"] = os.environ.get("EMAIL")
-                app.config["MAIL_PASSWORD"] = os.environ.get("PWD")
+                # em = app.config["MAIL_USERNAME"] = os.environ.get("EMAIL")
+                # app.config["MAIL_PASSWORD"] = os.environ.get("PWD")
 
                 mail = Mail(app)
 
@@ -805,8 +811,8 @@ def reset_request():
                 app.config["MAIL_SERVER"] = "smtp.googlemail.com"
                 app.config["MAIL_PORT"] = 587
                 app.config["MAIL_USE_TLS"] = True
-                em = app.config["MAIL_USERNAME"] = os.getenv("EMAIL")
-                app.config["MAIL_PASSWORD"] = os.getenv("PWD")
+                # em = app.config["MAIL_USERNAME"] = os.getenv("EMAIL")
+                # app.config["MAIL_PASSWORD"] = os.getenv("PWD")
 
                 mail = Mail(app)
 
@@ -1167,8 +1173,8 @@ def send_endof_term_form():
                     app.config["MAIL_SERVER"] = "smtp.googlemail.com"
                     app.config["MAIL_PORT"] = 587
                     app.config["MAIL_USE_TLS"] = True
-                    em = app.config["MAIL_USERNAME"] = os.getenv("EMAIL")
-                    app.config["MAIL_PASSWORD"] = os.getenv("PWD")
+                    # em = app.config["MAIL_USERNAME"] = os.getenv("EMAIL")
+                    # app.config["MAIL_PASSWORD"] = os.getenv("PWD")
 
                     mail = Mail(app)
 
@@ -1237,11 +1243,11 @@ or The current might have a pending report that is not yet approved""", "success
             flash(f"Updated Successfully!", "success")
 
             def send_link():
-                app.config["MAIL_SERVER"] = "smtp.googlemail.com"
-                app.config["MAIL_PORT"] = 587
-                app.config["MAIL_USE_TLS"] = True
-                em = app.config["MAIL_USERNAME"] = os.getenv("EMAIL")
-                app.config["MAIL_PASSWORD"] = os.getenv("PWD")
+                # app.config["MAIL_SERVER"] = "smtp.googlemail.com"
+                # app.config["MAIL_PORT"] = 587
+                # app.config["MAIL_USE_TLS"] = True
+                # em = app.config["MAIL_USERNAME"] = os.getenv("EMAIL")
+                # app.config["MAIL_PASSWORD"] = os.getenv("PWD")
 
                 mail = Mail(app)
 
@@ -1946,27 +1952,38 @@ def delete_post():
 
 def log_email_delivery(recipient_email,user_id,token=None, status=None):
     # Create a new log entry
+    print("email: ", recipient_email)
+    print("User Id: ", user_id)
+    print("token: ", token)
+    print("status: ", status)
+
+    if status == "Failed":
+        return jsonify({"Error":"Message Not Sent please confirm if recipient email is correct"})
+
     new_log = Tracking(
         uid = user_id,
         recipient=recipient_email,
-        delivery_status=status,
+        status=status,
         last_seen=None,  # Set to None by default
+        timestamp=datetime.now(),
         unique_id = token 
     )
 
     db.session.add(new_log)
     db.session.commit()
+    flash(f"Tracking Entry Recorded with Token: {new_log.unique_id}", "success")
 
 
 def update_last_seen(log_entry):
     # log_entry = Tracking.query.filter_by(company_email=recipient_email).order_by(Tracking.id.desc()).first()
     if log_entry:
         log_entry.last_seen = datetime.now()  # Update to the current UTC time
+        print("Last Seen: ", log_entry.last_seen)
         db.session.commit()
 
-
+# Get request from client email box 
 @app.route('/track_email_open/<token>', methods=['GET'])
-def track_email_open(token):
+def track_email_opened(token):
     log_entry = Tracking.query.filter_by(unique_id=token).first()
     if log_entry:
         # Update last seen timestamp on email open
@@ -1982,13 +1999,7 @@ def track_email_open(token):
         return '', 404
 
 
-app.config['MAIL_SERVER'] = 'smtp.example.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'your_email@example.com'
-app.config['MAIL_PASSWORD'] = 'your_password'
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-mail = Mail(app)
+
 
 
 @app.route("/easy_apply", methods=["GET", "POST"])
@@ -2001,7 +2012,8 @@ def easy_apply():
         application = easyapply(
             uid = current_user.id,
             company_email  = form.company_email.data,
-            portfolio_link  = form.portfolio_link.data,timestamp = datetime.now()
+            portfolio_link  = form.portfolio_link.data,
+            timestamp = datetime.now()
         )
 
         if form.letter.data:
@@ -2013,42 +2025,59 @@ def easy_apply():
         db.session.add(application)
         db.session.commit()
 
-        ea_obj = easyapply.query.filter_by(uid=current_user).first()
+        ea_obj = easyapply.query.filter_by(uid=current_user.id).order_by(easyapply.timestamp).first()
+        print("Easy Apply Latest Application: ", ea_obj.timestamp)
 
+        # We are recording certificates in a different model/table
         if form.certificates.data:
             files = form.certificates.data
             for file in files:
                 cert = Certificate (
+                    #Job Application Id
                     ea_id = ea_obj.id
                 )
+
                 cert.cert_file = save_pdf(file)
                 db.session.add(cert)
             db.session.commit()
+        print("Application Saved in database")
 
-        # Send Email And Track Delivery 
+        # Send Email And Track Delivery
         recipient_email = form.company_email.data
         subject = form.subject.data
-        body = form.subject.data
+        bodyy = form.body.data
         token = secrets.token_urlsafe(32) 
+        print("Email Token Created: ",token)
 
-                # Create the tracking pixel URL
-        pixel_url = url_for('track_email_open', token=token, _external=True)
 
-        body =+ f"""<br><img src="{pixel_url}" width="1" height="1" alt="" style="display:none;" />"""
+        # app.config['MAIL_USE_SSL'] = False
+        mail = Mail(app)
 
-        def send_email(recipient_email, subject, body):
-            msg = Message(subject, sender='your_email@example.com', recipients=[recipient_email])
-            # msg.body = body
-            msg.html = body
-            try:
+        # Create the tracking pixel URL
+        pixel_url = url_for('track_email_opened', token=token, _external=True)
+
+        bodyy += f"""<br><img src="{pixel_url}" width="1" height="1" alt="" style="display:none;" />"""
+
+        def send_email():
+            print("Subject: ", subject)
+            print("Body: ",bodyy)
+            print("Email: ",recipient_email)
+
+            msg = Message(subject, sender="noreply@gmail.com", recipients=[recipient_email])
+            msg.html = bodyy
+            print("Msg: ",msg.body)
+            print("Dir Mail: ",dir(mail))
+
+            # try:
+            with app.app_context():
                 mail.send(msg)
-                log_email_delivery(recipient_email,current_user.id,token=token,status='Sent')  # Log email delivery status
-                flash("Email Sent Successfully!", "success")
-            except Exception as e:
-                log_email_delivery(recipient_email, 'Failed')  # Log failure status
-                print(f'Error sending email: {e}')
+            log_email_delivery(recipient_email,current_user.id,token=token,status='Sent')  # Log email delivery status
+            flash("Email Sent Successfully! Check your inbox to confirm the email you sent to the receiver", "success")
+            # except Exception as e:
+            #    log_email_delivery(recipient_email,current_user.id,token=token,status='Failed')  # Log failure status
+            #    print(f'Error sending email: {e}')
 
-        send_email(recipient_email, subject, body)
+        send_email()
         
 
     return render_template("easy_apply.html", form=form)
@@ -2148,8 +2177,8 @@ def verification(arg):
             app.config["MAIL_PORT"] = 587
             app.config["MAIL_USE_TLS"] = True
             # Creditentials saved in environmental variables
-            em = app.config["MAIL_USERNAME"] = "pro.dignitron@gmail.com"  # os.getenv("MAIL")
-            app.config["MAIL_PASSWORD"] = os.getenv("PWD")
+            # em = app.config["MAIL_USERNAME"] = "pro.dignitron@gmail.com"  # os.getenv("MAIL")
+            # app.config["MAIL_PASSWORD"] = os.getenv("PWD")
             app.config["MAIL_DEFAULT_SENDER"] = '"The Hustlers Time" <no-reply@gmail.com>'
             app.config["MAIL_DEFAULT_SENDER"] = '"noreply@gmail.com"'
 
@@ -2326,8 +2355,8 @@ def hire_freelancer():
                 app.config["MAIL_SERVER"] = "smtp.googlemail.com"
                 app.config["MAIL_PORT"] = 587
                 app.config["MAIL_USE_TLS"] = True
-                em = app.config["MAIL_USERNAME"] = os.environ.get("EMAIL")
-                app.config["MAIL_PASSWORD"] = os.environ.get("PWD")
+                # em = app.config["MAIL_USERNAME"] = os.environ.get("EMAIL")
+                # app.config["MAIL_PASSWORD"] = os.environ.get("PWD")
 
                 mail = Mail(app)
 
@@ -2388,8 +2417,8 @@ def fl_approve_deal(token):
                 app.config["MAIL_SERVER"] = "smtp.googlemail.com"
                 app.config["MAIL_PORT"] = 587
                 app.config["MAIL_USE_TLS"] = True
-                em = app.config["MAIL_USERNAME"] = os.environ.get("EMAIL")
-                app.config["MAIL_PASSWORD"] = os.environ.get("PWD")
+                # em = app.config["MAIL_USERNAME"] = os.environ.get("EMAIL")
+                # app.config["MAIL_PASSWORD"] = os.environ.get("PWD")
 
                 mail = Mail(app)
 

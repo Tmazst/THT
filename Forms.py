@@ -36,13 +36,14 @@ class JobPostForm(FlaskForm):
 class EasyApplyForm(FlaskForm):
     company_email = StringField('Company Email', validators=[DataRequired(),Email()])
     my_email = StringField('My Email', validators=[DataRequired(),Email()])
-    subject = StringField('Subject *Title of Job', validators=[DataRequired()])
+    subject = StringField('Subject', validators=[DataRequired()])
     body = TextAreaField('Message', validators=[DataRequired()])
     letter = FileField('Attach Letter *PDF / MSWORD', validators=[DataRequired()])
     cv = FileField('Attach CV *PDF / MSWORD', validators=[DataRequired()])
-    portfolio_link = FileField('Paste Portfolio Link', validators=[DataRequired()])
+    portfolio_link = URLField('Paste Portfolio Link', validators=[Optional()])
     certificates = MultipleFileField('Attach Certificates *PDF / MSWORD', validators=[DataRequired()])
     legal = FileField('Attach ID', validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 
 class Login(FlaskForm):

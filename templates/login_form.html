@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+<br><br>
 <div class="tags">
 
-      <div class="flash-messages" class="btns">
+      <div class="flash-messages" class="">
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for  category, message in messages %}
@@ -72,9 +73,7 @@
                 </div>
 
           </div>
-         <div class="login-img-cont">
-              <img src="static/icons/login-img_Artboard.svg" />
-         </div>
+    
     </div>
     <br><br><br><br><br><br><br><br>
 </div>
