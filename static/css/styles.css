@@ -2747,13 +2747,18 @@ display:none
 }
 
 .rep-title{
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
 }
 
 .big-ibtns div{
     height: 20px !important;
 }
+
+.big-ibtns .gen-flex{
+    gap:1px !important;
+}
+
 
 .repo-icons{
     height:30px;
