@@ -123,10 +123,10 @@
             </div><br>
 
             <div class="gen-flex">
-                {%if report.last %}
+                {%if report.last_seen %}
                     <img class="repo-icons" src="static/icons/last-seen-blk-icon.png" />
                     <span class="rep-title">Last Seen:</span>
-                    <label class="labels">Opened: {{report.last_seen.strftime("%d %b %Y")}}</label>
+                    <label class="labels">Opened: {{report.last_seen.strftime("%d %b %Y %HH:%MM")}}</label>
                     {%else%}
                     <img class="repo-icons" src="static/icons/last-seen-blk-icon.png" />
                     <span class="rep-title">Last Seen:</span>
