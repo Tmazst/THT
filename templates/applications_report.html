@@ -124,9 +124,9 @@
 
             <div class="gen-flex">
                 {%if report.last_seen %}
-                    <img class="repo-icons" src="static/icons/last-seen-blk-icon.png" />
+                    <img class="repo-icons" src="static/icons/last-seen-icon.png" />
                     <span class="rep-title">Last Seen:</span>
-                    <label class="labels">Opened: {{report.last_seen.strftime("%d %b %y %H:%M")}}</label>
+                    <label class="labels">{{report.last_seen.strftime("%d %b %y %H:%M")}}</label>
                     {%else%}
                     <img class="repo-icons" src="static/icons/last-seen-blk-icon.png" />
                     <span class="rep-title">Last Seen:</span>
