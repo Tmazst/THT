@@ -2746,6 +2746,23 @@ display:none
     display:none
 }
 
+.rep-title{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.big-ibtns div{
+    height: 20px !important;
+}
+
+.repo-icons{
+    height:40px;
+}
+
+.easya-icon{
+    transform:rotate(-90deg);
+    right:-50px !important;
+}
 
 
 /*////////////////////////////////////////////BANNER ANIMATION///////////////////////////////////////////////*/

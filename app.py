@@ -1950,7 +1950,7 @@ def delete_post():
     return f''
 
 
-def log_email_delivery(recipient_email,user_id,token=None, status=None):
+def log_email_delivery(recipient_email,user_id,appl_id,token=None, status=None):
     # Create a new log entry
     print("email: ", recipient_email)
     print("User Id: ", user_id)
@@ -1963,6 +1963,7 @@ def log_email_delivery(recipient_email,user_id,token=None, status=None):
     new_log = Tracking(
         uid = user_id,
         recipient=recipient_email,
+        appl_id=appl_id,
         status=status,
         last_seen=None,  # Set to None by default
         timestamp=datetime.now(),
@@ -1999,7 +2000,15 @@ def track_email_opened(token):
         return '', 404
 
 
+@app.route("/job_reports", methods=["GET", "POST"])
+@login_required
+def job_reports():
 
+    # reports = easyapply.query.filter_by(uid=current_user.id).order_by(easyapply.timestamp).all()
+    # print("REPORTS: ",reports)
+    reports = Tracking.query.filter_by(uid=current_user.id).order_by(Tracking.timestamp).all()
+
+    return render_template("applications_report.html",reports=reports,apply_obj= easyapply )
 
 
 @app.route("/easy_apply", methods=["GET", "POST"])
@@ -2047,6 +2056,7 @@ def easy_apply():
         subject = form.subject.data
         bodyy = form.body.data
         token = secrets.token_urlsafe(32) 
+        appl_id = ea_obj.id
         print("Email Token Created: ",token)
 
 
@@ -2071,7 +2081,7 @@ def easy_apply():
             # try:
             with app.app_context():
                 mail.send(msg)
-            log_email_delivery(recipient_email,current_user.id,token=token,status='Sent')  # Log email delivery status
+            log_email_delivery(recipient_email,current_user.id,appl_id,token=token,status='Sent')  # Log email delivery status
             flash("Email Sent Successfully! Check your inbox to confirm the email you sent to the receiver", "success")
             # except Exception as e:
             #    log_email_delivery(recipient_email,current_user.id,token=token,status='Failed')  # Log failure status
