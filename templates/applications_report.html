@@ -25,7 +25,7 @@
         padding:10px;
     }
     .big-ibtns{
-        width:300px;
+        width:320px;
         /* height:200px !important; */
         box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.20);
         padding:15px;
@@ -126,7 +126,7 @@
                 {%if report.last_seen %}
                     <img class="repo-icons" src="static/icons/last-seen-blk-icon.png" />
                     <span class="rep-title">Last Seen:</span>
-                    <label class="labels">Opened: {{report.last_seen.strftime("%d %b %Y %HH:%MM")}}</label>
+                    <label class="labels">Opened: {{report.last_seen.strftime("%d %b %y %H:%M")}}</label>
                     {%else%}
                     <img class="repo-icons" src="static/icons/last-seen-blk-icon.png" />
                     <span class="rep-title">Last Seen:</span>
