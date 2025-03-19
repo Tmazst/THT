@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .profile-sections{
+        width:60%;
+        margin:0 auto;
+    }
+    .tags{margin:0 auto}
+    .big-btns a{
+        width:100%;
+        height:100%;
+        background:none !important;
+        box-shadow:none;
+    }
+    .big-btns a:hover{
+        background:none !important;
+        box-shadow:none;
+    }
+    .big-btns{
+        width:250px;
+        height:150px !important;
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.20);
+        padding:10px;
+    }
+    .big-ibtns{
+        width:300px;
+        /* height:200px !important; */
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.20);
+        padding:15px;
+        position:relative;
+        border-radius:15px;
+        border-right:3px solid coral;
+    }
+    .row-flex{
+        gap:20px;
+        width:90%;
+        flex-wrap:wrap;
+        justify-content:flex-start;
+    }
+    .labels{
+        color:#777;
+    }
+
+    @media all and (max-width: 575px) {
+
+    .profile-sections{
+        width:90% !important;
+        display:flex;
+        flex-direction:row;
+        }
+    .paras-subtopics{
+        margin: 5px 4%;
+        font-size:10px !important;
+        width:90% !important;
+    }
+    .topics {
+        padding:5px;
+        width:900px !im;
+        flex-grow:1;
+    }
+
+    .optimise-mobile{
+            height:inherit !important;
+        }
+    .inherent{
+        height:170px !important;
+        width:auto !important;
+    }
+
+    .optimise-mobile{
+        height:inherit !important
+    }
+
+    .row-flex{
+        width:100%;
+        justify-content:center;
+    }
+    #int-topic{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    #nt-on-mobile{width:250px;}
+
+    }
+</style>
+
+<br><br><br>
+<section style="background-color:;" class="flex-justify-align profile-sections">
+    <div style="position:;background-color:;" class="topics">
+        <div style="background-color:"  class="paras-subtopics  caption">
+            <h1 id="main-welcome-h1" class="h1-tag">
+                <span class="spans">Jobs Applications Reports</span><br>
+            </h1>
+        </div>
+    </div>
+</section>
+<br><br>
+
+<div class="tags">
+    <div style="" class="row-flex">
+        {%for report in reports%}
+        {% set appl_obj = apply_obj.query.filter_by(id = report.appl_id).first() %}
+        <div style="align-items: flex-start;gap:2px !important;padding:25px !important" class="big-ibtns gen-flex-col">
+            <div class="gen-flex">
+                <img class="repo-icons" src="static/icons/email_icon.png" />
+                <label class="rep-title">Email:</label>
+                <label class="labels">{{appl_obj}}</label>
+            </div><br>
+
+            <div class="gen-flex">
+                <img class="repo-icons" src="static/icons/brief_case-icon.png" />
+                <span class="rep-title">Job Title:</span>
+                <label class="labels">{{appl_obj}}</label>
+            </div><br>
+
+            <div class="gen-flex">
+                <img class="repo-icons" src="static/icons/sent-icon.png" />
+                <span class="rep-title">Sent:</span>
+                <label class="labels">{{report.timestamp.strftime("%d %b %Y")}}</label>
+            </div><br>
+
+            <div class="gen-flex">
+                {%if report.last %}
+                    <img class="repo-icons" src="static/icons/last-seen-blk-icon.png" />
+                    <span class="rep-title">Last Seen:</span>
+                    <label class="labels">Opened: {{report.last_seen.strftime("%d %b %Y")}}</label>
+                    {%else%}
+                    <img class="repo-icons" src="static/icons/last-seen-blk-icon.png" />
+                    <span class="rep-title">Last Seen:</span>
+                    <label class="labels">-</label>
+                {%endif%}
+            
+            </div>
+            <img style="position:absolute;height:50px" class="easya-icon" src="static/icons/easy-apply-icon.png"/>
+        </div>
+        {%endfor%}
+    </div>
+</div><br>
+
+
+
+<br>
+{% endblock %}
