@@ -222,11 +222,10 @@ app.jinja_env.globals['url_for'] = my_url_for
 
 @app.context_processor
 def inject_ser():
-    ser = Serializer(app.config['SECRET_KEY'])  # Define or retrieve the value for 'ser'
-    count_jobs = count_ads()
-
     with app.app_context():
         db.create_all()
+    ser = Serializer(app.config['SECRET_KEY'])  # Define or retrieve the value for 'ser'
+    count_jobs = count_ads()
 
     return dict(ser=ser, count_jobs=count_jobs)
 
@@ -1573,9 +1572,6 @@ def job_adverts():
 
 @app.route("/")
 def home():
-
-    with app.app_context():
-        db.create_all()
 
     # posted_jobs = jobs_posted.query.all().order_by(
     #             desc(jobs_posted.timepstamp))
