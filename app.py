@@ -1575,9 +1575,7 @@ def home():
     # posted_jobs = jobs_posted.query.all().order_by(
     #             desc(jobs_posted.timepstamp))
     posted_jobs = jobs_posted.query.order_by(desc(jobs_posted.timepstamp)).all()
-    login_thabo = user.query.get(1)
-    if login_thabo:
-        login_user(login_thabo)
+    
 
 
     return render_template("job_ads_gui.html",posted_jobs=posted_jobs)
