@@ -730,6 +730,10 @@ a{
     height:30px
 }
 
+.nav-ico2{
+    height:60px
+}
+
 .saas-nav-item{
     font-size:16px;
     font-weight:600;
@@ -1881,7 +1885,7 @@ h2{
 }
 
 .topics {
-    padding:40px;
+    padding:5px;
     width:600px;
     flex-grow:1;
 }

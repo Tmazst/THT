@@ -92,15 +92,14 @@
     <div style="position:;background-color:;" class="topics">
         <div style="background-color:"  class="paras-subtopics  caption">
             <h1 id="main-welcome-h1" class="h1-tag">
-                <span class="spans">Jobs Applications Reports</span><br>
+                <span class="spans">Jobs Applications Reports</span>
             </h1>
+            <div style="max-width: 1100px;" class="gen-flex"><img class="nav-ico2" src="static/icons/tracker-icon.png" /><h2> Monitor your job application delivery status and view the last activity with the Application Tracking Feature.</h2></div>
         </div>
     </div>
 </section>
-<br><br>
 
 <div class="tags">
-    <div class="gen-flex"><img class="nav-ico" src="static/icons/tracker-icon.png" /><h2> Monitor your job application delivery status and view the last activity with the Application Tracking Feature.</h2></div>
     <div style="" class="row-flex">
         {%for report in reports%}
         {% set appl_obj = apply_obj.query.filter_by(id = report.appl_id).first() %}
