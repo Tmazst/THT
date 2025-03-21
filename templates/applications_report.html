@@ -100,6 +100,7 @@
 <br><br>
 
 <div class="tags">
+    <div class="gen-flex"><img class="nav-ico" src="static/icons/tracker-icon.png" /><h2> Monitor your job application delivery status and view the last activity with the Application Tracking Feature.</h2></div>
     <div style="" class="row-flex">
         {%for report in reports%}
         {% set appl_obj = apply_obj.query.filter_by(id = report.appl_id).first() %}
