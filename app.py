@@ -166,8 +166,6 @@ class user_class:
 
 @login_manager.user_loader
 def load_user(user_id):
-    with app.app_context():
-        session.clear()
     return user.query.get(user_id)
 
 
