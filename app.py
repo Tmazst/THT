@@ -2116,7 +2116,7 @@ def log_email_delivery(recipient_email,user_id,appl_id,token=None, status=None):
 
     db.session.add(new_log)
     db.session.commit()
-    flash(f"Tracking Entry Recorded with Token: {new_log.unique_id}", "success")
+    print(f"Tracking Entry Recorded with Token: {new_log.unique_id}", "success")
 
 
 def update_last_seen(log_entry):
@@ -2308,7 +2308,7 @@ def easy_apply():
                 mail.send(msg)
 
             log_email_delivery(recipient_email,current_user.id,appl_id,token=token,status='Sent')  # Log email delivery status
-            flash("Email Sent Successfully! Check your inbox to confirm the email you sent to the receiver", "success")
+            flash("Email Sent Successfully! Check your inbox we have copied the email you sent to the receiver", "success")
             # except Exception as e:
             #    log_email_delivery(recipient_email,current_user.id,token=token,status='Failed')  # Log failure status
             #    print(f'Error sending email: {e}')
