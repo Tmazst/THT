@@ -2181,8 +2181,10 @@ def easy_apply():
         db.session.add(application)
         db.session.commit()
 
-        ea_obj = easyapply.query.filter_by(uid=current_user.id).order_by(easyapply.timestamp).first()
+        ea_obj = easyapply.query.filter_by(uid=current_user.id).order_by(easyapply.timestamp.desc()).first()
+        print("Company Email:", ea_obj.id )
         print("Easy Apply Latest Application: ", ea_obj.timestamp)
+        print("Äpplication Id:", ea_obj.id )
 
         # We are recording certificates in a different model/table
         if form.certificates.data:
