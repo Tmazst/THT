@@ -74,7 +74,7 @@ app = Flask(__name__)
 # sitemap = Sitemap(app=app)
 
 app.config['SECRET_KEY'] = 'f9ec9f35fbf2a9d8b95f9bffd18ba9a1'
-# APP_DATABASE_URI = "mysql+mysqlconnector://Tmaz:Tmazst*@1111Aynwher_isto3/Tmaz.mysql.pythonanywhere-services.com:3306/users_db"
+
 
 # Local
 if os.environ.get('EMAIL_INFO') == 'info@techxolutions.com':
