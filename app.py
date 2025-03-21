@@ -2196,6 +2196,7 @@ def easy_apply():
 
         # app.config['MAIL_USE_SSL'] = False
         mail = Mail(app)
+        user_email = current_user.email
 
         # Create the tracking pixel URL
         pixel_url = url_for('track_email_opened', token=token, _external=True)
@@ -2208,7 +2209,7 @@ def easy_apply():
             print("Email: ",recipient_email)
 
             # Create and send the email
-            msg = Message(subject, sender="noreply@gmail.com", recipients=[recipient_email])
+            msg = Message(subject, sender="noreply@gmail.com", recipients=[recipient_email, user_email])
             msg.html = bodyy
             print("Msg: ",msg.body)
             
