@@ -112,6 +112,7 @@ class easyapply(db.Model):
     letter = db.Column(db.String(120))
     company_email =  db.Column(db.String(120))
     cv = db.Column(db.String(120))
+    job_title = db.Column(db.String(120))
     portfolio_link = db.Column(db.String(120))
     resume = db.Column(db.String(120))
     other_doc = db.Column(db.String(120))

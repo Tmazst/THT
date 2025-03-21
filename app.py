@@ -2151,6 +2151,7 @@ def easy_apply():
             uid = current_user.id,
             company_email  = form.company_email.data,
             portfolio_link  = form.portfolio_link.data,
+            job_title = form.subject.data,
             timestamp = datetime.now()
         )
 
@@ -2229,7 +2230,7 @@ def easy_apply():
                     cert_file_path = os.path.join("static/files",cert)
                     if os.path.exists(cert_file_path):
                         with app.open_resource(cert_file_path) as fp:
-                            msg.attach(application.letter, letter.mimetype, fp.read())
+                            msg.attach(cert, letter.mimetype, fp.read())
                             print("Attached Certificate")
 
             # try:
