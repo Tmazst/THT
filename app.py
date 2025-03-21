@@ -2363,7 +2363,6 @@ def view_user():
                            , ser=ser, current_job=portfolio_current_job, company_usr=company_usr, job_ad=job_ad)
 
 
-
 @app.route("/verified/<token>", methods=["POST", "GET"])
 # Email verification link verified with a token
 def verified(token):
