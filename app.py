@@ -48,6 +48,25 @@ from sqlalchemy.exc import IntegrityError
 # DB sessions
 # db_sessions = sessionmaker(bind=engine)
 # db = db_sessions()
+import pytz
+
+
+def current_time_wlzone():
+    # Get the current UTC time
+    timestamp = datetime.now(pytz.utc)
+
+    # Define the user's timezone (for example, 'America/New_York')
+    user_timezone = 'Africa/Mbabane'  # Replace this with the user's timezone
+
+    # Create a timezone object
+    local_tz = pytz.timezone(user_timezone)
+
+    # Convert UTC time to user's local time
+    local_time = timestamp.astimezone(local_tz)
+
+    # print("Current time in user's local timezone:", local_time)
+
+    return local_time
 
 
 # Applications
@@ -136,7 +155,7 @@ app.config['SECURITY_TWO_FACTOR_SECRET'] = 'jhs&h$$sbUE_&WI*(*7hK5S'
 # 2FA Auth
 # otp_key = pyotp.random_base32()
 # otp = pyotp.TOTP(otp_key, interval=60)
-days_to_lauch = datetime.strptime("2024-07-02", "%Y-%m-%d") - datetime.now()
+days_to_lauch = datetime.strptime("2024-07-02", "%Y-%m-%d") - current_time_wlzone()
 
 class user_class:
     s = None
@@ -328,7 +347,7 @@ def sign_up():
             hashd_pwd = encry_pw.generate_password_hash(register.password.data).decode('utf-8')
             user1 = job_user(name=register.name.data, email=register.email.data, password=hashd_pwd,
                              confirm_password=hashd_pwd, image="default.jpg",
-                             time_stamp=datetime.now())
+                             time_stamp=current_time_wlzone())
 
             try:
                 db.session.add(user1)
@@ -1019,7 +1038,7 @@ def post_job():
             details = form.details.data,
             deadline = form.deadline.data,
             link = form.link.data,
-            timepstamp = datetime.now()
+            timepstamp = current_time_wlzone()
         )
         print("CHECH IMAGE: ",form.advert_image.data)
         if form.advert_image.data:
@@ -1372,7 +1391,7 @@ def freelancer_viewed():
         esw_freelancer = Esw_Freelancers.query.filter_by(uid=fr_id).first()
         user_ = user.query.get(esw_freelancer.uid)
 
-        years = (datetime.now().date() - user_.date_of_birth).days
+        years = (current_time_wlzone().date() - user_.date_of_birth).days
 
         usr_years = int(years / 365)
 
@@ -1507,7 +1526,7 @@ def date_filter(input):
 @app.route("/job_ads", methods=["GET", "POST"])
 # @basic_auth.required
 def job_adverts():
-    date_today = datetime.now()
+    date_today = current_time_wlzone()
     token = user_class()
     encry = encry_pw
     if current_user.is_authenticated:
@@ -1586,7 +1605,7 @@ def view_job():
         dcry_jbid = ser.loads(id_)["data"]
         job_ad = Jobs_Ads.query.get(dcry_jbid)
 
-        deadln = job_ad.application_deadline - datetime.now()
+        deadln = job_ad.application_deadline - current_time_wlzone()
         days_left = deadln.days
         chekif_usr_applied = Applications.query.filter_by(job_details_id=dcry_jbid,
                                                           applicant_id=current_user.id).first()
@@ -1895,7 +1914,7 @@ def google_signin():
         # context
         hashd_pwd = encrypt_password.generate_password_hash(usr_athash).decode('utf-8')
         user1 = user(name=usr_name, email=usr_email, password=hashd_pwd,
-                        confirm_password=hashd_pwd, image="default.jpg",time_stamp=datetime.now(),verified=True)
+                        confirm_password=hashd_pwd, image="default.jpg",time_stamp=current_time_wlzone(),verified=True)
 
         try:
             db.session.add(user1)
@@ -2092,7 +2111,7 @@ def log_email_delivery(recipient_email,user_id,appl_id,token=None, status=None):
         appl_id=appl_id,
         status=status,
         last_seen=None,  # Set to None by default
-        timestamp=datetime.now(),
+        timestamp=current_time_wlzone(),
         unique_id = token 
     )
 
@@ -2104,7 +2123,7 @@ def log_email_delivery(recipient_email,user_id,appl_id,token=None, status=None):
 def update_last_seen(log_entry):
     # log_entry = Tracking.query.filter_by(company_email=recipient_email).order_by(Tracking.id.desc()).first()
     if log_entry:
-        log_entry.last_seen = datetime.now()  # Update to the current UTC time
+        log_entry.last_seen = current_time_wlzone()  # Update to the current UTC time
         print("Last Seen: ", log_entry.last_seen)
         db.session.commit()
 
@@ -2150,7 +2169,7 @@ def easy_apply():
             company_email  = form.company_email.data,
             portfolio_link  = form.portfolio_link.data,
             job_title = form.subject.data,
-            timestamp = datetime.now()
+            timestamp = current_time_wlzone()
         )
 
         if form.letter.data:
