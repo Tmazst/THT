@@ -122,6 +122,28 @@
                 {% endif %}
             </div>
 
+            <!-------ID--------->
+            <div class="job-ad-group marginise-bottom">
+                {{ form.id.label(class="labels")}}<br>
+                    {{ form.id(class="form-control adj-width-60", style="")}}
+                    {% if form.id.errors %}
+                    {% for error in form.id.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-------Drivers--------->
+            <div class="job-ad-group marginise-bottom">
+                {{ form.drivers.label(class="labels")}}<br>
+                    {{ form.drivers(class="form-control adj-wdriversth-60", style="")}}
+                    {% if form.drivers.errors %}
+                    {% for error in form.drivers.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
         <div>
             {{ form.submit(class="btns") }}
         </div>

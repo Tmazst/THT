@@ -115,9 +115,9 @@ class easyapply(db.Model):
     job_title = db.Column(db.String(120))
     portfolio_link = db.Column(db.String(120))
     resume = db.Column(db.String(120))
-    other_doc = db.Column(db.String(120))
-    other_doc1 = db.Column(db.String(120))
-    other_doc2 = db.Column(db.String(120))
+    other_doc = db.Column(db.String(120))#ID
+    other_doc1 = db.Column(db.String(120))#License
+    other_doc2 = db.Column(db.String(120))#Other
     other_doc3 = db.Column(db.String(120))
     timestamp = db.Column(db.DateTime)
     tracking_ids = relationship("Tracking", backref='easyapply', lazy=True)

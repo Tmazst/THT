@@ -38,11 +38,13 @@ class EasyApplyForm(FlaskForm):
     my_email = StringField('My Email', validators=[DataRequired(),Email()])
     subject = StringField('Subject', validators=[DataRequired()])
     body = TextAreaField('Message', validators=[DataRequired()])
+    id = FileField('National Identity Copy (ID)', validators=[DataRequired()])
+    drivers = FileField('Drivers License', validators=[Optional()])
     letter = FileField('Attach Letter (PDF / MSWORD)', validators=[DataRequired()])
     cv = FileField('Attach CV (PDF / MSWORD)', validators=[DataRequired()])
     portfolio_link = URLField('Paste Portfolio Link', validators=[Optional()])
     certificates = MultipleFileField('Attach Certificates (PDF / MSWORD)', validators=[DataRequired()])
-    legal = FileField('Attach ID', validators=[DataRequired()])
+    other = FileField('Other', validators=[Optional()])
     submit = SubmitField("Submit")
 
 

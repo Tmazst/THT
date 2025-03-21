@@ -2171,12 +2171,21 @@ def easy_apply():
             job_title = form.subject.data,
             timestamp = current_time_wlzone()
         )
-
+        #Letter
         if form.letter.data:
             application.letter = save_pdf(form.letter.data)
 
+        #CV
         if form.cv.data:
-            application.cv = save_pdf(form.cv.data)
+            application.other_doc = save_pdf(form.cv.data)
+
+        #ID
+        if form.id.data:
+            application.other_doc1 = save_pdf(form.cv.data)
+
+        #Drivers
+        if form.drivers.data:
+            application.other_doc2= save_pdf(form.cv.data)
 
         db.session.add(application)
         db.session.commit()
@@ -2212,6 +2221,8 @@ def easy_apply():
         
         letter = form.letter.data
         cv_file = form.cv.data
+        id_file = form.id.data
+        drivers_file = form.drivers.data
 
         # app.config['MAIL_USE_SSL'] = False
         mail = Mail(app)
@@ -2235,6 +2246,9 @@ def easy_apply():
             # Check if the attachment file exists
             cv_file_path = os.path.join("static/files",application.cv)
             lttr_file_path = os.path.join("static/files",application.letter)
+            id_file_path = os.path.join("static/files",application.other_doc)
+            drivers_file_path = os.path.join("static/files",application.other_doc1)
+            
             if os.path.exists(cv_file_path):
                 with app.open_resource(cv_file_path) as fp:
                     msg.attach(application.cv, cv_file.mimetype, fp.read())
@@ -2243,6 +2257,16 @@ def easy_apply():
             if os.path.exists(lttr_file_path):
                 with app.open_resource(lttr_file_path) as fp:
                     msg.attach(application.letter, letter.mimetype, fp.read())
+
+            # Drivers
+            if os.path.exists(drivers_file_path):
+                with app.open_resource(drivers_file_path) as fp:
+                    msg.attach(application.other_doc1, drivers_file.mimetype, fp.read())
+
+            # ID
+            if os.path.exists(id_file_path):
+                with app.open_resource(id_file_path) as fp:
+                    msg.attach(application.other_doc, id_file.mimetype, fp.read())
 
             # Attached Certicates
             if form.certificates.data:
