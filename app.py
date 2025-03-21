@@ -155,7 +155,7 @@ app.config['SECURITY_TWO_FACTOR_SECRET'] = 'jhs&h$$sbUE_&WI*(*7hK5S'
 # 2FA Auth
 # otp_key = pyotp.random_base32()
 # otp = pyotp.TOTP(otp_key, interval=60)
-days_to_lauch = datetime.strptime("2024-07-02", "%Y-%m-%d") - current_time_wlzone()
+# days_to_lauch = datetime.strptime("2024-07-02", "%Y-%m-%d") - current_time_wlzone()
 
 class user_class:
     s = None
