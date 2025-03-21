@@ -2174,15 +2174,15 @@ def easy_apply():
 
         #CV
         if form.cv.data:
-            application.other_doc = save_pdf(form.cv.data)
+            application.cv = save_pdf(form.cv.data)
 
         #ID
         if form.id.data:
-            application.other_doc1 = save_pdf(form.cv.data)
+            application.other_doc = save_pdf(form.id.data)
 
         #Drivers
         if form.drivers.data:
-            application.other_doc2= save_pdf(form.cv.data)
+            application.other_doc1= save_pdf(form.drivers.data)
 
         db.session.add(application)
         db.session.commit()
@@ -2269,25 +2269,25 @@ def easy_apply():
             if application.other_doc1:
                 drivers_file_path = os.path.join("static/files",application.other_doc1)
 
-            if os.path.exists(cv_file_path):
+            if application.cv and os.path.exists(cv_file_path):
                 with app.open_resource(cv_file_path) as fp:
                     msg.attach(application.cv, cv_file.mimetype, fp.read())
                     print("Attached CV")
 
             # Check if the attachment file exists
-            if os.path.exists(lttr_file_path):
+            if application.letter and os.path.exists(lttr_file_path):
                 with app.open_resource(lttr_file_path) as fp:
                     msg.attach(application.letter, letter.mimetype, fp.read())
                     print("Attached Letter")
 
             # Drivers
-            if os.path.exists(drivers_file_path):
+            if application.other_doc and os.path.exists(drivers_file_path):
                 with app.open_resource(drivers_file_path) as fp:
                     msg.attach(application.other_doc1, drivers_file.mimetype, fp.read())
                     print("Attached Drivers")
 
             # ID
-            if os.path.exists(id_file_path):
+            if application.other_doc1 and os.path.exists(id_file_path):
                 with app.open_resource(id_file_path) as fp:
                     msg.attach(application.other_doc, id_file.mimetype, fp.read())
                     print("Attached ID")
