@@ -1569,6 +1569,9 @@ def job_adverts():
 @app.route("/")
 def home():
 
+    with app.app_context():
+        db.create_all()
+
     # posted_jobs = jobs_posted.query.all().order_by(
     #             desc(jobs_posted.timepstamp))
     posted_jobs = jobs_posted.query.order_by(desc(jobs_posted.timepstamp)).all()
