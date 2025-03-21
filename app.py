@@ -168,10 +168,8 @@ class user_class:
 def load_user(user_id):
     with app.app_context():
         session.clear()
-    if user:
-        return user.query.get(user_id)
-    else:
-        return redirect(url_for("home"))
+    return user.query.get(user_id)
+
 
 
 @app.errorhandler(401)
