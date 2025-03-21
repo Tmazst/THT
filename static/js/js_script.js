@@ -18,6 +18,10 @@
 //    scrollingElement.style.position = "relative";
 //  }
 //}
+var userName = document.querySelector("#navlink");
+var trimmed  = userName.textContent.substring(0,7);
+userName.textContent  = trimmed+"..";
+
 
 function sideNavFunc(event){
   console.log("Side Nav");

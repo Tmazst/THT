@@ -110,6 +110,18 @@
                 {% endif %}
             </div>
 
+            
+            <!-------CERTIFICATES--------->
+            <div class="job-ad-group marginise-bottom">
+                {{ form.certificates.label(class="labels")}}<br>
+                    {{ form.certificates(class="form-control adj-width-60", style="")}}
+                    {% if form.certificates.errors %}
+                    {% for error in form.certificates.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
         <div>
             {{ form.submit(class="btns") }}
         </div>

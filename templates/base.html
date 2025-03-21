@@ -11,24 +11,40 @@
     <link rel="stylesheet" href="https://storage.googleapis.com/non-spec-apps/mio-icons/latest/outline.css">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 
-
     <title>The Hustlers Time</title>
     <link rel="icon" type="image/png" href="static/icons/the-hustlers-time-logo.png">
 
 <!--    <div class="main">-->
-
-        <div class="title-bar-cont">
+        <div class="title-bar-cont gen-flex">
             <div style="width:100%" class="titles">
                 <div style=""  onclick="sideNavFunc(event)" class="menu-icon">
-                  <div class="stroke"></div>
-                  <div class="stroke"></div>
-                  <div class="stroke"></div>
-              </div>
+                    <div class="stroke"></div>
+                    <div class="stroke"></div>
+                    <div class="stroke"></div>
+                </div>
                 <img style="height:60px" class="social-icon-main" src="static/icons/tht_logo_icon.png" />
-                <div  id="title"><span></span>The Hustlers Time <br><span style="font-size:11px;font-weight:600"></span></div>
+                <div  id="title"><span></span>The Hustlers Time<br><span style="font-size:11px;font-weight:600"></span></div>
             </div>
-            <div class="social-icons">
+            <div class="filler"></div>
+            <!-- <div class="search-cont">
+                <form style="gap:0;flex-wrap: nowrap;" class="general-flex" action="/search" method="get">
+                  <input class="search-field" type="search" name="search_value" placeholder="One Word Search" value="">
+                  <button style="background: none;" class="search-btn" type="submit"><img style="height:30px" src="static/icons/sibuko.png"></button>
+                </form>
+            </div> -->
+            <div style="background-color:;" class="user">
+                <div class="user-label gen-flex">
+                  {% if current_user.is_authenticated %}
+                    <div><a class="" href="/account"><span id="navlink" style="font-size:13px" class="nav-link">{{current_user.name}}</span></a></div>
+                    <div><a href="/logout"><img class="logout-icon" style="height:40px" src="static/icons/logout-icon.webp"></a></div>
+                  {% else %}
+                    <li><a id="login" class="btns-outlined links-user" href="/login">Login</a></li>
+                    <!-- <li><a class="btns-user links-user" href="/google_login">Register</a></li> -->
+                  {% endif %}
+                </div>
             </div>
+            <!-- <div class="social-icons">
+            </div> -->
         </div>
 
         <div  id="side-navig-bg" class="side-nav-bg ">
@@ -145,6 +161,14 @@
                   <div id="" class="saas-nav-item gen-flex">
                     <img class="nav-ico" src="static/icons/post_icon.png" />
                     <a href="/post_job"><span style="color:black">Post A Job</span></a>
+                  </div>
+                  <div id="" class="saas-nav-item gen-flex">
+                    <img class="nav-ico" src="static/icons/applyeasy-icon.png" />
+                    <a href="/easy_apply"><span style="color:black">Easily Apply</span></a>
+                  </div>
+                  <div id="" class="saas-nav-item gen-flex">
+                    <img class="nav-ico" src="static/icons/tracker-icon.png" />
+                    <a href="/job_reports"><span style="color:black">Application Tracker</span></a>
                   </div>
                   <div class="filler"></div>
                   <div class="gen-flex-col lower-nav">

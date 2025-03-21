@@ -107,13 +107,13 @@
             <div class="gen-flex">
                 <img class="repo-icons" src="static/icons/email_icon.png" />
                 <label class="rep-title">Email:</label>
-                <label class="labels">{{appl_obj}}</label>
+                <label id="" class="labels comp_email">pro.dignitron@gmail.com</label>
             </div><br>
 
             <div class="gen-flex">
                 <img class="repo-icons" src="static/icons/brief_case-icon.png" />
                 <span class="rep-title">Job Title:</span>
-                <label class="labels">{{appl_obj}}</label>
+                <label class="labels">{{appl_obj.email}}</label>
             </div><br>
 
             <div class="gen-flex">
@@ -140,6 +140,26 @@
     </div>
 </div><br>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select the label element by ID
+        var compEmail = document.querySelectorAll(".comp_email");
+        
+        // Check if the element is found
+        if (compEmail) {
+            
+            compEmail.forEach(email =>{
+                // Extract the first 10 characters
+                var truncatedEmail = email.textContent.substring(0, 17);
+                console.log(truncatedEmail); // This should output "pro.digni"
+                email.textContent = truncatedEmail + "...";
+            });
+            
+        } else {
+            console.log("Element not found");
+        }
+    });
+</script>
 
 
 <br>

@@ -4,7 +4,13 @@
 <br><br>
 <div class="tags">
 
-      <div class="flash-messages" class="">
+      
+<!--      <h3>How are you Today!<br> <span class="spans"></span></h3>-->
+
+    <h1 >Welcome again, <br><span class="spans">Login</span></h1>
+            <!----FORM----->
+     <div id="login-page" class="general-flex">
+        <div class="flash-messages" class="">
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for  category, message in messages %}
@@ -13,17 +19,15 @@
                 {% endif %}
             {% endwith %}
      </div>
-<!--      <h3>How are you Today!<br> <span class="spans"></span></h3>-->
-    <br><br><br>
-     <p class="paras-subtopics">Good Day,</p>
-    <h1 >Welcome again, <br><span class="spans">Login</span></h1>
-            <!----FORM----->
-     <div id="login-page" class="general-flex">
-          <div style="max-width:400px;background-color:3ab;" class="form_container anim">
-                <div class="card">
+          <div style="max-width:300px;background-color:3ab;" class="form_container anim">
+                <div style="width:100%;max-width:300px;" class="card">
                     <div style="width:100%;" class="card-body py-md-4">
                         <h2 style="padding-left:8%;padding-top:8%;color:#006769" class="card-title text-center">Login</h2>
-                        <form _lpchecked="1" action="" method="post">
+                        <div class="ggl-signin-btn">
+                            <a href="{{url_for('google_login')}}"><div style="gap:2px;justify-content: flex-start;" class="general-flex" ><h4 class="form-welcome" style="margin:0;color:rgb(39, 39, 39)">Continue with </h4>
+                            <img class="ggl-img" style="height: 35px;width:95px;border-radius: 15px;" src="static/icons/google-icon.png" /> </div></a>
+                        </div> 
+                        <!-- <form _lpchecked="1" action="" method="post">
 
                              <div class="group">
                                   {{login.hidden_tag()}}
@@ -33,7 +37,7 @@
                                         <span class="span-error" >*{{error}}</span>
                                     {% endfor %}
                                  {% endif %}
-                                <!--<input type="email" class="form-control" id="email" name="email" placeholder="Email">-->
+                                
                              </div>
 
                              <div class="group">
@@ -43,38 +47,38 @@
                                         <span class="span-error" >*{{error}}</span>
                                     {% endfor %}
                                  {% endif %}
-                               <!--<input type="password" class="form-control" id="password" name="passw" placeholder="Password">-->
+                              
                              </div>
 
                             <div class="">
                                 {{ login.use_2fa_auth.label(style="font-size:13px,font-weight:600;color:coral")}}{{ login.use_2fa_auth(style="",id="2fa_check_box")}}
-                               <!--<input type="password" class="form-control" id="password" name="passw" placeholder="Password">-->
+                               
                              </div><br><br>
 
                              <div style="margin:0 auto;" class="group group-flex">
                                      <div style="padding-left:;width:40%;background-color:339ab3" class="d-flex flex-row align-items-center justify-content-between">
                                          {{ login.submit(style="font-size:13px",class="btns", id="login_btn") }}
-                                         <!--<input class="btns" type="submit" value="Create Account" />-->
+                                        
                                          <a style="font-size:13px;" class="form-a links" href="reset_request">Forgot Password?</a>
 
                                     </div>
                                     <div style="text-align:right;width:40%;background-color:339ab3;" class="">
                                         {{ login.stay_signed.label(style="font-size:13px")}}
                                          {{ login.stay_signed}}
-                                         <!--<input class="btns" type="submit" value="Create Account" />-->
+                                         
                                     </div>
 
                              </div>
 
 
 
-                        </form>
+                        </form> -->
                     </div>
                 </div>
 
           </div>
     
     </div>
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br>
 </div>
 {% endblock %}

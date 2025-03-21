@@ -2759,6 +2759,42 @@ display:none
     gap:1px !important;
 }
 
+.user-label a{
+    color:white !important;
+}
+
+.user-label li{
+   list-style-type:none !important;
+}
+
+.links-user:hover{
+    color:coral;
+    border:2px solid coral;
+    background:none;
+}
+
+
+
+.btns-outlined{
+
+    border:2px solid var(--main-color);
+    padding:5px 10px;
+    color:var(--main-color);
+    font-weight:600;
+    border-radius:15px;
+    background:none;
+    text-decoration:none;
+    list-style-type: none;
+}
+
+
+.ggl-signin-btn{
+    border-radius: 10px;
+    border:1px solid #cac9c9;
+    padding:10px;
+    background-color: #d9ddeb;
+}
+
 
 .big-ibtns .labels{
     margin:1px !important;
@@ -3190,8 +3226,6 @@ display:none
 }
 
 
-
-
 .flash-messages{
     z-index:3;
     height:20vw !important;
@@ -3206,7 +3240,7 @@ display:none
 .user{
     display:flex;
     justify-content:center;
-    width:100%;
+    width:max-content;
     padding:5px;
     margin:0 !important;
 }

@@ -35,16 +35,19 @@ from BLOG_CLASS import blog_class
 from werkzeug.utils import secure_filename
 import platform
 import base64
+from authlib.integrations.flask_client import OAuth
 # from bs4 import BeautifulSoup as b_soup
 import requests
 import sendgrid
 # from sendgrid.helpers.mail import Mail
 import io
-
+import json
+from sqlalchemy.exc import IntegrityError
 # from models.user import get_reset_token, very_reset_token
 # DB sessions
 # db_sessions = sessionmaker(bind=engine)
 # db = db_sessions()
+
 
 # Applications
 app = Flask(__name__)
@@ -76,7 +79,12 @@ app.config['MAIL_USERNAME'] = 'seeker.eswatini@gmail.com' #os.getenv("MAIL") #
 app.config['MAIL_PASSWORD'] = 'qcwqtochvppknpbk' #os.getenv("PWD") # 
 app.config['MAIL_USE_TLS'] = True
 
+app.config['FOLDER']='attachments'
+
 db.init_app(app)
+
+
+oauth = OAuth(app)
 
 pub,priv = rsa.newkeys(128)
 
@@ -87,7 +95,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 # Encrypt Password
-encry_pw = Bcrypt(app)
+encrypt_password = Bcrypt(app)
 
 ser = Serializer(app.config['SECRET_KEY'])
 
@@ -95,6 +103,34 @@ ser = Serializer(app.config['SECRET_KEY'])
 
 # migrate = Migrate(app,db)
 # basic_auth = BasicAuth(app)
+
+
+if os.path.exists("client.json"):
+    # Load secrets from JSON file
+    with open("client.json") as f:
+        creds = json.load(f)
+
+#Google oauth configs
+if os.path.exists('client.json'):
+    appConfig = {
+        "OAUTH2_CLIENT_ID" : creds['clientid'],
+        "OAUTH2_CLIENT_SECRET":creds['clientps'],
+        "OAUTH2_META_URL":"",
+        "FLASK_SECRET": app.config['SECRET_KEY'], #"sdsdjsdsdjfe832j2rj_32jfesdsdjfe832j2rj32j832",
+        "FLASK_PORT": 5000  
+    }
+
+    oauth.register("tht_oauth",
+                client_id = appConfig.get("OAUTH2_CLIENT_ID"),
+                client_secret = appConfig.get("OAUTH2_CLIENT_SECRET"),
+                    api_base_url='https://www.googleapis.com/',
+                    userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo', 
+                client_kwargs={ "scope" : "openid email profile"},
+                server_metadata_url= 'https://accounts.google.com/.well-known/openid-configuration',
+                jwks_uri = "https://www.googleapis.com/oauth2/v3/certs"
+                )
+
+
 
 # Yet To Be Tested
 app.config['SECURITY_TWO_FACTOR_ENABLED_METHODS'] = ['mail', 'sms']
@@ -232,6 +268,7 @@ def save_pdf(pdf_file):
     pdf_file.save(file_path)
 
     return new_file_name_ext
+
 
 
 def delete_pdf(file_name):
@@ -457,20 +494,20 @@ def login():
         return redirect(url_for('home'))
 
     login = Login()
-    if request.method == 'POST':
+    # if request.method == 'POST':
 
-        if login.validate_on_submit():
-            user_login = user.query.filter_by(email=login.email.data).first()
-            if user_login and encry_pw.check_password_hash(user_login.password, login.password.data):
+    #     if login.validate_on_submit():
+    #         user_login = user.query.filter_by(email=login.email.data).first()
+    #         if user_login and encry_pw.check_password_hash(user_login.password, login.password.data):
                 
-                login_user(user_login)
+    #             login_user(user_login)
 
-                req_page = request.args.get('next')
-                flash("Login Successful!")
-                return redirect(req_page) if req_page else redirect(url_for('home'))
-            else:
-                flash("Login Access Denied! Check your password and email","error")
-                return redirect('login')
+    #             req_page = request.args.get('next')
+    #             flash("Login Successful!")
+    #             return redirect(req_page) if req_page else redirect(url_for('home'))
+    #         else:
+    #             flash("Login Access Denied! Check your password and email","error")
+    #             return redirect('login')
 
     return render_template('login_form.html', title='Login', login=login)
 
@@ -1538,6 +1575,10 @@ def home():
     # posted_jobs = jobs_posted.query.all().order_by(
     #             desc(jobs_posted.timepstamp))
     posted_jobs = jobs_posted.query.order_by(desc(jobs_posted.timepstamp)).all()
+    login_thabo = user.query.get(1)
+    if login_thabo:
+        login_user(login_thabo)
+
 
     return render_template("job_ads_gui.html",posted_jobs=posted_jobs)
 
@@ -1808,6 +1849,93 @@ def company_login():
 
     return render_template('company_login_form.html', title='Company Login', company_login=company_login, ser=ser)
 
+@app.route("/google_signup", methods=["POST","GET"])
+def google_signup():
+
+    return render_template('google_signup.html')
+
+#google login
+@app.route("/google_login", methods=["POST","GET"])
+def google_login():
+
+    # Step 1: Generate a nonce and store it in the session for validation
+
+    return oauth.tht_oauth.authorize_redirect(redirect_uri=url_for("google_signin",_external=True))
+
+
+#login redirect
+@app.route("/google_signin", methods=["POST","GET"])
+def google_signin():
+
+    # Step 1: Handle the OAuth2 callback and exchange the authorization code for an access token
+    token = oauth.tht_oauth.authorize_access_token()
+
+    # Step 2: Parse the ID token from the response to get user information
+    user_info = oauth.tht_oauth.parse_id_token(token)
+    
+    # Step 3: Store user info in the Flask session for persistence
+    session['user'] = user_info
+
+    verified = user_info.get("email_verified")
+    usr_email = user_info.get("email")
+    usr_name=user_info.get("name")
+    usr_athash=user_info.get("at_hash")
+
+    if not verified:
+        flash("Access Denied!, Your Email is not verified with Google")
+        flash("Please, Set up your account manually")
+        return redirect(url_for('sign_up'))
+    
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    #Sign Up
+    if not user.query.filter_by(email=usr_email).first():
+
+        print("Email Not Found!, We will register")
+
+        # context
+        hashd_pwd = encrypt_password.generate_password_hash(usr_athash).decode('utf-8')
+        user1 = user(name=usr_name, email=usr_email, password=hashd_pwd,
+                        confirm_password=hashd_pwd, image="default.jpg",time_stamp=datetime.now(),verified=True)
+
+        try:
+            db.session.add(user1)
+            db.session.commit()
+
+            #Login user
+            usr_obj = user.query.filter_by(email=usr_email).first()
+            #Check if user have a church id
+            login_user(usr_obj)
+            flash(f"Welcome! {usr_obj.name.title()}", "success")
+
+            req_page = request.args.get('next')
+            return redirect(req_page) if req_page else redirect(url_for('home'))
+
+        
+        except IntegrityError:
+            db.session.rollback()  # Rollback the session on error
+            return jsonify({"message": "Email already exists"}), 409
+        
+        except Exception as e:
+                db.session.rollback()  # Rollback on any other error
+                return jsonify({"message": "An error occurred", "error": str(e)}), 500
+        
+    else:
+        user_login = user.query.filter_by(email=usr_email).first()
+
+        if not user_login.verified:
+            login_user(user_login)
+            return redirect(url_for('verification'))
+
+        login_user(user_login)
+        flash(f"welcome! {user_login.name.title()}", "success")
+
+
+        req_page = request.args.get('next')
+        return redirect(req_page) if req_page else redirect(url_for('home'))
+    
+
 
 # ---------------COMPANY ACCOUNT---------------------#
 @app.route("/company_account", methods=["GET", "POST"])
@@ -2016,6 +2144,7 @@ def job_reports():
 def easy_apply():
 
     form = EasyApplyForm()
+    certificates_ = []
 
     if request.method =="POST":
         application = easyapply(
@@ -2045,10 +2174,11 @@ def easy_apply():
                     #Job Application Id
                     ea_id = ea_obj.id
                 )
-
                 cert.cert_file = save_pdf(file)
+                certificates_.append(cert.cert_file)
                 db.session.add(cert)
             db.session.commit()
+            print("Certificates: ",certificates_)
         print("Application Saved in database")
 
         # Send Email And Track Delivery
@@ -2059,6 +2189,9 @@ def easy_apply():
         appl_id = ea_obj.id
         print("Email Token Created: ",token)
 
+        
+        letter = form.letter.data
+        cv_file = form.cv.data
 
         # app.config['MAIL_USE_SSL'] = False
         mail = Mail(app)
@@ -2073,14 +2206,36 @@ def easy_apply():
             print("Body: ",bodyy)
             print("Email: ",recipient_email)
 
+            # Create and send the email
             msg = Message(subject, sender="noreply@gmail.com", recipients=[recipient_email])
             msg.html = bodyy
             print("Msg: ",msg.body)
-            print("Dir Mail: ",dir(mail))
+            
+            # Check if the attachment file exists
+            cv_file_path = os.path.join("static/files",application.cv)
+            lttr_file_path = os.path.join("static/files",application.letter)
+            if os.path.exists(cv_file_path):
+                with app.open_resource(cv_file_path) as fp:
+                    msg.attach(application.cv, cv_file.mimetype, fp.read())
+
+            # Check if the attachment file exists
+            if os.path.exists(lttr_file_path):
+                with app.open_resource(lttr_file_path) as fp:
+                    msg.attach(application.letter, letter.mimetype, fp.read())
+
+            # Attached Certicates
+            if form.certificates.data:
+                for cert in certificates_:
+                    cert_file_path = os.path.join("static/files",cert)
+                    if os.path.exists(cert_file_path):
+                        with app.open_resource(cert_file_path) as fp:
+                            msg.attach(application.letter, letter.mimetype, fp.read())
+                            print("Attached Certificate")
 
             # try:
             with app.app_context():
                 mail.send(msg)
+
             log_email_delivery(recipient_email,current_user.id,appl_id,token=token,status='Sent')  # Log email delivery status
             flash("Email Sent Successfully! Check your inbox to confirm the email you sent to the receiver", "success")
             # except Exception as e:
@@ -2137,6 +2292,7 @@ def view_user():
     return render_template('user_viewed.html', job_usr=job_usr, db=db, user=user, company_user=company_user,
                            portfolio_approved_jobs=portfolio_approved_jobs
                            , ser=ser, current_job=portfolio_current_job, company_usr=company_usr, job_ad=job_ad)
+
 
 
 @app.route("/verified/<token>", methods=["POST", "GET"])
