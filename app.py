@@ -2221,6 +2221,13 @@ def easy_apply():
         id_file = form.id.data
         drivers_file = form.drivers.data
 
+        print("----Docs from Form Object----")
+        print("CV: ",cv_file.filename)
+        print("Letter: ",letter.filename)
+        print("ID: ",id_file.filename)
+        print("Drivers: ",drivers_file.filename)
+        print("--------------------------------")
+            
         # app.config['MAIL_USE_SSL'] = False
         mail = Mail(app)
         user_email = current_user.email
@@ -2238,32 +2245,52 @@ def easy_apply():
             # Create and send the email
             msg = Message(subject, sender="noreply@gmail.com", recipients=[recipient_email, user_email])
             msg.html = bodyy
-            print("Msg: ",msg.body)
+            print("Msg: ",msg.html)
+
+            # ----Docs from Model Object----
+            print("----Docs from Model Object----")
+            print("CV: ",application.cv)
+            print("Letter: ",application.letter)
+            print("ID: ",application.other_doc)
+            print("Drivers: ",application.other_doc1)
+            print("--------------------------------")
             
             # Check if the attachment file exists
-            cv_file_path = os.path.join("static/files",application.cv)
-            lttr_file_path = os.path.join("static/files",application.letter)
-            id_file_path = os.path.join("static/files",application.other_doc)
-            drivers_file_path = os.path.join("static/files",application.other_doc1)
+            cv_file_path = None
+            lttr_file_path = None
+            id_file_path = None
+            drivers_file_path = None
+            if application.cv:
+                cv_file_path = os.path.join("static/files",application.cv)
+            if application.letter:
+                lttr_file_path = os.path.join("static/files",application.letter)
+            if application.other_doc:
+                id_file_path = os.path.join("static/files",application.other_doc)
+            if application.other_doc1:
+                drivers_file_path = os.path.join("static/files",application.other_doc1)
 
             if os.path.exists(cv_file_path):
                 with app.open_resource(cv_file_path) as fp:
                     msg.attach(application.cv, cv_file.mimetype, fp.read())
+                    print("Attached CV")
 
             # Check if the attachment file exists
             if os.path.exists(lttr_file_path):
                 with app.open_resource(lttr_file_path) as fp:
                     msg.attach(application.letter, letter.mimetype, fp.read())
+                    print("Attached Letter")
 
             # Drivers
             if os.path.exists(drivers_file_path):
                 with app.open_resource(drivers_file_path) as fp:
                     msg.attach(application.other_doc1, drivers_file.mimetype, fp.read())
+                    print("Attached Drivers")
 
             # ID
             if os.path.exists(id_file_path):
                 with app.open_resource(id_file_path) as fp:
                     msg.attach(application.other_doc, id_file.mimetype, fp.read())
+                    print("Attached ID")
 
             # Attached Certicates
             if form.certificates.data:
