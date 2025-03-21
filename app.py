@@ -57,15 +57,11 @@ app.config['SECRET_KEY'] = 'f9ec9f35fbf2a9d8b95f9bffd18ba9a1'
 # APP_DATABASE_URI = "mysql+mysqlconnector://Tmaz:Tmazst*@1111Aynwher_isto3/Tmaz.mysql.pythonanywhere-services.com:3306/users_db"
 
 # Local
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tht_db.db"
-# Online
-# app.config[
-#     "SQLALCHEMY_DATABASE_URI"] = "mysql+mysqldb://Tmaz:Tmazst41@Tmaz.mysql.pythonanywhere-services.com:3306/Tmaz$users_db"
-
-# if os.environ.get('ENV') == 'LOCAL':
-#     app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:tmazst41@localhost/tht_database"
-# else:
-#     app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqldb://Tmaz:Tmazst41@Tmaz.mysql.pythonanywhere-services.com:3306/Tmaz$users_db"
+if os.environ.get('ENV') == 'LOCAL':
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tht_db.db"
+else:#Online
+    app.config[
+    "SQLALCHEMY_DATABASE_URI"] = "mysql+mysqldb://Tmaz:Tmazst41@Tmaz.mysql.pythonanywhere-services.com:3306/techt_lnf_tht_db"
 
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_recycle': 280}
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
