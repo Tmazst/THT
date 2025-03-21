@@ -38,6 +38,7 @@ import base64
 from authlib.integrations.flask_client import OAuth
 # from bs4 import BeautifulSoup as b_soup
 import requests
+import mysql.connector
 import sendgrid
 # from sendgrid.helpers.mail import Mail
 import io
@@ -61,7 +62,7 @@ if os.environ.get('ENV') == 'LOCAL':
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tht_db.db"
 else:#Online
     app.config[
-    "SQLALCHEMY_DATABASE_URI"] = "mysql+mysqldb://Tmaz:Tmazst41@Tmaz.mysql.pythonanywhere-services.com:3306/techt_lnf_tht_db"
+    "SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://techtlnf_tmaz:!Tmazst41#@localhost/techt_lnf_tht_db"
 
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_recycle': 280}
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
