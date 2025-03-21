@@ -708,13 +708,21 @@ a{
     gap:5px;
     transition:all 0.3s ease;
 }
-
+ body{
+    background:  linear-gradient(0deg, rgba(0, 103, 105,0.05) 0%, rgba(255,255,255,1) 100%)
+ }
 
 .stroke{
     border-radius:10px;
     height:3px;
     width:100%;
     background-color:white;
+}
+
+.ea-icon-appl{
+    position: absolute;
+    top:45px;
+    right:30px;
 }
 
 
@@ -795,6 +803,7 @@ a{
 
 #side-navig-cont{
     position: relative;
+    background:  linear-gradient(0deg, rgba(233, 246, 247, 1) 0%, rgba(255,255,255,1) 100%)
 }
 
 
