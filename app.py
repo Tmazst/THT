@@ -1585,8 +1585,8 @@ def job_adverts():
 @app.route("/")
 def home():
 
-    user_ = user.query.get(1)
-    login_user(user_)
+    # user_ = user.query.get(1)
+    # login_user(user_)
 
     # posted_jobs = jobs_posted.query.all().order_by(
     #             desc(jobs_posted.timepstamp))
