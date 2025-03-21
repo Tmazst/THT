@@ -55,7 +55,7 @@ def current_time_wlzone():
     # Get the current UTC time
     timestamp = datetime.now(pytz.utc)
 
-    # Define the user's timezone (for example, 'America/New_York')
+    # Define the user's timezone
     user_timezone = 'Africa/Mbabane'  # Replace this with the user's timezone
 
     # Create a timezone object
