@@ -1870,15 +1870,18 @@ def google_signin():
     token = oauth.tht_oauth.authorize_access_token()
 
     # Step 2: Parse the ID token from the response to get user information
-    user_info = oauth.tht_oauth.parse_id_token(token)
+    # user_info = oauth.tht_oauth.parse_id_token(token)
     
     # Step 3: Store user info in the Flask session for persistence
-    session['user'] = user_info
+    session['user'] = token
 
-    verified = user_info.get("email_verified")
-    usr_email = user_info.get("email")
-    usr_name=user_info.get("name")
-    usr_athash=user_info.get("at_hash")
+    pretty=session.get("user")
+
+    usr_info = pretty.get('userinfo')
+    verified = usr_info.get("email_verified")
+    usr_email = usr_info.get("email")
+    usr_name=usr_info.get("name")
+    usr_athash=usr_info.get("at_hash")
 
     if not verified:
         flash("Access Denied!, Your Email is not verified with Google")
