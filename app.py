@@ -166,7 +166,12 @@ class user_class:
 
 @login_manager.user_loader
 def load_user(user_id):
-    return user.query.get(user_id)
+    with app.app_context():
+        session.clear()
+    if user:
+        return user.query.get(user_id)
+    else:
+        return redirect(url_for("home"))
 
 
 @app.errorhandler(401)
