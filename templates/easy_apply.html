@@ -158,8 +158,10 @@
                 {% endif %}
             </div>
 
+        <small id="please-wait">"Please wait as we prepare to send your content..."</small>
+
         <div>
-            {{ form.submit(class="btns") }}
+            {{ form.submit(id="submit-btn", onsubmit="showPleaseWait()", class="btns") }}
         </div>
 
          </form>
@@ -168,5 +170,15 @@
   </div>
   </div>
 </div>
+<script>
+        var pleaseWait = document.querySelector("#please-wait");
+    var submitBtn = document.querySelector("#submit-btn");
+
+    function showPleaseWait() {
+        pleaseWait.style.display = 'block';
+        // Optionally disable the button to prevent double clicks
+        submitBtn.disabled = true;
+    }
+</script>
 
 {% endblock %}
