@@ -19,26 +19,26 @@
 //  }
 //}
 
-function openAuthWindow() {
-  // Open Google OAuth in a new tab/window
-  const authUrl = '/google_login'; // Your Flask route for Google OAuth
-  const authWindow = window.open(authUrl, 'authWindow', 'width=500,height=600');
+// function openAuthWindow() {
+//   // Open Google OAuth in a new tab/window
+//   const authUrl = '/google_login'; // Your Flask route for Google OAuth
+//   const authWindow = window.open(authUrl, 'authWindow', 'width=500,height=600');
 
-  // Poll the authentication window to check if it has been redirected
-  const pollAuthWindow = setInterval(() => {
-      try {
-          // Check if the authentication window has been redirected to the success URL
-          if (authWindow.location.href.includes('/google_signin')) {
-              clearInterval(pollAuthWindow); // Stop polling
-              authWindow.close(); // Close the authentication window
-              alert('Authentication successful!'); // Notify the user
-              window.location.reload(); // Reload the parent window to reflect the logged-in state
-          }
-      } catch (e) {
-          // Ignore errors (e.g., cross-origin issues)
-      }
-  }, 500); // Poll every 500ms
-}
+//   // Poll the authentication window to check if it has been redirected
+//   const pollAuthWindow = setInterval(() => {
+//       try {
+//           // Check if the authentication window has been redirected to the success URL
+//           if (authWindow.location.href.includes('/google_signin')) {
+//               clearInterval(pollAuthWindow); // Stop polling
+//               authWindow.close(); // Close the authentication window
+//               alert('Authentication successful!'); // Notify the user
+//               window.location.reload(); // Reload the parent window to reflect the logged-in state
+//           }
+//       } catch (e) {
+//           // Ignore errors (e.g., cross-origin issues)
+//       }
+//   }, 500); // Poll every 500ms
+// }
 
 var userName = document.querySelector("#navlink");
 var trimmed  = userName.textContent.substring(0,7);
