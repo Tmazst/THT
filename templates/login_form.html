@@ -23,9 +23,11 @@
                 <div style="width:100%;max-width:300px;" class="card">
                     <div style="width:100%;" class="card-body py-md-4">
                         <h2 style="padding-left:8%;padding-top:8%;color:#006769" class="card-title text-center">Login</h2>
-                        <div class="ggl-signin-btn">
-                            <a href="{{url_for('google_login')}}"><div style="gap:2px;justify-content: flex-start;" class="general-flex" ><h4 class="form-welcome" style="margin:0;color:rgb(39, 39, 39)">Continue with </h4>
-                            <img class="ggl-img" style="height: 35px;width:95px;border-radius: 15px;" src="static/icons/google-icon.png" /> </div></a>
+                        <div onclick="openAuthWindow()" class="ggl-signin-btn">
+                            <!-- <a href=""> -->
+                            <div style="gap:2px;justify-content: flex-start;" class="general-flex" ><h4 class="form-welcome" style="margin:0;color:rgb(39, 39, 39)">Continue with </h4>
+                            <img class="ggl-img" style="height: 35px;width:95px;border-radius: 15px;" src="static/icons/google-icon.png" /> </div>
+                        <!-- </a> -->
                         </div> 
                         <!-- <form _lpchecked="1" action="" method="post">
 
@@ -81,4 +83,26 @@
     </div>
     <br><br><br><br><br>
 </div>
+<script>
+    function openAuthWindow() {
+        // Open Google OAuth in a new tab/window
+        const authUrl = '/google_login'; // Your Flask route for Google OAuth
+        const authWindow = window.open(authUrl, 'authWindow', 'width=500,height=600');
+
+        // Poll the authentication window to check if it has been redirected
+        const pollAuthWindow = setInterval(() => {
+            try {
+                // Check if the authentication window has been redirected to the success URL
+                if (authWindow.location.href.includes('/google_signin')) {
+                    clearInterval(pollAuthWindow); // Stop polling
+                    authWindow.close(); // Close the authentication window
+                    alert('Authentication successful!'); // Notify the user
+                    window.location.reload(); // Reload the parent window to reflect the logged-in state
+                }
+            } catch (e) {
+                // Ignore errors (e.g., cross-origin issues)
+            }
+        }, 500); // Poll every 500ms
+    }
+</script>
 {% endblock %}

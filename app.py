@@ -1871,7 +1871,9 @@ def google_signup():
 @app.route("/google_login", methods=["POST","GET"])
 def google_login():
 
-    # Step 1: Generate a nonce and store it in the session for validation
+    if current_user.is_authenticated:
+        req_page = request.args.get('next')
+        return redirect(req_page) if req_page else redirect(url_for('home'))
 
     return oauth.tht_oauth.authorize_redirect(redirect_uri=url_for("google_signin",_external=True))
 
