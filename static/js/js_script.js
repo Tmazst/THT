@@ -19,29 +19,30 @@
 //  }
 //}
 
-// function openAuthWindow() {
-//   // Open Google OAuth in a new tab/window
-//   const authUrl = '/google_login'; // Your Flask route for Google OAuth
-//   const authWindow = window.open(authUrl, 'authWindow', 'width=500,height=600');
 
-//  // Check if the window was blocked or opened in the same WebView
-//  if (!authWindow || authWindow.closed || typeof authWindow.closed === 'undefined') {
-//   // If the window was blocked or not opened externally, prompt the user to open the link manually
-//   const openExternally = confirm('Please open this link in an external browser: ' + authUrl);
-//   if (openExternally) {
-//       // Redirect the user to the URL (they can copy and paste it into an external browser)
-//       window.location.href = authUrl;
-//   }
-// } else {
-//   // Listen for messages from the authentication window
-//   window.addEventListener('message', (event) => {
-//       if (event.data === 'auth_complete') {
-//           alert('Authentication successful!');
-//           window.location.reload(); // Reload the parent window
-//       }
-//   });
-// }
-// }
+function openAuthWindow() {
+  // Open Google OAuth in a new tab/window
+  const authUrl = '/login'; // Your Flask route for Google OAuth
+  const authWindow = window.open(authUrl, 'authWindow', 'width=300,height=600');
+
+ // Check if the window was blocked or opened in the same WebView
+ if (!authWindow || authWindow.closed || typeof authWindow.closed === 'undefined') {
+  // If the window was blocked or not opened externally, prompt the user to open the link manually
+  const openExternally = confirm('Please open this link in an external browser: ' + authUrl);
+  if (openExternally) {
+      // Redirect the user to the URL (they can copy and paste it into an external browser)
+      window.location.href = authUrl;
+  }
+} else {
+  // Listen for messages from the authentication window
+  window.addEventListener('message', (event) => {
+      if (event.data === 'auth_complete') {
+          alert('Authentication successful!');
+          window.location.reload(); // Reload the parent window
+      }
+  });
+}
+}
 
 var userName = document.querySelector("#navlink");
 var trimmed  = userName.textContent.substring(0,7);
