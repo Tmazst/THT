@@ -23,11 +23,11 @@
                 <div style="width:100%;max-width:300px;" class="card">
                     <div style="width:100%;" class="card-body py-md-4">
                         <h2 style="padding-left:8%;padding-top:8%;color:#006769" class="card-title text-center">Login</h2>
-                        <div onclick="openAuthWindow()" class="ggl-signin-btn">
-                            <!-- <a href=""> -->
+                        <div onclick="openAuhWindow()" class="ggl-signin-btn">
+                            <a href="{{url_for('google_login', _external=True)}}">
                                 <div style="gap:2px;justify-content: flex-start;" class="general-flex" ><h4 class="form-welcome" style="margin:0;color:rgb(39, 39, 39)">Continue with </h4>
                                 <img class="ggl-img" style="height: 35px;width:95px;border-radius: 15px;" src="static/icons/google-icon.png" /> </div>
-                            <!-- </a> -->
+                            </a>
                         </div> 
                         <!-- <form _lpchecked="1" action="" method="post">
 
