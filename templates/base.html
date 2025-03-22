@@ -38,7 +38,7 @@
                     <div><a class="" href="/account"><span id="navlink" style="font-size:13px" class="nav-link">{{current_user.name}}</span></a></div>
                     <div><a href="/logout"><img class="logout-icon" style="height:40px" src="static/icons/logout-icon.webp"></a></div>
                   {% else %}
-                    <li><div id="login" class="btns-outlined links-user" onclick="openAuthWindow()">Login</a></li>
+                    <li><a id="login" class="btns-outlined links-user" onclick="openAuthWindow()">Login</a></li>
                     <!-- <li><a class="btns-user links-user" href="/google_login">Register</a></li> -->
                   {% endif %}
                 </div>
