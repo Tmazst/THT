@@ -1951,7 +1951,23 @@ def google_signin():
 
 
         req_page = request.args.get('next')
-        return redirect(req_page) if req_page else redirect(url_for('home'))
+          
+        if request.accept_mimetypes['text/html']:  # Checking if the request expects HTML
+            print("Rquest accepts text/html")
+            if 'popup' in request.args:  # Conditional redirect for popup logic
+                print("Message to close pop window sent!")
+                return '''
+                    <script type="text/javascript">
+                        window.opener.postMessage('auth_complete', '*');
+                        window.close();  // Optionally close the popup
+                    </script>
+                '''
+            else:
+                print("Redirect for Wider Screens")
+                # Regular redirect for full page load
+                return redirect(req_page) if req_page else redirect(url_for('home')) # Redirect to main dashboard page
+        else:
+            return jsonify({'status': 'success'}), 200  # For APIs, return JSON response
     
 
 
