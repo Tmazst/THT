@@ -24,7 +24,7 @@ function openAuthWindow(){
     // Open Google OAuth in a new tab/window
     if (window.innerWidth <= 768){
         const authUrl = '/login?popup=true'; // Your Flask route for Google OAuth
-        const authWindow = window.open(authUrl, 'authWindow', 'width=350,height=600');
+        window.open(authUrl, 'authWindow', 'width=350,height=600');
 
             // Listen for messages from the authentication window
             window.addEventListener('message', (event) => {
@@ -36,7 +36,7 @@ function openAuthWindow(){
           });
         
       }else{
-        window.location.href = "/google_login";
+        window.location.href = "/google_login?nopopup=true'";
       }
 }
 
