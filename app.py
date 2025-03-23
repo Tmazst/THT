@@ -1587,7 +1587,7 @@ def home():
 
     # user_ = user.query.get(1)
     # login_user(user_)
-    req_page = session['req_page']
+    req_page = session.get('req_page')
     if req_page:
         session['req_page'] = ''
         return redirect(req_page) if req_page else redirect(url_for('home'))
