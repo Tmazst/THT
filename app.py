@@ -1950,24 +1950,31 @@ def google_signin():
         flash(f"welcome! {user_login.name.title()}", "success")
 
         req_page = request.args.get('next')
-          
-        if request.accept_mimetypes['text/html']:  # Checking if the request expects HTML
-            print("1. Request accepts text/html")
-            print("Check if Popup: ",request.args)
-            if 'popup' in request.args:  # Conditional redirect for popup logic
-                print("Message to close pop window sent!")
-                return '''
+
+        return '''
                     <script type="text/javascript">
                         window.opener.postMessage('auth_complete', '*');
                         window.close();  // Optionally close the popup
                     </script>
                 '''
-            else:
-                print("3. Redirect for Wider Screens")
-                # Regular redirect for full page load
-                return redirect(req_page) if req_page else redirect(url_for('home')) # Redirect to main dashboard page
-        else:
-            return jsonify({'status': 'success'}), 200  # For APIs, return JSON response
+          
+        # if request.accept_mimetypes['text/html']:  # Checking if the request expects HTML
+        #     print("1. Request accepts text/html")
+        #     print("Check if Popup: ",request.args)
+        #     if 'popup' in request.args:  # Conditional redirect for popup logic
+        #         print("Message to close pop window sent!")
+        #         return '''
+        #             <script type="text/javascript">
+        #                 window.opener.postMessage('auth_complete', '*');
+        #                 window.close();  // Optionally close the popup
+        #             </script>
+        #         '''
+        #     else:
+        #         print("3. Redirect for Wider Screens")
+        #         # Regular redirect for full page load
+        #         return redirect(req_page) if req_page else redirect(url_for('home')) # Redirect to main dashboard page
+        # else:
+        #     return jsonify({'status': 'success'}), 200  # For APIs, return JSON response
     
 
 

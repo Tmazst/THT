@@ -22,22 +22,22 @@
 
 function openAuthWindow(){
     // Open Google OAuth in a new tab/window
-    if (window.innerWidth <= 768){
-        const authUrl = '/login?popup=true'; // Your Flask route for Google OAuth
-        window.open(authUrl, 'authWindow', 'width=350,height=600');
+    // if (window.innerWidth <= 768){
+    sessionStorage.setItem('authPopup', 'true');
+    const authUrl = '/login'; // Your Flask route for Google OAuth
+    window.open(authUrl, 'authWindow', 'width=350,height=600');
 
-            // Listen for messages from the authentication window
-            window.addEventListener('message', (event) => {
-              // Make sure to check origin in a production environment
-              if (event.origin === 'https://jobs.techxolutions.com' && event.data === 'auth_complete') {
-                  alert('Authentication successful!');
-                  window.location.reload(); // Reload the parent window
-              }
-          });
-        
-      }else{
-        window.location.href = "/google_login?nopopup=true'";
+    // Listen for messages from the authentication window
+    window.addEventListener('message', (event) => {
+      // Make sure to check origin in a production environment
+      if (event.origin === 'https://jobs.techxolutions.com' && event.data === 'auth_complete') {
+          alert('Authentication successful!');
+          window.location.reload(); // Reload the parent window
       }
+  }); 
+      // }else{
+      //   window.location.href = "/google_login?nopopup=true'";
+      // }
 }
 
 var userName = document.querySelector("#navlink");
