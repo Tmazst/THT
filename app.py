@@ -1587,6 +1587,10 @@ def home():
 
     # user_ = user.query.get(1)
     # login_user(user_)
+    req_page = session['req_page']
+    if req_page:
+        session['req_page'] = ''
+        return redirect(req_page) if req_page else redirect(url_for('home'))
 
     # posted_jobs = jobs_posted.query.all().order_by(
     #             desc(jobs_posted.timepstamp))
@@ -1949,7 +1953,7 @@ def google_signin():
         login_user(user_login)
         flash(f"welcome! {user_login.name.title()}", "success")
 
-        req_page = request.args.get('next')
+        session['req_page'] = request.args.get('next')
 
         return '''
                     <script type="text/javascript">
