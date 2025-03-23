@@ -1949,7 +1949,6 @@ def google_signin():
         login_user(user_login)
         flash(f"welcome! {user_login.name.title()}", "success")
 
-
         req_page = request.args.get('next')
           
         if request.accept_mimetypes['text/html']:  # Checking if the request expects HTML
