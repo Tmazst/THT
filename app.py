@@ -64,7 +64,7 @@ def current_time_wlzone():
     # Convert UTC time to user's local tim
     local_time = timestamp.astimezone(local_tz)
 
-    # print("Current time in user's local timezone:", local_time)
+
 
     return local_time
 
