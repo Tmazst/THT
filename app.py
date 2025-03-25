@@ -56,7 +56,7 @@ def current_time_wlzone():
     timestamp = datetime.now(pytz.utc)
 
     # Define the user's timezone
-    user_timezone = 'Africa/Mbabane'  # Replace this with the user's timezone
+    user_timezone = 'Africa/Mbabane'  # Replace this with the user's timezon
 
     # Create a timezone object
     local_tz = pytz.timezone(user_timezone)
