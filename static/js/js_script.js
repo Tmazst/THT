@@ -21,7 +21,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   const slides = document.querySelectorAll('.adv-cont');
-  let currentSlide = 0;
+  let currentSlide = 2;
 
   // if (window.innerWidth =< 700){}
   // Show first slide immediately
@@ -42,8 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   nextSlide();
-
-
 
   // Auto-advance every 5 seconds (adjust timing)
   // setInterval(nextSlide, 5000);
