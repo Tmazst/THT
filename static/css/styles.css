@@ -2909,7 +2909,11 @@ display:none
 #esw_cmps_join{flex-direction:row}
 .page-pic{flex-wrap:wrap;height:auto}
 
+.welcome-advert{
 
+    background-image: url("../images/celebration-phone-01.jpg");
+    background-position: center;
+}
 
 .positioning{width:400px !important;top:40px;background-color:;}
 .positioningA{width:400px !important;top:40px;background-color:;}
@@ -2920,7 +2924,11 @@ display:none
 
 
 @media all and (max-width: 575px) {
+    .welcome-advert{
 
+        background-image: url("../images/celebration-phone-01.jpg");
+        background-position: center;
+    }
 .job-cont-cont{
     margin: 0 auto;
 
