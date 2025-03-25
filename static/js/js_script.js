@@ -19,6 +19,40 @@
 //  }
 //}
 
+document.addEventListener('DOMContentLoaded', function() {
+  const slides = document.querySelectorAll('.adv-cont');
+  let currentSlide = 0;
+
+  // if (window.innerWidth =< 700){}
+  // Show first slide immediately
+  slides[currentSlide].classList.add('display');
+
+  function nextSlide() {
+
+      slides.forEach(slide => {
+            slide.classList.remove("display");
+      });
+      
+      // Move to next slide (loop if at end)
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("display");
+      
+      // Fade in next slide after a delay
+      setTimeout(nextSlide, 5000); // Match this delay to CSS transition time
+  }
+
+  nextSlide();
+
+
+
+  // Auto-advance every 5 seconds (adjust timing)
+  // setInterval(nextSlide, 5000);
+});
+
+function closeAdverts(){
+  document.querySelector(".welcome-advert").style.display = "none";
+}
+
 
 function openAuthWindow(){
     // Open Google OAuth in a new tab/window
@@ -129,6 +163,7 @@ if( nav && burger && navLinks.length > 0){
   //
 };
 }
+
 navSlide();
 
 

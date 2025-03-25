@@ -95,11 +95,38 @@
 <section style="background-color:" class="flex-justify-align profile-sections">
         <div style="position:;background-color:" class="topics">
             <div style="background-color:;padding:5px;"  class="paras-subtopics  caption">
-                <h1 id="main-welcome-h1" class="h1-tag">
-                    <span class="spans">Discover platforms to enhance your job search endeavors.</span><br></h1>
+                <h3 id="main-welcome-h1" class="h1-tag">
+                    <span class="spans">Search, apply, and land your perfect job – whether it’s right around the corner or halfway across the world. 
+                        Local or remote, full-time or freelance, we’ve got you covered.
+                    </span><br></h3>
             </div>
         </div>
 </section>
+
+<div class="welcome-advert gen-flex-col">
+    <img style="height: 100px;width:100px" src="static/icons/tht_logo_icon.png" />
+    <div class="slideshow-container">
+        <div class="adv-cont">
+            <h1 class="advert">Your Dream Job Awaits – Locally or Globally! 🌍
+                One Platform. Endless Opportunities.
+            </h1>
+        </div>
+        <div style="" class="adv-cont gen-flex-col">
+            
+            <div style="margin: 0 auto;width:max-content"><img style="height:50px" src="static/icons/easy-apply-icon.png" /></div>
+            <div style="margin: 0 auto;width:max-content"><img style="height:400px" src="static/images/application-form-1.png" /></div>
+            <div style="margin: 0 auto;width: max-content;"><label style="color:rgb(255, 254, 254);text-align: center;margin: 0 auto;width: max-content;" class="adver">Apply Here and Easily!
+            </label></div>
+        </div>
+        <div style="" class="adv-cont gen-flex-col">
+            <h3 style="color:coral" class="advert">Track Delivery and Last seen Activities
+            </h3>
+            <div style="margin: 0 auto;width:max-content"><img style="max-height:400px" src="static/images/tracker.png" /></div>
+        </div>
+    </div>
+    <div style="flex-grow:1"></div>
+    <div onclick="closeAdverts()" class="btns go-btn">Go</div>
+</div>
 
 <div style="" class="tags">
     <div style="background-color:" class="row-flex">
@@ -173,27 +200,55 @@
     </div><br><br><br>
 </div>
 <br><br>
+
+
+{% if posted_jobs%}
+<div id="featured_jobs" class="other-jb-section">
+    <h1 class="">Featured Jobs</h1>
+    <h2 style="margin-top: -10px;">Apply Easily</h2>
+    <div style="width:inherit;flex-wrap: wrap;gap:15px" class="gen-flex">
+        {%for job in posted_jobs%}
+            {%if job.advert_image%}
+            <div class="job-cont-cont gen-flex-col">
+                <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
+                <div class="details">{{job.details}}...<br>
+                    {%if job.deadline%}
+                        <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
+                    {%endif%}
+                </div>
+                <a href="{{job.link}}" target="_blank"><div class="link btns">Apply</div></a>
+                {%if current_user.is_authenticated%}
+                    <a href="/delete_post?pstid={{ser.dumps({'data':job.id})}}"><div class="link join_btn3">Delete</div></a>
+                {%endif%}
+            </div>
+            {%endif%}
+        {%endfor%}
+    </div>
+</div>
+{%endif%}
+<br><br>
+
 <div style="margin:0 auto;width:70%;background-color:"  class="paras-subtopics  caption">
-              <h1 id="main-welcom" class="h1-tag">
-              <span style="color:coral" class="spans">International Internship Programs For Youth</span><br></h1>
- </div>
+    <h1 id="main-welcom" class="h1-tag">
+    <span style="color:coral" class="spans">International Internship Programs For Youth</span><br></h1>
+</div>
 <section id="int-topic"  style="background-color:;" class="flex-justify-align profile-sections">
-            <div id="nt-on-mobile" style="background-color:;"  class="optimise-mobile trim-edges anim not-on-mobile">
-               <img style="height:inherit" class="inherent" alt="young-hustlers-climbing-for-success" src="static/images/youth-tht.jpeg" />
+  <div id="nt-on-mobile" style="background-color:;"  class="optimise-mobile trim-edges anim not-on-mobile">
+     <img style="height:inherit" class="inherent" alt="young-hustlers-climbing-for-success" src="static/images/youth-tht.jpeg" />
 <!--           <img class="inherent" alt="the-hustlers-time-young-professionals" src="static/icons/young-people-analysing-jobs-online.png" />-->
-          </div>
-         <div style="position:" class="topics">
-              <div style="background-color:"  class="paras-subtopics  caption">
-                  <h1 id="main-welcome" class="h1-tag">Perhaps you are fresh from  college, you might need to polish-up your skills.<br>
-                  <span style="color:coral;"  class="spans">Explore online internships that could elevate your career to new heights.</span><br></h1>
-              </div>
+</div>
+<div style="position:" class="topics">
+    <div style="background-color:"  class="paras-subtopics  caption">
+        <h1 id="main-welcome" class="h1-tag">Perhaps you are fresh from  college, you might need to polish-up your skills.<br>
+        <span style="color:coral;"  class="spans">Explore online internships that could elevate your career to new heights.</span><br></h1>
+    </div>
 <!--              <div  style="position:"  class="paras-subtopics  caption">-->
 <!--                  <h1><span class="spans">Get Employability Skills</span> through <br> Are you looking for a Job but no experience, we are your plug!</h1>-->
 <!--              </div>-->
 <!--              <div style="position:"  class="paras-subtopics  caption">-->
 <!--                  <h1><span class="spans">Gain Entreprenuership Skills</span> through <br> Short-term, Remote & Freelance Jobs, Today!</h1>-->
 <!--              </div>-->
-          </div>
+</div>
 <!--              <button class="next-btns"  onclick="showNextSection()"> + </button>-->
 </section><br><br>
 
@@ -258,30 +313,6 @@
     </div>
 </div><br>
 
-{% if posted_jobs%}
-<div id="featured_jobs" class="other-jb-section">
-    <h1 class="">Other Job Adverts</h1>
-    <h2 style="margin-top: -10px;">Other Featured Job Opportunities</h2>
-    <div style="width:inherit;flex-wrap: wrap;gap:15px" class="gen-flex">
-        {%for job in posted_jobs%}
-            {%if job.advert_image%}
-            <div class="job-cont-cont gen-flex-col">
-                <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
-                <div class="details">{{job.details}}...<br>
-                    {%if job.deadline%}
-                        <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
-                    {%endif%}
-                </div>
-                <a href="{{job.link}}" target="_blank"><div class="link btns">Apply</div></a>
-                {%if current_user.is_authenticated%}
-                    <a href="/delete_post?pstid={{ser.dumps({'data':job.id})}}"><div class="link join_btn3">Delete</div></a>
-                {%endif%}
-            </div>
-            {%endif%}
-        {%endfor%}
-    </div>
-</div>
-{%endif%}
 
 <br>
 {% endblock %}
