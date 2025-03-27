@@ -16,6 +16,7 @@
 
 <!--    <div class="main">-->
         <div class="title-bar-cont gen-flex">
+
             <div style="width:100%" class="titles">
                 <div style=""  onclick="sideNavFunc(event)" class="menu-icon">
                     <div class="stroke"></div>
@@ -23,15 +24,17 @@
                     <div class="stroke"></div>
                 </div>
                 <img style="height:60px" class="social-icon-main" src="static/icons/tht_logo_icon.png" />
-                <div  id="title"><span></span>The Hustlers Time<br><span style="font-size:11px;font-weight:600"></span></div>
+                <div  id="title"><span></span>The Hustlers Time<br><span style="font-size:11px;font-weight:500"></span></div>
             </div>
+
             <div class="filler"></div>
             <!-- <div class="search-cont">
                 <form style="gap:0;flex-wrap: nowrap;" class="general-flex" action="/search" method="get">
                   <input class="search-field" type="search" name="search_value" placeholder="One Word Search" value="">
                   <button style="background: none;" class="search-btn" type="submit"><img style="height:30px" src="static/icons/sibuko.png"></button>
                 </form>
-            </div> -->
+              </div> 
+            -->
             <div style="background-color:;" class="user">
                 <div class="user-label gen-flex">
                   {% if current_user.is_authenticated %}
@@ -157,6 +160,10 @@
                   <div id="" class="saas-nav-item gen-flex">
                     <img class="nav-ico" src="static/icons/featured-icon.png" />
                     <a href="/#featured_jobs"><span style="color:black">Featured Jobs</span></a>
+                  </div>
+                  <div id="" class="saas-nav-item gen-flex">
+                    <img class="nav-ico" src="static/icons/online-course-icon.png" />
+                    <a href="/online_courses"><span style="color:black">Online Courses</span></a>
                   </div>
                   <div id="" class="saas-nav-item gen-flex">
                     <img class="nav-ico" src="static/icons/post_icon.png" />

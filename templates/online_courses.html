@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .profile-sections{
+        width:70%;
+        margin:0 auto;
+    }
+    .tags{margin:0 auto}
+    .big-btns a{
+        width:100%;
+        height:100%;
+        background:none !important;
+        box-shadow:none;
+    }
+    .big-btns a:hover{
+        background:none !important;
+        box-shadow:none;
+    }
+    .big-btns{
+        width:250px;
+        height:150px !important;
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.20);
+        padding:10px;
+    }
+    .big-ibtns{
+        width:300px;
+        height:150px !important;
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.20);
+        padding:10px;
+        position:relative;
+        border-radius:15px;
+        display:flex;
+        flex-wrap:wrap;
+        gap:10px;
+        border-right:3px solid coral;
+    }
+    .row-flex{
+        gap:20px;
+        width:90%;
+        flex-wrap:wrap;
+        justify-content:flex-start;
+    }
+    .labels{
+        color:#777;
+    }
+
+    @media all and (max-width: 575px) {
+
+        .spans{
+            color:#032627 !important
+        }
+
+    .profile-sections{
+        width:90% !important;
+        display:flex;
+        flex-direction:row;
+        }
+    .paras-subtopics{
+        margin: 5px 4%;
+        font-size:10px !important;
+        width:90% !important;
+    }
+    .topics {
+        padding:5px;
+        width:900px !im;
+        flex-grow:1;
+    }
+
+    .optimise-mobile{
+            height:inherit !important;
+        }
+    .inherent{
+        height:170px !important;
+        width:auto !important;
+    }
+
+    .optimise-mobile{
+        height:inherit !important
+    }
+
+    .row-flex{
+        width:100%;
+        justify-content:center;
+    }
+    #int-topic{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    #nt-on-mobile{width:250px;}
+
+    }
+</style>
+
+
+<br><br><br><br><br>
+<section style="background-color:" class="courses-ad-cont gen-flex">
+    <img class="course-ad-img" src="static/images/woman-pc.jpg" />
+    <h3  class="h1-tag">
+        <span class="spans">Are you ready to elevate your skills and boost your knowledge? 🌍 We have consolidated online short courses that are designed for everyone—whether you're a school leaver, 
+            a working professional, or someone seeking to reskill after a break.
+    </span><br></h3>   
+</section><br>
+
+<h3 style="background: none;" class="course-intros">Explore a wide range of topics that spark your interest and align with your career goals:</h3>
+<div style="flex-wrap:wrap;justify-content: flex-start;" class="course-intros gen-flex">
+    <div class="couser-tab gen-flex">Introduction to Programming</div>
+    <div class="couser-tab gen-flex">Physics</div>
+    <div class="couser-tab gen-flex">Introduction to Artificial Intelligence (AI)</div>
+    <div class="couser-tab gen-flex">Chemistry</div>
+    <div class="couser-tab gen-flex">Music</div>
+    <div class="couser-tab gen-flex">English Courses</div>
+    <div class="couser-tab gen-flex">Fashion Design</div>
+    <div class="couser-tab gen-flex">Graphic Design</div>
+</div>
+
+<!-- <div   class="tags">
+
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for  category, message in messages %}
+                    <div class="flash-messages alert-{{category}}"> {{ message }} </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <p class="paras-subtopics"></p> -->
+
+<br><br>
+  <div style="background-color:ae23a3;padding:20px" class="general-flex-x tags">
+        {% if courses %}
+            {% for item in courses %}
+            <!----FORM----->
+                    <div style="display:flex;flex-direction:column;width:300px;" class="new_job_ad_style_usr anim">
+
+                            <div style="" class="center-prl-img">
+                                <div style="margin:15px auto 0px auto;"  class="img-cont">
+                                   {% if item.course_image %}
+                                        <img class="prf-image" src="{{url_for('static', filename='images/' + item.course_image)}}"/>
+                                   {% endif %}
+                                </div>
+                            </div>
+
+                            <h2 style="margin-bottom:0px;margin-top:0px;">{{item.course_name}}<br></h2>
+                            <span><small style="color:#aaa" >{{item.university}}</small></span>
+                            <span><small style="color:#aaa" >{{item.site}}</small></span><br>
+
+                            <!-------JOB TITLE--------->
+                        {% if item.describe %}
+                            <small style="color:#006769;width:90%;margin:0 auto;font-weight:600">"{{item.describe}}"</small><br><br>
+                        {% endif %}
+                        {% if item.intro_link %}
+                        <a href="{{item.intro_link}}">
+                            <div><small class="view_applicant_p" ><span class="view_freelanca_p" >Course Intro</span><span></span></small></div>
+                            <div><small class="view_applicant_p" >Course Overview</small></div>
+                        </a><br><br>
+                        {% endif %}
+                            <!---------JOB TYPE--------->
+                        {% if item.course_link %}
+                        <a href="{{item.course_link}}">
+                            <div><small class="view_applicant_p" ><span class="view_freelanca_p" >Start Learning</span><span></span></small></div>
+                            <div><small class="view_applicant_p" ><span style="font-wight:bold;" ></span>Application Details</small></div>
+                        </a>
+                        {% endif %}
+                        <br><br>
+                        <div class="space-filler"></div>
+                        <div style="dispaly:block">
+                                 <!-- <a class="view_user" href="/user_viewed?id=">View</a> -->
+                        </div>
+                    </div>
+                   
+            {% endfor %}
+              {% endif %}
+  </div>
+</div>
+<br><br>
+
+<br>
+{% endblock %}

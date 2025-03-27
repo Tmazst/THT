@@ -144,6 +144,22 @@ class Tracking(db.Model):
     other1 = db.Column(db.String(120))
 
 
+class online_courses(db.Model):
+
+    __tablename__ = "online_courses"
+
+    id = db.Column(db.Integer, primary_key=True)
+    course_name =  db.Column(db.String(120))
+    university =  db.Column(db.String(120))
+    describe =  db.Column(db.String(120))
+    site =  db.Column(db.String(120))
+    course_starts=db.Column(db.Date)
+    intro_link =  db.Column(db.String(120))
+    course_link =  db.Column(db.String(120))
+    other=db.Column(db.String(120))
+    other1=db.Column(db.String(120))
+    other2=db.Column(db.String(120))
+    course_image=db.Column(db.String(120))
 
 
 class Esw_Freelancers(db.Model, UserMixin): #A table form filling prior tht experience

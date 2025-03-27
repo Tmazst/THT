@@ -56,6 +56,16 @@ class Login(FlaskForm):
     use_2fa_auth = BooleanField("Use 2-Factor-Authentication?: ")
     submit = SubmitField('Login')
 
+class OnlineCoursesForm(FlaskForm):
+    course_image = FileField("Upload Image")
+    site =  StringField('Source', validators=[Optional()])
+    university =  StringField('University', validators=[Optional()])
+    describe = TextAreaField('Additional Info', validators=[Optional(),Length(max=64)])
+    course_name = StringField('Course Name', validators=[DataRequired()])
+    course_starts = DateField('Starts',validators=[Optional()])
+    intro_link = URLField('Intro Link',validators=[DataRequired(),Length(min=8, max=255)])
+    course_link = URLField('Course Link',validators=[DataRequired(),Length(min=8, max=255)])
+    publish = SubmitField('Post')
 
 class Contact_Form(FlaskForm):
 

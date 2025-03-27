@@ -33,6 +33,7 @@ html {-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
     height:300px;
 }
 
+
 p{
     font-weight:300;
     color:#303030;
@@ -54,8 +55,15 @@ body{
 
 .job-cont-cont{
     width:300px;
-    border-bottom: 1px solid var(--main-color);
-    padding-bottom:15px;
+    /* border-bottom: 1px solid var(--main-color); */
+    padding:15px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.20);
+    border-radius:15px ;
+    
+}
+
+#featured_jobs{
+    background: (0deg, rgba(252, 121, 69,1) 50%, rgb(255, 249, 241) 100%) !important;
 }
 
 .banner-container{
@@ -84,6 +92,8 @@ body{
     min-width:400px;
 
 }
+
+
 #title{
 
     padding: 14px 10px;
@@ -110,7 +120,7 @@ body{
 
 .view_freelanca_p{
     font-size:13px !important;
-    background-color:#006769;
+    background-color:coral;
     border-radius:16px;
     padding:2px 10px;
     width:95%;
@@ -136,6 +146,7 @@ textarea{
     font-weight:600 !important;
     padding-left:15px;
     width:100%;
+    color:#202020 !important;
     //background-color:red;
 }
 
@@ -229,19 +240,12 @@ a{
     position:relative;
     z-index:1000;
     background-color:rgba(190,190,190,0.5);
-    //padding:5px 0px;
-    width:100%;
-    //height:45px;
-    //margin-bottom:10px;
-
-    //backdrop-filter: blur(15px);
 
 }
 
 .user{
     display:flex;
     width:35%;
-    //background-color:orange;
     align-items:center;
     transition:ease 1s;
     backdrop-filter: blur(20px);
@@ -249,9 +253,6 @@ a{
 
 #nav-div-cont{
         width:65%;
-        //margin-bottom:10px;
-        //background-color:rgba(190,190,190,0.4);
-        //background-color:#04aa3a;
         backdrop-filter: blur(20px);
 }
 
@@ -310,16 +311,10 @@ a{
 .show_anim{
     opacity:1;
     transition-delay:50ms;
-    //background-color:red;
-    //transform:translateY(0%);
-    //transform:translateX(0);
-    //transition:all 1s ease-in-out;
 }
 
 .hidden_Y{
     opacity:0;
-    //background-color:green;
-    //transform:translateY(40%);
 }
 
 .hidden_X{
@@ -416,7 +411,6 @@ a{
 .sidebar-main h3{
 
     color:#006769;
-    //width:100%;
     float:left;
     padding-bottom:6px;
     border-bottom:1px solid  #006769;
@@ -492,11 +486,9 @@ a{
     left: -20%;
     top:8vh;
     min-height:80vh;
-    //background: #555;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    //justify-content:center;
     width: 19%;
     margin: 0;
     padding-top: 20px;
@@ -579,7 +571,6 @@ a{
     direction:column;
     justify-content:flex-start;
     gap:10px;
-    //background-color:blue;
 }
 
 .other-navbar-nav{
@@ -588,7 +579,6 @@ a{
     direction:column;
     justify-content:flex-start;
     gap:10px;
-    //background-color:blue;
     list-style-type:none !important;
 }
 
@@ -634,7 +624,6 @@ a{
 
 .navbar-nav-user li{
     display:flex !important;
-    //margin:10px;
 }
 #nav-div-cont li{
      display:flex;
@@ -708,8 +697,9 @@ a{
     gap:5px;
     transition:all 0.3s ease;
 }
+
  body{
-    background:  linear-gradient(0deg, rgba(0, 103, 105,0.05) 0%, rgba(255,255,255,1) 100%)
+    background: linear-gradient(0deg, rgba(0, 103, 105, 0.2) 0%, rgba(255, 255, 255, 1) 50%, rgba(0, 103, 105, 0.08) 100%);
  }
 
 .stroke{
@@ -981,6 +971,7 @@ a{
     width:300px;
     height:270px !important;
     position:relative;
+    background-color: #ffffff;
 }
 
 .big-btns-invtd a{
@@ -1124,7 +1115,6 @@ span.spans{
 .account_container{
 
     width:70%;
-    //min-width:450px;
     /*background-color: #f8f9fa;*/
 
 }
@@ -1213,7 +1203,6 @@ span.spans{
 
 .form-group{
 
-    //background-color: #f8f9fa;
     width:100%;
     white-space:no-nowrap;
 
@@ -1222,12 +1211,9 @@ span.spans{
 
 
 .group{
-
-    //padding:0 10%;
     background-color:f8f9aa;
     width:100%;
     margin:0 auto;
-    //white-space:no-nowrap;
 
 }
 
@@ -1290,7 +1276,6 @@ font-weight:400;
     white-space:normal;
     overflow-x:auto;
     font-size:0.6 vw !important;
-    //display:inline-block;
     padding:5px;
     border-radius:5px;
     width:200px;
@@ -1298,26 +1283,20 @@ font-weight:400;
     margin-right:auto;
 }
 
-.job_ad_group{
-    //margin-left:-10px;
-}
+
 
 .job_main-cont{
     width:100%;
     margin:70px auto;
-    //background-color:#235ab1;
     display:flex;
     align-items:center;
-    //justify-content:center;
     flex-direction: row;
 }
 
 .job_ad_container{
-    //max-width:70px;
     width:100%;
     margin: 30px auto;
     position:relative;
-    //background-color:#333abc;
 
 
 }
@@ -1336,25 +1315,84 @@ font-weight:400;
 .new_job_ad_style{
     width:100%;
     min-width:250px;
-    //margin: 20px auto;
-    border: 2px solid #34aba7;
+    border: 2px solid rgb(0, 103, 105);
     border-radius:10px;
     padding:10px 10px;
     text-align:center;
+}
+
+.course-intros{
+    max-width: 1100px;
+    background-color: #edf8f7;
+    margin: 10px auto;
+    padding: 15px;   
+    border-radius: 10px;
+}
+
+
+body{
+    /* padding-left: 15px;
+    padding-right: 15px; */
+}
+.couser-tab{
+    border:1px solid #4b5858;
+    border-radius: 12px;
+    padding:7px;
+    color:#4b5858;  
+}
+
+.couser-tabs{
+    border:1px solid #a8b1b1;
+    border-radius: 12px;
+    padding:7px;
+    color:#a8b1b1;  
 }
 
 .new_job_ad_style_usr{
     width:100%;
     min-width:250px;
-    //margin: 20px auto;
-    border: 2px solid coral;
+    border: 2px solid rgba(0, 103, 105,0.4);
     border-radius:10px;
     padding:10px 10px;
     text-align:center;
+    box-shadow: 0px 0px 10px 3px rgba(0, 103, 105,0.5);
+    background: linear-gradient(45deg,rgba(0, 103, 105,0.2),50%, rgba(255,255,255,1) 100%);
+    /* background:  linear-gradient(0deg, rgba(233, 246, 247, 1) 0%, rgba(255,255,255,1) 100%) */
+}
+
+.courses-ad-cont{
+    max-width: 1100px;
+    margin: 0 auto;
+    gap:15px;
+
+}
+
+.h1-tag span{
+    font-weight:500 !important;
+    color:rgb(36, 30, 27)
+}
+
+
+.gen-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gen-flex-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .grid-div{
     display:flex;
+}
+
+.course-ad-img{
+    height:350px;
+    border-radius: 18px;
 }
 
 .img-div{
@@ -1364,10 +1402,7 @@ font-weight:400;
     height:7vh;
     margin-left:-160px;
     margin-top:75px;
-    //background-color:#006769;
-    //padding:10px;
     object-fit:cover;
-    //border-radius:50%;
 }
 
 .spaceFiller{
@@ -1447,8 +1482,6 @@ font-weight:400;
     max-width:1100px !important;
     gap:10px;
     flex-wrap:wrap  !important;
-    //background-color:#333;
-    //justify-content:center;
 
 
 }
@@ -1493,7 +1526,6 @@ font-weight:400;
     width:120px;
     height:120px;
     border:3px solid #ccc;
-    //border-radius:50%;
     overflow:hidden;
     content-justify:center;
 }
@@ -1516,7 +1548,6 @@ font-weight:400;
     background-color:#eaeaea;
     width:100%;
     height:25vh;
-    //z-index:0;
 
 }
 
@@ -2115,10 +2146,8 @@ h2{
     float:right;
     height:100px;
     width:50%;
-    //margin-bottom:250px;
     border-bottom:2px solid red;
     border-right:2px solid red;
-    //border-radius: 0 30px 0 0px;
 }
 
 .titles{
@@ -2130,7 +2159,8 @@ h2{
 
 .title-bar-cont{
     display:flex;
-    background-color:#006769 !important;
+    background: linear-gradient(90deg,rgba(0, 103, 105,1)0%,rgb(67, 134, 134) 50%,rgba(0, 103, 105,1)100%) !important;
+    box-shadow: 2px 2px 10px 2px rgba(0, 103, 105,1);
     position:fixed;
     top:0;
     height:77px;
@@ -2142,10 +2172,8 @@ h2{
     display:flex;
     justify-content:flex-start;
     align-content:flex-end;
-    //align-items:flex-end;
     width:23%;
     height:inherit;
-    //background-color:red;
 }
 
 .contact-icons-div small{
@@ -2167,13 +2195,11 @@ h2{
 }
 
 .arrow-lines-2{
-    //position:absolute;
     height:100px;
     width:50%;
     float:left;
     border-top:2px solid red;
     border-left:2px solid red;
-    //border-radius: 0 0 0 30px;
 }
 
 
@@ -2214,7 +2240,6 @@ h2{
 
 .job_ad_group{
     //width:70%;
-
 }
 
 #closeButton{
@@ -2247,13 +2272,9 @@ width:70% !important;
 
 
 .home-content{
-    //background-color:#eae;
-    //height: 300px;
     display:flex;
     justify-content:center;
     align-items:center;
-    //border-radius: 30px;
-    //flex-wrap:wrap;
     padding:50px;
     margin-top:80px;
     width:75%;
@@ -2263,9 +2284,7 @@ width:70% !important;
 
 .home-tags{
     display:flex;
-    align-items:center;
-    //border-radius: 0 30px 30px 0;
-    height: 300px;
+    align-items:center; height: 300px;
     padding:50px;
     width:50%;
     background-color:#eaeaea;
@@ -2290,7 +2309,6 @@ width:70% !important;
 }
 
 .home-img-div{
-    //border-radius: 30px;
     height: 300px;
     overflow:hidden;
 }
@@ -2768,6 +2786,10 @@ display:none
     height: 20px !important;
 }
 
+.big-ibtns{
+    background-color: white;
+}
+
 .big-ibtns .gen-flex{
     gap:1px !important;
 }
@@ -2903,6 +2925,10 @@ display:none
 
 @media all and (max-width: 900px) and (min-width: 600px){
 
+    .courses-ad-cont{
+        flex-wrap: wrap !important;
+    }
+
 .banner-container{display:none}
 .home-tags{background:;width:64%;}
 .flex-justify-align{flex-direction:column}
@@ -2924,6 +2950,9 @@ display:none
 
 
 @media all and (max-width: 575px) {
+    .courses-ad-cont{
+        flex-wrap: wrap !important;
+    }
     .welcome-advert{
 
         background-image: url("../images/celebration-phone-01.jpg");
@@ -2932,6 +2961,10 @@ display:none
 .job-cont-cont{
     margin: 0 auto;
 
+}
+
+.h1-tag{
+    max-width: 300px;
 }
 
 .profile-sections{

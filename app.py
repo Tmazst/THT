@@ -26,7 +26,7 @@ from flask_sqlalchemy import SQLAlchemy
 from models import *
 from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 from wtforms.validators import ValidationError
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, timezone
 import time
 import itsdangerous
 import calendar
@@ -239,6 +239,8 @@ def inject_ser():
     ser = Serializer(app.config['SECRET_KEY'])  # Define or retrieve the value for 'ser'
     count_jobs = count_ads()
 
+    
+
     return dict(ser=ser, count_jobs=count_jobs)
 
 def save_pic(picture, size_x=300, size_y=300):
@@ -290,6 +292,50 @@ def delete_pdf(file_name):
     if os.path.exists(file_path):
         os.remove(file_path)
 
+# Set the session to be permanent and define the lifetime
+app.permanent_session_lifetime = timedelta(minutes=1)  # Example: 30 minutes
+
+@app.route("/")
+def home():
+     # Make the session permanent so the expiration time is effective
+    session.permanent = True  
+    
+    # Use the session variable to track modal display
+    if "run_modal" not in session:
+        session["run_modal"] = True  # Set to True (modal shown)
+        session["modal_displayed_time"] = datetime.now(timezone.utc)  # Track the time modal was shown
+    else:
+        # Check if modal_displayed_time exists in session
+        if "modal_displayed_time" in session:
+            # Use aware datetime for comparison
+            time_since_display = datetime.now(timezone.utc) - session["modal_displayed_time"]
+            # Determine if the modal should be shown based on expiration
+            if time_since_display < timedelta(minutes=30):  # If less than 30 minutes
+                session["run_modal"] = False  # Don't show modal again
+            else:
+                session["run_modal"] = True  # Show modal again after expiration
+                session["modal_displayed_time"] = datetime.now(timezone.utc)  # Update display time
+        else:
+            # If modal_displayed_time is not present, set it and show modal
+            session["run_modal"] = True
+            session["modal_displayed_time"] = datetime.now(timezone.utc)
+    with app.app_context():
+        db.create_all()
+
+    
+    # user_ = user.query.get(1)
+    # login_user(user_)
+    req_page = session.get('req_page')
+    if req_page:
+        session['req_page'] = ''
+        return redirect(req_page) if req_page else redirect(url_for('home'))
+
+    # posted_jobs = jobs_posted.query.all().order_by(
+    #             desc(jobs_posted.timepstamp))
+    posted_jobs = jobs_posted.query.order_by(desc(jobs_posted.timepstamp)).all()
+    
+
+    return render_template("job_ads_gui.html",posted_jobs=posted_jobs)
 
 @app.route('/static/css/style.css')
 def serve_static(filename):
@@ -432,11 +478,6 @@ def blog_writer():
 
 
 
-# --------------END BLOG-------------------- #
-
-
-
-# ----------------UPDATE ACCOUNT --------------#
 @app.route("/account", methods=['POST', 'GET'])
 @login_required
 def account():
@@ -1021,6 +1062,79 @@ def job_ads_form(udi=None):
     return render_template("job_ads_form.html", job_ad_form=job_ad_form, ser=ser, job_ad=job_ad,usr_id=usr_id)
 
 
+
+@app.route("/online_form", methods=["POST", "GET"])
+def online_courses_form(udi=None):
+
+    form = OnlineCoursesForm()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            post = online_courses(
+                    site =  form.site .data,
+                    university =  form.university.data,
+                    describe = form.describe.data,
+                    course_name = form.course_name.data,
+                    course_starts = form.course_starts.data,
+                    intro_link = form.intro_link.data,
+                    course_link=form.course_link.data
+            )
+
+            # if bools are True
+            if form.course_image.data:
+                post.course_image = save_pic(form.course_image.data)
+
+            db.session.add(post)
+            db.session.commit()
+
+            flash('Course Posted Successfully!!', 'success')
+
+    # elif request.method == "GET":
+    #     job_ad = Jobs_Ads.query.filter_by(job_id=ser.loads(request.args.get("jo_id"))['data_11']).first()
+
+    return render_template("post_course.html", form=form)
+
+
+@app.route("/online_courses", methods=["POST", "GET"])
+def courses(udi=None):
+
+    course_list = [
+    "Introduction to Python Programming",
+    "Data Science and Analytics",
+    "Digital Marketing Fundamentals",
+    "Graphic Design Basics",
+    "Web Development Bootcamp",
+    "Project Management Essentials",
+    "Social Media Marketing Strategies",
+    "Financial Accounting",
+    "Creative Writing Techniques",
+    "Machine Learning for Beginners",
+    "Cybersecurity Essentials",
+    "Photography for Beginners",
+    "Video Editing Basics",
+    "User Experience (UX) Design",
+    "Public Speaking and Communication Skills",
+    "Artificial Intelligence Concepts",
+    "SEO Fundamentals",
+    "Mobile App Development",
+    "Business Communication Skills",
+    "Health and Wellness Coaching",
+    "Introduction to Cloud Computing",
+    "Blockchain Technology",
+    "Introduction to Graphic Design",
+    "Language Learning (e.g., Spanish, French)",
+    "Interior Design Basics",
+    "Remote Team Management",
+    "Ethical Hacking Fundamentals",
+    "Virtual Assistance Training",
+    "Introduction to Game Development"
+]
+
+    courses = online_courses.query.all()
+
+    return render_template("online_courses.html", courses=courses,course_list=course_list)
+
+
 class jo_id_cls:
     id_ = None
 
@@ -1581,23 +1695,6 @@ def job_adverts():
     else:
         return redirect(url_for("intro_eswatini_jobs"))
 
-
-@app.route("/")
-def home():
-
-    # user_ = user.query.get(1)
-    # login_user(user_)
-    req_page = session.get('req_page')
-    if req_page:
-        session['req_page'] = ''
-        return redirect(req_page) if req_page else redirect(url_for('home'))
-
-    # posted_jobs = jobs_posted.query.all().order_by(
-    #             desc(jobs_posted.timepstamp))
-    posted_jobs = jobs_posted.query.order_by(desc(jobs_posted.timepstamp)).all()
-    
-
-    return render_template("job_ads_gui.html",posted_jobs=posted_jobs)
 
 
 @app.route("/job_ad_opened", methods=["GET", "POST"])
