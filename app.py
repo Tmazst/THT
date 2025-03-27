@@ -293,7 +293,7 @@ def delete_pdf(file_name):
         os.remove(file_path)
 
 # Set the session to be permanent and define the lifetime
-app.permanent_session_lifetime = timedelta(minutes=1)  # Example: 30 minutes
+app.permanent_session_lifetime = timedelta(minutes=1440)  # Example: 30 minutes
 
 @app.route("/")
 def home():
@@ -310,7 +310,7 @@ def home():
             # Use aware datetime for comparison
             time_since_display = datetime.now(timezone.utc) - session["modal_displayed_time"]
             # Determine if the modal should be shown based on expiration
-            if time_since_display < timedelta(minutes=30):  # If less than 30 minutes
+            if time_since_display < timedelta(minutes=1440):  # If less than 30 minutes
                 session["run_modal"] = False  # Don't show modal again
             else:
                 session["run_modal"] = True  # Show modal again after expiration

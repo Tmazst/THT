@@ -132,10 +132,16 @@
 
 <div style="" class="tags">
     <div style="background-color:" class="row-flex">
-        <a href="https://jobs.eswazi.org/find-a-job/"><div class="big-btns">
+        <a href="https://jobs.eswazi.org/find-a-job/" ><div class="big-btns">
             Jobs Eswatini<br>
             <label class="labels"> Jobs Near to you</label>
             <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/Jobs-Eswatini-Logo.png"/>
+        </div></a>
+
+        <a href="https://www.facebook.com/jobsinsd/" ><div class="big-btns">
+            Jobs in Swaziland<br>
+            <label class="labels"> Jobs Near to you</label>
+            <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/jobs_in_swaziland_logo.jpg"/>
         </div></a>
 
         <a href="https://www.linkedin.com/jobs/jobs-in-eswatini/?currentJobId=3946680377&originalSubdomain=sz"><div class="big-btns">
@@ -215,7 +221,7 @@
             {%if job.advert_image%}
             <div class="job-cont-cont gen-flex-col">
                 <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
-                <div class="details">{{job.details}}...<br>
+                <div style="font-weight: 600;" class="details">{{job.details}}...<br>
                     {%if job.deadline%}
                         <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
                     {%endif%}
