@@ -1065,11 +1065,13 @@ def job_ads_form(udi=None):
 
 @app.route("/online_form", methods=["POST", "GET"])
 def online_courses_form(udi=None):
-
+    print("Test Points:")
     form = OnlineCoursesForm()
-
+    print("Test point 1 ")
     if request.method == 'POST':
+        print("Test point 2 ")
         if form.validate_on_submit():
+            print("Test point 3 ")
             post = online_courses(
                     site =  form.site .data,
                     university =  form.university.data,
@@ -1079,15 +1081,18 @@ def online_courses_form(udi=None):
                     intro_link = form.intro_link.data,
                     course_link=form.course_link.data
             )
-
+            print("Test point 3 ")
             # if bools are True
             if form.course_image.data:
                 post.course_image = save_pic(form.course_image.data)
-
+            print("Test point 4:  ",post.course_image)
             db.session.add(post)
             db.session.commit()
 
             flash('Course Posted Successfully!!', 'success')
+        else:
+            for error in form.errors:
+                print("Error in Online Form: ",error)
 
     # elif request.method == "GET":
     #     job_ad = Jobs_Ads.query.filter_by(job_id=ser.loads(request.args.get("jo_id"))['data_11']).first()
