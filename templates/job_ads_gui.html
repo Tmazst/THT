@@ -103,6 +103,7 @@
         </div>
 </section>
 
+{% if session.get('run_modal', False) %}
 <div class="welcome-advert gen-flex-col">
     <img style="height: 100px;width:100px" src="static/icons/tht_logo_icon.png" />
     <div class="slideshow-container">
@@ -125,8 +126,9 @@
         </div>
     </div>
     <div style="flex-grow:1"></div>
-    <div onclick="closeAdverts()" class="btns go-btn">Go</div>
+    <div id="close-button" onclick="closeAdverts()" class="btns go-btn">Go</div>
 </div>
+{%endif%}
 
 <div style="" class="tags">
     <div style="background-color:" class="row-flex">
@@ -203,10 +205,12 @@
 
 
 {% if posted_jobs%}
-<div id="featured_jobs" class="other-jb-section">
-    <h1 class="">Featured Jobs</h1>
-    <h2 style="margin-top: -10px;">Apply Easily</h2>
-    <div style="width:inherit;flex-wrap: wrap;gap:15px" class="gen-flex">
+<div id="featured_jobs" class="tags">
+    <div style="justify-content: flex-start;" class="gen-flex"><img style="height:75px" src="static/icons/briefcase-icon-bg.png" />
+        <h1 style="color:#2b201c;font-weight:600;">Featured Jobs</h1></div><br>
+    <!-- <h2 style="margin-top: -10px;">Apply Easily</h2> -->
+    <br>
+    <div style="width:inherit;flex-wrap:wrap;gap:15px;justify-content: flex-start;" class="gen-flex">
         {%for job in posted_jobs%}
             {%if job.advert_image%}
             <div class="job-cont-cont gen-flex-col">
@@ -227,6 +231,7 @@
 </div>
 {%endif%}
 <br><br>
+
 
 <div style="margin:0 auto;width:70%;background-color:"  class="paras-subtopics  caption">
     <h1 id="main-welcom" class="h1-tag">

@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .flash-messages{
+        border:none !important;
+    }
+    h1,h2,h3{
+        font-weight: 600;
+    }
+
+    .card{
+        padding:5px;
+        padding-bottom: 15px;
+    }
+</style>
+
+<div  style="margin-bottom:700px" class="tags">
+    <div class="flash-messages" class="btns">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for  category, message in messages %}
+                    <div class="flash-messages alert-{{category}}"> {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
+    <!----FORM----->
+  <div style="background-color:" class="form_container">
+     <div class="row justify-content-center">
+    <div class="col-md-5">
+     <div style="padding-left:30px;padding-right:30px;display:;"  class="card">
+
+        <h2 class="card-title text-center">Upload Online Course</h2>
+        <form style="background-color:f8db5a;width:;"  _lpchecked="1" action="" method="post" enctype="multipart/form-data">
+            <small style="font-weight:600;" class="paras-subtopics "><span style="color:coral">Note:</span></span> Take a screenshot of the job advert & paste it on the link below.</small><br><br>
+             <div style="background-color: f8f95a;" class="job-ad-group marginise-bottom">
+                  {{form.hidden_tag()}}
+                 {{form.csrf_token}}
+             </div>
+
+
+
+            <!-------IMAGE-------->
+            <div class="job-ad-group marginise-bottom">
+
+            {{ form.course_image.label(class="labels")}}<br>
+                {{ form.course_image(class="form-control adj-width-60", style="",placeholder="")}}
+                {% if form.course_image.errors %}
+                {% for error in form.course_image.errors %}
+                    <span class="span-error" >*{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+            <!-------DETAILS-------->
+             <div class="job-ad-group marginise-bottom">
+                 {{ form.describe.label(class="labels")}}<br>
+                  {{ form.describe(class="form-control adj-width-60", style="min-height:70px",placeholder="Additional Info")}}
+                  {% if form.describe.errors %}
+                    {% for error in form.describe.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                 {% endif %}
+             </div>
+
+            <!-------COURSE ANME--------->
+             <div class="job-ad-group marginise-bottom">
+                 {{ form.course_name.label(class="labels")}}<br>
+                  {{ form.course_name(class="form-control adj-width-60", style="",placeholder="course_name")}}
+                  {% if form.course_name.errors %}
+                    {% for error in form.course_name.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                 {% endif %}
+             </div>
+
+              <!-------University--------->
+              <div class="job-ad-group marginise-bottom">
+                {{ form.university.label(class="labels")}}<br>
+                 {{ form.university(class="form-control adj-width-60", style="",placeholder="university")}}
+                 {% if form.university.errors %}
+                   {% for error in form.university.errors %}
+                       <span class="span-error" >*{{error}}</span>
+                   {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-------Site--------->
+            <div class="job-ad-group marginise-bottom">
+                {{ form.site.label(class="labels")}}<br>
+                 {{ form.site(class="form-control adj-width-60", style="",placeholder="site")}}
+                 {% if form.site.errors %}
+                   {% for error in form.site.errors %}
+                       <span class="span-error" >*{{error}}</span>
+                   {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-------Intro LINK--------->
+            <div class="job-ad-group marginise-bottom">
+            {{ form.intro_link.label(class="labels")}}<br>
+                {{ form.intro_link(class="form-control adj-width-60", style="",placeholder="Job intro_link")}}
+                {% if form.intro_link.errors %}
+                {% for error in form.intro_link.errors %}
+                    <span class="span-error" >*{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-------LINK--------->
+        <div class="job-ad-group marginise-bottom">
+            {{ form.course_link.label(class="labels")}}<br>
+                {{ form.course_link(class="form-control adj-width-60", style="",placeholder="Job course_link")}}
+                {% if form.course_link.errors %}
+                {% for error in form.course_link.errors %}
+                    <span class="span-error" >*{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-------LINK--------->
+        <div class="job-ad-group marginise-bottom">
+            {{ form.course_starts.label(class="labels")}}<br>
+                {{ form.course_starts(class="form-control adj-width-60", style="",placeholder="Job course_starts")}}
+                {% if form.course_starts.errors %}
+                {% for error in form.course_starts.errors %}
+                    <span class="span-error" >*{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.publish(class="btns") }}
+        </div>
+
+         </form>
+       </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+{% endblock %}
