@@ -1092,7 +1092,7 @@ def online_courses_form(udi=None):
 
             flash('Course Posted Successfully!!', 'success')
         else:
-            for error in errors:
+            for error in form.errors:
                 print("Errors in Online Courses: ",error)
 
     # elif request.method == "GET":
