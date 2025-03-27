@@ -1065,11 +1065,14 @@ def job_ads_form(udi=None):
 
 @app.route("/online_form", methods=["POST", "GET"])
 def online_courses_form(udi=None):
-
+    print("Test Points")
     form = OnlineCoursesForm()
+    print("Test Points 1")
 
     if request.method == 'POST':
+        print("Test Points 2")
         if form.validate_on_submit():
+            print("Test Points 3")
             post = online_courses(
                     site =  form.site .data,
                     university =  form.university.data,
@@ -1079,11 +1082,11 @@ def online_courses_form(udi=None):
                     intro_link = form.intro_link.data,
                     course_link=form.course_link.data
             )
-
+            print("Test Points 4")
             # if bools are True
             if form.course_image.data:
                 post.course_image = save_pic(form.course_image.data)
-
+            print("Test Points 5")
             db.session.add(post)
             db.session.commit()
 
