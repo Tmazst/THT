@@ -1940,6 +1940,7 @@ h2{
 .share-jb-img-cont{
     height:300px;
     border-radius: 15px;
+    width:100%;
     overflow: hidden;
 }
 
