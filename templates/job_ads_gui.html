@@ -220,7 +220,7 @@
         {%for job in posted_jobs%}
             {%if job.advert_image%}
             <div class="job-cont-cont gen-flex-col">
-                <div class="share-jb-img-cont"><img  src="static/images/{{job.advert_image}}" /></div>
+                <div class="share-jb-img-cont gen-flex"><img  src="static/images/{{job.advert_image}}" /></div>
                 <div style="font-weight: 600;" class="details">{{job.details}}...<br>
                     {%if job.deadline%}
                         <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
