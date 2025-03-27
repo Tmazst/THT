@@ -1091,6 +1091,9 @@ def online_courses_form(udi=None):
             db.session.commit()
 
             flash('Course Posted Successfully!!', 'success')
+        else:
+            for error in errors:
+                print("Errors in Online Courses: ",error)
 
     # elif request.method == "GET":
     #     job_ad = Jobs_Ads.query.filter_by(job_id=ser.loads(request.args.get("jo_id"))['data_11']).first()
