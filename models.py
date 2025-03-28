@@ -315,3 +315,14 @@ class testimonials(db.Model, UserMixin):
     company = db.Column(db.String(80))
     testimony = db.Column(db.String(200))
     image = db.Column(db.String(120))
+
+
+class visitors(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String(122))
+    other = db.Column(db.String(122))
+    other1 = db.Column(db.String(122))
+    latest_visit = db.Column(db.DateTime)
+    num_visits = db.Column(db.Integer)
+    timestamp = db.Column(db.DateTime)

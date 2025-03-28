@@ -295,10 +295,41 @@ def delete_pdf(file_name):
 # Set the session to be permanent and define the lifetime
 app.permanent_session_lifetime = timedelta(minutes=1440)  # Example: 30 minutes
 
+
+def track_visitor():
+    # Get visitor's IP address
+    visitor_ip = request.remote_addr
+
+    # You can define your own IP address to exclude
+    your_ip = 'YOUR_IP_ADDRESS_HERE'  # Replace with your actual IP address
+
+    reg_visitor = visitors.query.filter_by(ip=visitor_ip).first()
+
+    if reg_visitor:
+        reg_visitor.num_visits +=1
+        reg_visitor.latest_visit = current_time_wlzone()
+        print("Visitor: ", visitor_ip," ",current_time_wlzone())
+        print("Last Visited: ",reg_visitor.timestamp)
+    elif not reg_visitor:
+        # If the visitor is not yours, track them
+        visit = visitors(
+            ip = visitor_ip,
+            timestamp = current_time_wlzone(),  
+        )
+        visit.num_visits = 0
+        visit.num_visits  +=1
+
+        db.session.add(visit)
+        print("New Visitor: ", visitor_ip," ",visit.timestamp)
+    db.session.commit()
+
+
 @app.route("/")
 def home():
      # Make the session permanent so the expiration time is effective
     session.permanent = True  
+
+    track_visitor()
     
     # Use the session variable to track modal display
     if "run_modal" not in session:
