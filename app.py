@@ -1280,7 +1280,7 @@ def eidt_job_ads_form():
 
 
 @app.route("/fl_job_ads_form", methods=["POST", "GET"])
-@login_required
+# @login_required
 def fl_job_ads_form():
     fl_job_ad_form = Freelance_Ads_Form()
     fl_job_ads_model = Freelance_Jobs_Ads
@@ -1789,6 +1789,7 @@ def job_adverts_filtered():
                            category_set=category_set)
 
 
+
 @app.route("/freelance_job_ads", methods=["GET", "POST"])
 def freelance_job_adverts():
     if current_user.is_authenticated:
@@ -1819,6 +1820,9 @@ def freelance_job_adverts():
             fl_job_ads = Freelance_Jobs_Ads.query.order_by(desc(Freelance_Jobs_Ads.date_posted))
 
     fl_job_ads_form = Freelance_Ads_Form()
+
+    return render_template("freelance_jobs_ui.html", fl_job_ads=fl_job_ads, fl_job_ads_form=fl_job_ads_form, db=db,
+                           company_user=company_user, user=usr, no_image_fl=no_image_fl, ser=ser)
 
     # Fix jobs adds does not have hidden tag
     if days_to_lauch.days <= 0:

@@ -2395,11 +2395,12 @@ width:70% !important;
 
 .page-pic{
 
-    height: 400px;
+    height: 300px;
     display: flex;
     wrap: flex-wrap;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
 }
 
@@ -2881,6 +2882,20 @@ display:none
     animation: fadeInOut 0.5s ease-in-out;
 }
 
+.cel-main-pic{
+    background-image: url("../images/celebration-mainp.jpg");
+    margin: 0 auto;
+    width:100%;
+    height:550px;
+    background-position: bottom;
+    background-size: cover;
+}
+
+.cel-main-pic img{
+    border-radius: 15px;
+    width:100%
+}
+
 .display{
     display: block;
 }
@@ -2915,6 +2930,8 @@ display:none
 }
 
 
+
+
 /*////////////////////////////////////////////BANNER ANIMATION///////////////////////////////////////////////*/
 
 
@@ -2924,7 +2941,7 @@ display:none
 
 
 
-@media all and (max-width: 900px) and (min-width: 600px){
+@media all and (max-width: 900px) and (min-width: 700px){
 
     .courses-ad-cont{
         flex-wrap: wrap !important;
@@ -2948,9 +2965,134 @@ display:none
 
 }
 
+.ad-parent{
+    background:linear-gradient(45deg,rgba(248, 104, 7, 0.2),50%, rgba(255,255,255,0) 100%);
+    padding:5px 0;
+    height:150px;
+    width:70%;
+    margin: 0 auto;
+}
+
+.explore-btn{
+    background-color: coral !important;
+    color: white !important;
+    border: none !important;
+    transition: all 0.2s ease-in;
+}
+
+.btns{
+    transition: all 0.2s ease-in;
+}
+
+.freel_rem_cont div{
+    width:60%;
+}
+
+.freel_rem_subtitle{
+    font-size:28px;
+}
+
+.freel_rem_title{
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.explore-btn:hover{
+    background: none !important;
+    color: coral !important;
+    border: coral !important;
+}
+
+.freel_rem_cont{
+    width:100%;
+    height:550px;
+    background-image: url("../images/lady_working _remotely.jpg");
+    background-position: bottom;
+    background-size: cover;
+
+}
+
+.monento{
+    height:inherit;
+    width:200px;
+    overflow: hidden;
+}
+
+.course-ad-mainp{
+    height:inherit;
+}
+
+.sub-ad-parent{
+    flex-grow: 1;
+    display: flex;
+    gap:5px;
+    flex-direction: column;
+}
+
+.sub-ad-parent div{
+    width:100%;
+    font-weight:600;
+}
 
 
-@media all and (max-width: 575px) {
+
+@media all and (max-width: 700px) {
+
+    .freel_rem_cont .explore-btn{
+        width:max-content !important
+    }
+    .tagg h1{
+        transform: scale(0.9);
+    }
+    .cel-main-pic{
+        height:350px;
+        padding:10px;
+    }
+    .cel-main-pic div{
+        transform: scale(0.8);
+    }
+
+    .cel-main-pic .btns{
+        width:max-content !important
+    }
+
+
+    .ad-parent{
+        background-color: rgba(0, 103, 105,  0.1);
+        padding:5px 0;
+        height:150px;
+        width:auto;
+    }
+
+    .monento{
+        height:inherit;
+        width:160px;
+        overflow: hidden;
+    }
+
+    .course-ad-mainp{
+        height:inherit;
+    }
+
+    .sub-ad-parent{
+        flex-grow: 1;
+        display: flex;
+        gap:5px;
+        flex-direction: column;
+    }
+
+    .sub-ad-parent div{
+        width:100%;
+        font-weight:600;
+    }
+    .cel-main-pic{
+        width:100%;
+        /* max-height: 25; */
+    }
+    .cel-main-pic img{
+        border-radius: 1px;
+        /* max-height: 25; */
+    }
     .courses-ad-cont{
         flex-wrap: wrap !important;
     }
