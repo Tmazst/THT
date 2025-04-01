@@ -3006,7 +3006,8 @@ display:none
 .freel_rem_cont{
     width:100%;
     height:550px;
-    background-image: url("../images/lady_working _remotely.jpg");
+    background-image:  url("../images/celebration-phone-01.jpg") ;
+    /* url("../images/lady_working _remotely.jpg"); */
     background-position: bottom;
     background-size: cover;
 
