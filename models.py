@@ -257,7 +257,7 @@ class Jobs_Ads(db.Model, UserMixin):
     application_deadline = db.Column(db.DateTime, nullable=False)
     contact_person = db.Column(db.String(60))
     other = db.Column(db.String(120))
-    date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False) #Records itself
+    date_posted = db.Column(db.DateTime, default=datetime.now(), nullable=False) #Records itself
     job_posted_by = db.Column(db.Integer, ForeignKey('company_user.id'),nullable=False) #Records itself
     applicantions = relationship("Applications", backref='All Applications', lazy=True)
     tht_portfolio_hired = relationship("users_tht_portfolio", backref='users_tht_portfolio.id', lazy=True)

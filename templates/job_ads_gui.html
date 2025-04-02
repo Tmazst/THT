@@ -110,7 +110,8 @@
                     </span><br></h3>
             </div>
         </div>
-</section><br>
+</section>
+<br>
 
 {% if session.get('run_modal', False) %}
 <div class="welcome-advert gen-flex-col">
@@ -231,6 +232,7 @@
             {%if job.advert_image%}
             <div class="job-cont-cont gen-flex-col">
                 <div class="share-jb-img-cont gen-flex"><img  src="static/images/{{job.advert_image}}" /></div>
+                <span class="deadln-tag">Posted: {{job.timepstamp.strftime("%d %b %Y")}}</span>
                 <div style="font-weight: 600;" class="details">{{job.details}}...<br>
                     {%if job.deadline%}
                         <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
@@ -255,8 +257,8 @@
         <div style="font-weight:500;color:#777;font-size:13px ;">Explore a wide range of topics that spark your interest and align with your career goals</div>
         <div><a href="/online_courses" ><button class="btns explore-btn">Explore</button></a></div>
     </div>
-</div><br>
-
+</div>
+<br>
 
 <div style="margin:0 auto;width:70%;background-color:"  class="paras-subtopics  caption">
     <h1 id="main-welcom" class="h1-tag">
