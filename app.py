@@ -311,8 +311,8 @@ def track_visitor():
     if reg_visitor:
         reg_visitor.num_visits +=1
         reg_visitor.latest_visit = current_time_wlzone()
-        print("Visitor: ", visitor_ip," ",current_time_wlzone())
-        print("First Visited: ",reg_visitor.timestamp)
+        print("Tracking  Visitor: ", visitor_ip," ",current_time_wlzone())
+        print("Tracking First Visited: ",reg_visitor.timestamp)
     elif not reg_visitor:
         # If the visitor is not yours, track them
         visit = visitors(
@@ -323,7 +323,7 @@ def track_visitor():
         visit.num_visits  +=1
 
         db.session.add(visit)
-        print("New Visitor: ", visitor_ip," ",visit.timestamp)
+        print("Tracking New Visitor: ", visitor_ip," ",visit.timestamp)
     db.session.commit()
 
 
@@ -369,8 +369,8 @@ def home():
      # Make the session permanent so the expiration time is effective
     session.permanent = True  
 
-    updates=updates_modal()[0]
-    days_missed=updates_modal()[1]
+    updates,days_missed=updates_modal()
+
 
     track_visitor()
     
