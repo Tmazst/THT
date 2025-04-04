@@ -338,6 +338,8 @@ def updates_modal():
 
     if ifip:
         print("Visit Updates: ",ifip.ip )
+        print("Check Last visit: ",ifip.latest_visit )
+        print("Checked " )
         if ifip.latest_visit and today > ifip.latest_visit:
             days_missed = today - ifip.latest_visit
             print("Your last Visit: ",days_missed.days)
