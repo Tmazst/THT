@@ -334,21 +334,22 @@ def updates_modal():
     print("Check Visitor: ",ifip.ip)
     days_missed = 0
     missed_posts = None
+    today = datetime.now()
 
     if ifip:
         print("Visit Updates: ",ifip.ip )
-        if ifip.latest_visit:
-            days_missed = datetime.now() - ifip.latest_visit
-            print("Your last Vist: ",days_missed.days)
-            missed__posts = jobs_posted.query.all() #filter(jobs_posted.timepstamp > ifip.latest_visit).
+        if ifip.latest_visit and today > ifip.latest_visit:
+            days_missed = today - ifip.latest_visit
+            print("Your last Visit: ",days_missed.days)
+            missed__posts = jobs_posted.query.filter(today > ifip.latest_visit).all()
             print("Missed: ", missed__posts)
             missed_posts = missed__posts
-        else:
-            days_missed = datetime.now() - ifip.timestamp
-            print("Your last Vist2: ",days_missed.days)
+        elif not ifip.latest_visit:
+            days_missed = today - ifip.timestamp
+            print("Your last Visit2: ",days_missed.days)
             # Fetch posts that were created after the user's first visit (timestamp)
-            missed__posts = jobs_posted.query.all() #.filter(jobs_posted.timepstamp > ifip.timestamp)
-            print("Missed: ", missed__posts)
+            missed__posts = jobs_posted.query.filter(today > ifip.timestamp).all()
+            print("Missed2: ", missed__posts)
             missed_posts = missed__posts
 
 
