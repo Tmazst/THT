@@ -113,7 +113,7 @@
 </section>
 <br>
 {% if updates %}
-<div class="updates-popup gen-flex">
+<div class="display-updates updates-popup gen-flex">
     <div style="gap:5px" class="pop-content">
         <div style="" class="scroll-enabler">
             <div>
@@ -381,13 +381,14 @@
 
 <br>
 <script>
-    var container = document.querySelectorAll(".updates-popup");
+    var container = document.querySelector(".updates-popup");
     var closeBtn=document.querySelector("#got-it");
     closeBtn.addEventListener('click', function(){
         console.log("Check Closing")
-        container.forEach(element => {
-            element.style.display="none";
-        });
+        container.classList.remove("display-updates");
+        // container.forEach(element => {
+        //     element.style.display="none";
+        // });
         
     });
 </script>

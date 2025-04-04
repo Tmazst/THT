@@ -3040,8 +3040,12 @@ display:none
     display: none;
 } */
 
-.updates-popup{
+/* .updates-popup{
     display:none;
+} */
+
+.display-updates{
+    display: none;
 }
 
 
@@ -3073,6 +3077,10 @@ display:none
         /* position: absolute; */
     }
 
+    .display-updates{
+        display: flex !important;
+    }
+
     .updates-popup{
         background: rgba(63, 63, 63, 0.4);
         position: absolute;
@@ -3081,8 +3089,9 @@ display:none
         backdrop-filter: blur(5px);
         padding:20px;
         z-index: 1607;
-        display: flex;
+        display: none;
     }
+    
     .pop-content{
         border-radius: 15px;
         height: 95vh;
