@@ -341,19 +341,16 @@ def updates_modal():
         print("Check Last visit: ",ifip.latest_visit )
         print("Checked " )
         if ifip.latest_visit and today > ifip.latest_visit:
-            days_missed = today - ifip.latest_visit
-            print("Your last Visit: ",days_missed.days)
-            missed__posts = jobs_posted.query.filter(today > ifip.latest_visit).all()
-            print("Missed: ", missed__posts)
-            missed_posts = missed__posts
+            days_missed = (today - ifip.latest_visit).days
+            print("Your last Visit: ",days_missed)
+            missed_posts = jobs_posted.query.filter(jobs_posted.timepstamp > ifip.latest_visit).all()
+            print("Missed: ", missed_posts)
         elif not ifip.latest_visit:
-            days_missed = today - ifip.timestamp
-            print("Your last Visit2: ",days_missed.days)
+            days_missed = (today - ifip.timestamp).days
+            print("Your last Visit2: ",days_missed)
             # Fetch posts that were created after the user's first visit (timestamp)
-            missed__posts = jobs_posted.query.filter(today > ifip.timestamp).all()
-            print("Missed2: ", missed__posts)
-            missed_posts = missed__posts
-
+            missed_posts = jobs_posted.query.filter(jobs_posted.timepstamp > ifip.timestamp).all()
+            print("Missed2: ", missed_posts)
 
     # Return or process missed posts for display
     if missed_posts:
@@ -361,7 +358,7 @@ def updates_modal():
     else:
         print("You haven't missed any posts since your last visit.")
 
-    return missed_posts, days_missed  # or any other format for the output
+    return missed_posts if missed_posts is not None else [], days_missed  # or any other format for the output
 
 
 @app.route("/")
