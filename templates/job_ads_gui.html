@@ -381,10 +381,14 @@
 
 <br>
 <script>
-    var container = document.querySelector(".updates-popup");
+    var container = document.querySelectorAll(".updates-popup");
     var closeBtn=document.querySelector("#got-it");
     closeBtn.addEventListener('click', function(){
-        container.style.display="none";
+        console.log("Check Closing")
+        container.forEach(element => {
+            element.style.display="none";
+        });
+        
     });
 </script>
 
