@@ -134,21 +134,7 @@
                     </div>
                 {%endfor%}
                 </div>
-                <div style="gap:5px;display:flex;flex-direction: column;">
-                    {%for update in updates%}
-                        <div  class="post-container gen-flex">
-                            <div class="img-cont-01 img-cont"><img src="static/images/{{update.advert_image}}" /></div>
-                            <div style="align-items: flex-start;" class="jb-title-cont gen-flex-col">
-                                <div style="font-size:14px;font-weight: 600;color:#006769">{{update.details}}</div>
-                                <small style="font-size:10px;color:#383838" >
-                                    <span style="font-weight: 500;">Posted:</span> {{update.timepstamp.strftime("%d %b %y")}}{%if update.deadline %}
-                                    <span style="font-weight:500">  Deadline:</span>  {{update.deadline.strftime("%d %b %y")}}{%endif%}
-                                </small>
-                            </div>
-                            <div class="filler"></div>
-                        </div>
-                    {%endfor%}
-                    </div>
+                
             </div>
         </div>
         <div style="margin: 0 auto;width: max-content;">
