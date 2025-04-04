@@ -112,33 +112,80 @@
         </div>
 </section>
 <br>
-
-{% if session.get('run_modal', False) %}
-<div class="welcome-advert gen-flex-col">
-    <img style="height: 100px;width:100px" src="static/icons/tht_logo_icon.png" />
-    <div class="slideshow-container">
-        <div class="adv-cont">
-            <h1 class="advert">Your Dream Job Awaits – Locally or Globally! 🌍
-                One Platform. Endless Opportunities.
-            </h1>
+{% if updates %}
+<div class="updates-popup gen-flex">
+    <div style="gap:5px" class="pop-content">
+        <div style="" class="scroll-enabler">
+            <div>
+                <h3 style="color:coral;font-weight:600">🤗Welcome Back!</h3>
+                <h5 style="font-size: 13px;color:#363232" >Job Posts you missed since you last visited, {{days_missed.days}} days ago</h5>
+                <div style="gap:5px;display:flex;flex-direction: column;">
+                {%for update in updates%}
+                    <div  class="post-container gen-flex">
+                        <div class="img-cont-01 img-cont"><img src="static/images/{{update.advert_image}}" /></div>
+                        <div style="align-items: flex-start;" class="jb-title-cont gen-flex-col">
+                            <div style="font-size:14px;font-weight: 600;color:#006769">{{update.details}}</div>
+                            <small style="font-size:10px;color:#383838" >
+                                <span style="font-weight: 500;">Posted:</span> {{update.timepstamp.strftime("%d %b %y")}}{%if update.deadline %}
+                                <span style="font-weight:500">  Deadline:</span>  {{update.deadline.strftime("%d %b %y")}}{%endif%}
+                            </small>
+                        </div>
+                        <div class="filler"></div>
+                    </div>
+                {%endfor%}
+                </div>
+                <div style="gap:5px;display:flex;flex-direction: column;">
+                    {%for update in updates%}
+                        <div  class="post-container gen-flex">
+                            <div class="img-cont-01 img-cont"><img src="static/images/{{update.advert_image}}" /></div>
+                            <div style="align-items: flex-start;" class="jb-title-cont gen-flex-col">
+                                <div style="font-size:14px;font-weight: 600;color:#006769">{{update.details}}</div>
+                                <small style="font-size:10px;color:#383838" >
+                                    <span style="font-weight: 500;">Posted:</span> {{update.timepstamp.strftime("%d %b %y")}}{%if update.deadline %}
+                                    <span style="font-weight:500">  Deadline:</span>  {{update.deadline.strftime("%d %b %y")}}{%endif%}
+                                </small>
+                            </div>
+                            <div class="filler"></div>
+                        </div>
+                    {%endfor%}
+                    </div>
+            </div>
         </div>
-        <div style="" class="adv-cont gen-flex-col">
-            
-            <div style="margin: 0 auto;width:max-content"><img style="height:50px" src="static/icons/easy-apply-icon.png" /></div>
-            <div style="margin: 0 auto;width:max-content"><img style="height:400px" src="static/images/application-form-1.png" /></div>
-            <div style="margin: 0 auto;width: max-content;"><label style="color:rgb(255, 254, 254);text-align: center;margin: 0 auto;width: max-content;" class="adver">Apply Here and Easily!
-            </label></div>
-        </div>
-        <div style="" class="adv-cont gen-flex-col">
-            <h3 style="color:coral" class="advert">Track Delivery and Last seen Activities
-            </h3>
-            <div style="margin: 0 auto;width:max-content"><img style="max-height:400px" src="static/images/tracker.png" /></div>
+        <div style="margin: 0 auto;width: max-content;">
+            <button style="border:none" id="got-it" class="btns go-btn">Got it👍</button>
         </div>
     </div>
-    <div style="flex-grow:1"></div>
-    <div id="close-button" onclick="closeAdverts()" class="btns go-btn">Go</div>
 </div>
+{%else%}
+    {% if session.get('run_modal', False) %}
+    <div class="welcome-advert gen-flex-col">
+        <img style="height: 100px;width:100px" src="static/icons/tht_logo_icon.png" />
+        <div class="slideshow-container">
+            <div class="adv-cont">
+                <h1 class="advert">Your Dream Job Awaits – Locally or Globally! 🌍
+                    One Platform. Endless Opportunities.
+                </h1>
+            </div>
+            <div style="" class="adv-cont gen-flex-col">
+                
+                <div style="margin: 0 auto;width:max-content"><img style="height:50px" src="static/icons/easy-apply-icon.png" /></div>
+                <div style="margin: 0 auto;width:max-content"><img style="height:400px" src="static/images/application-form-1.png" /></div>
+                <div style="margin: 0 auto;width: max-content;"><label style="color:rgb(255, 254, 254);text-align: center;margin: 0 auto;width: max-content;" class="adver">Apply Here and Easily!
+                </label></div>
+            </div>
+            <div style="" class="adv-cont gen-flex-col">
+                <h3 style="color:coral" class="advert">Track Delivery and Last seen Activities
+                </h3>
+                <div style="margin: 0 auto;width:max-content"><img style="max-height:400px" src="static/images/tracker.png" /></div>
+            </div>
+        </div>
+        <div style="flex-grow:1" class="filler"></div>
+        <div  id="close-button" onclick="closeAdverts()" class="btns go-btn">Go</div>
+    </div>
+    {%endif%}
 {%endif%}
+
+
 
 <div style="" class="tags">
     <div style="background-color:" class="row-flex">
@@ -347,5 +394,12 @@
 
 
 <br>
+<script>
+    var container = document.querySelector(".updates-popup");
+    var closeBtn=document.querySelector("#got-it");
+    closeBtn.addEventListener('click', function(){
+        container.style.display="none";
+    });
+</script>
 
 {% endblock %}

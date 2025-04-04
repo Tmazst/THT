@@ -299,17 +299,20 @@ app.permanent_session_lifetime = timedelta(minutes=1440)  # Example: 30 minutes
 def track_visitor():
     # Get visitor's IP address
     visitor_ip = request.remote_addr
+    visitor_addr = visitor_ip
 
     # You can define your own IP address to exclude
     your_ip = 'YOUR_IP_ADDRESS_HERE'  # Replace with your actual IP address
 
     reg_visitor = visitors.query.filter_by(ip=visitor_ip).first()
 
+
+
     if reg_visitor:
         reg_visitor.num_visits +=1
         reg_visitor.latest_visit = current_time_wlzone()
         print("Visitor: ", visitor_ip," ",current_time_wlzone())
-        print("Last Visited: ",reg_visitor.timestamp)
+        print("First Visited: ",reg_visitor.timestamp)
     elif not reg_visitor:
         # If the visitor is not yours, track them
         visit = visitors(
@@ -324,10 +327,49 @@ def track_visitor():
     db.session.commit()
 
 
+def updates_modal():
+    visitor_addr = request.remote_addr
+    ifip = visitors.query.filter_by(ip=visitor_addr).first()
+
+    print("Check Visitor: ",ifip.ip)
+    days_missed = 0
+    missed_posts = None
+
+    if ifip:
+        print("Visit Updates: ",ifip.ip )
+        if not ifip.latest_visit:
+            days_missed = datetime.now() - ifip.latest_visit
+            print("Your last Vist: ",days_missed.days)
+            missed__posts = jobs_posted.query.filter(jobs_posted.timepstamp > ifip.latest_visit).all()
+            print("Missed: ", missed__posts)
+            missed_posts = missed__posts
+        else:
+            days_missed = datetime.now() - ifip.timestamp
+            print("Your last Vist2: ",days_missed.days)
+            # Fetch posts that were created after the user's first visit (timestamp)
+            missed__posts = jobs_posted.query.filter(jobs_posted.timepstamp < ifip.timestamp).all()
+            print("Missed: ", missed__posts)
+            missed_posts = missed__posts
+
+
+    # Return or process missed posts for display
+    if missed_posts:
+        print("You missed the following posts:")
+        for post in missed_posts:
+            print(f"Post ID: {post.id}, Details: {post.details}, Deadline: {post.deadline}")
+    else:
+        print("You haven't missed any posts since your last visit.")
+
+    return missed_posts, days_missed  # or any other format for the output
+
+
 @app.route("/")
 def home():
      # Make the session permanent so the expiration time is effective
     session.permanent = True  
+
+    updates=updates_modal()[0]
+    days_missed=updates_modal()[1]
 
     track_visitor()
     
@@ -366,7 +408,7 @@ def home():
     posted_jobs = jobs_posted.query.order_by(desc(jobs_posted.timepstamp)).all()
     
 
-    return render_template("job_ads_gui.html",posted_jobs=posted_jobs)
+    return render_template("job_ads_gui.html",posted_jobs=posted_jobs,updates=updates, days_missed=days_missed)
 
 @app.route('/static/css/style.css')
 def serve_static(filename):
