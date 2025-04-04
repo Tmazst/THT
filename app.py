@@ -354,9 +354,7 @@ def updates_modal():
 
     # Return or process missed posts for display
     if missed_posts:
-        print("You missed the following posts:")
-        for post in missed_posts:
-            print(f"Post ID: {post.id}, Details: {post.details}, Deadline: {post.deadline}")
+        print("You missed the following posts:",len(missed_posts))
     else:
         print("You haven't missed any posts since your last visit.")
 
