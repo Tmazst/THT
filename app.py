@@ -331,7 +331,6 @@ def updates_modal():
     visitor_addr = request.remote_addr
     ifip = visitors.query.filter_by(ip=visitor_addr).first()
 
-    print("Check Visitor: ",ifip.ip)
     days_missed = 0
     missed_posts = None
     today = datetime.now()
