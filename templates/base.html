@@ -42,7 +42,7 @@
                     <div><a class="" href="/account"><span id="navlink" style="font-size:13px" class="nav-link">{{current_user.name}}</span></a></div>
                     <div><a href="/logout"><img class="logout-icon" style="height:40px" src="static/icons/logout-icon.webp"></a></div>
                   {% else %}
-                    <li><a id="login" class="btns-outlined links-user" onclick="openAuthWindow()">Login</a></li>
+                   <a id="login" class="btns-outlined links-user" onclick="openAuthWindow()"><div style="cursor: pointer;">Login</div></a>
                     <!-- <li><a class="btns-user links-user" href="/google_login">Register</a></li> -->
                   {% endif %}
                 </div>
@@ -185,8 +185,9 @@
                     <a href="/job_reports"><span style="color:black">Application Tracker</span></a>
                   </div>
                   <div class="filler"></div>
-                  <div class="gen-flex-col lower-nav">
+                  <div style="align-items: flex-start;" class="gen-flex-col lower-nav">
                       <a href="/download_app"><div class="gen-flex"><img style="height:30px" src="static/icons/android-icon.png" /><span style="color:#006769" class="labels">Install App</span></div></a>
+                      <a href="/contact"><div class="gen-flex"><img style="height:30px" src="static/icons/feedback-icon.png" /><span style="color:#006769" class="labels">Send Feedback</span></div></a>
                       <!-- <a href="#"><div class="gen-flex"><img style="height:30px" src="static/icons/about-icon.png" /><span class="labels">About</span></div></a>  -->
                   </div>
 

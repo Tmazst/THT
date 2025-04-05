@@ -1,7 +1,14 @@
 {% extends "base.html" %}
+<style>
+    @media all and (max-width: 700px) {
+        .flash-messages{
+            display: none !important;
+        }
+    }
+</style>
 
 {% block content %}
-<div style="margin-top:150px !important" class="tags ">
+<div style="margin-top:50px !important" class="tags ">
         <div class="flash-messages">
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}

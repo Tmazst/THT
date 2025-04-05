@@ -864,18 +864,19 @@ def contact_us():
                 app.config["MAIL_SERVER"] = "smtp.googlemail.com"
                 app.config["MAIL_PORT"] = 587
                 app.config["MAIL_USE_TLS"] = True
-                # em = app.config["MAIL_USERNAME"] = os.environ.get("EMAIL")
+                app.config['MAIL_PASSWORD'] = 'qcwqtochvppknpbk'
+                em = app.config["MAIL_USERNAME"] = "seeker.eswatini@gmail.com"
                 # app.config["MAIL_PASSWORD"] = os.environ.get("PWD")
 
                 mail = Mail(app)
 
-                msg = Message(contact_form.subject.data, sender=contact_form.email.data, recipients=[em])
+                msg = Message(contact_form.subject.data, sender=contact_form.email.data, recipients=["seeker.eswatini@gmail.com"])
                 msg.body = f"""{contact_form.message.data}
 {contact_form.email.data}
                     """
                 try:
                     mail.send(msg)
-                    flash("Your Message has been Successfully Sent!!", "success")
+                    flash("Message Successfully Sent!!", "success")
                     return "Email Sent"
                 except Exception as e:
                     # print(e)
