@@ -3088,6 +3088,10 @@ display:none
 
 
 @media all and (max-width: 700px) {
+
+    .menu-nav-cont{
+        width:95%;
+    }
     .scrolla{
         width:100%;
     }
