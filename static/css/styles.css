@@ -2860,7 +2860,7 @@ display:none
     right:0;
     height:100vh;
     background: rgba(0, 103, 105,  1);
-    z-index:1000;
+    z-index:1600;
     background-image: url("../images/celebration.jpg");
     background-position: center;
     background-size: cover;
@@ -3046,10 +3046,62 @@ display:none
 
 .display-updates{
     display: none;
+    z-index: 1500;
+}
+
+.menu-nav-cont{
+    width:100%;
+    max-width: 600px;
+    padding:15px;
+    padding-top: 0;
+    gap:18px !important
+}
+
+.menu-card:hover{
+    background-color: coral;
+    cursor:pointer
+}
+
+#menu-modal{
+    background-image: url("../images/GF_3.jpg");
+    z-index: 1000;
+}
+
+.menu-card span{
+    font-size:14px;
+    font-weight: 600;
+    text-align: center;
+    color:black
+}
+
+.menu-card{
+    width:160px;
+    height: 180px;
+    background: rgba(35, 187, 170,0.8);
+    border-radius: 15px;
+    transition: all 0.2s ease;
+}
+
+.menu-card-icon{
+    height:70px;
 }
 
 
 @media all and (max-width: 700px) {
+    .scrolla{
+        width:100%;
+    }
+
+    #menu-modal{
+        /* height:max-content */
+        overflow: scroll;
+    }
+    .menu-card span{
+        font-size:13px;
+    }
+    .slideshow-container{
+        width:100%
+    }
 
     .contact-form-control{
         width:100%
@@ -3083,6 +3135,7 @@ display:none
 
     .display-updates{
         display: flex !important;
+        z-index:1001;
     }
 
     .updates-popup{

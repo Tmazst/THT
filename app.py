@@ -405,7 +405,87 @@ def home():
     posted_jobs = jobs_posted.query.order_by(desc(jobs_posted.timepstamp)).all()
     
 
-    return render_template("job_ads_gui.html",posted_jobs=posted_jobs,updates=updates, days_missed=days_missed)
+    return render_template("index.html",posted_jobs=posted_jobs,updates=updates, days_missed=days_missed)
+
+@app.route("/featured_jobs")
+def featured():
+     # Make the session permanent so the expiration time is effective
+    session.permanent = True  
+
+    updates,days_missed=updates_modal()
+
+    track_visitor()
+    
+    # Use the session variable to track modal display
+    if "run_modal" not in session:
+        session["run_modal"] = True  # Set to True (modal shown)
+        session["modal_displayed_time"] = datetime.now(timezone.utc)  # Track the time modal was shown
+    else:
+        # Check if modal_displayed_time exists in session
+        if "modal_displayed_time" in session:
+            # Use aware datetime for comparison
+            time_since_display = datetime.now(timezone.utc) - session["modal_displayed_time"]
+            # Determine if the modal should be shown based on expiration
+            if time_since_display < timedelta(minutes=1440):  # If less than 30 minutes
+                session["run_modal"] = False  # Don't show modal again
+            else:
+                session["run_modal"] = True  # Show modal again after expiration
+                session["modal_displayed_time"] = datetime.now(timezone.utc)  # Update display time
+        else:
+            # If modal_displayed_time is not present, set it and show modal
+            session["run_modal"] = True
+            session["modal_displayed_time"] = datetime.now(timezone.utc)
+    with app.app_context():
+        db.create_all()
+    
+    posted_jobs = jobs_posted.query.order_by(desc(jobs_posted.timepstamp)).all()
+    
+    return render_template("featured_jobs.html",posted_jobs=posted_jobs, updates=updates, days_missed=days_missed)
+
+@app.route("/internships")
+def internships():
+     # Make the session permanent so the expiration time is effective
+    session.permanent = True  
+
+    track_visitor()
+
+    
+    return render_template("internships.html")
+
+
+@app.route("/job_boards")
+def job_boards():
+     # Make the session permanent so the expiration time is effective
+    session.permanent = True  
+
+    updates,days_missed=updates_modal()
+
+    track_visitor()
+    
+    # Use the session variable to track modal display
+    if "run_modal" not in session:
+        session["run_modal"] = True  # Set to True (modal shown)
+        session["modal_displayed_time"] = datetime.now(timezone.utc)  # Track the time modal was shown
+    else:
+        # Check if modal_displayed_time exists in session
+        if "modal_displayed_time" in session:
+            # Use aware datetime for comparison
+            time_since_display = datetime.now(timezone.utc) - session["modal_displayed_time"]
+            # Determine if the modal should be shown based on expiration
+            if time_since_display < timedelta(minutes=1440):  # If less than 30 minutes
+                session["run_modal"] = False  # Don't show modal again
+            else:
+                session["run_modal"] = True  # Show modal again after expiration
+                session["modal_displayed_time"] = datetime.now(timezone.utc)  # Update display time
+        else:
+            # If modal_displayed_time is not present, set it and show modal
+            session["run_modal"] = True
+            session["modal_displayed_time"] = datetime.now(timezone.utc)
+    with app.app_context():
+        db.create_all()
+    
+    return render_template("job_boards.html",updates=updates, days_missed=days_missed)
+
 
 @app.route('/static/css/style.css')
 def serve_static(filename):

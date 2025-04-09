@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .profile-sections{
+        width:70%;
+        margin:0 auto;
+    }
+    .tags{margin:0 auto}
+    .big-btns a{
+        width:100%;
+        height:100%;
+        background:none !important;
+        box-shadow:none;
+    }
+    .big-btns a:hover{
+        background:none !important;
+        box-shadow:none;
+    }
+    .big-btns{
+        width:250px;
+        height:150px !important;
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.20);
+        padding:10px;
+    }
+    .big-ibtns{
+        width:300px;
+        height:150px !important;
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.20);
+        padding:10px;
+        position:relative;
+        border-radius:15px;
+        display:flex;
+        flex-wrap:wrap;
+        gap:10px;
+        border-right:3px solid coral;
+    }
+    .row-flex{
+        gap:20px;
+        width:90%;
+        flex-wrap:wrap;
+        justify-content:flex-start;
+    }
+    .labels{
+        color:#777;
+    }
+
+    @media all and (max-width: 575px) {
+
+    .profile-sections{
+        width:90% !important;
+        display:flex;
+        flex-direction:row;
+        }
+    .paras-subtopics{
+        margin: 5px 4%;
+        font-size:10px !important;
+        width:90% !important;
+    }
+    .topics {
+        padding:5px;
+        width:900px !im;
+        flex-grow:1;
+    }
+
+    .optimise-mobile{
+            height:inherit !important;
+        }
+    .inherent{
+        height:170px !important;
+        width:auto !important;
+    }
+
+    .optimise-mobile{
+        height:inherit !important
+    }
+
+    .row-flex{
+        width:100%;
+        justify-content:center;
+    }
+    #int-topic{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    #nt-on-mobile{width:250px;}
+
+    }
+</style>
+
+
+<br><br><br>
+
+
+<div style="margin:0 auto;width:70%;background-color:"  class="paras-subtopics  caption">
+    <h1 id="main-welcom" class="h1-tag">
+    <span style="color:#2b201c" class="spans">International Internship Programs For Youth</span><br></h1>
+</div><br>
+<section id="int-topic"  style="background-color:;" class="flex-justify-align profile-sections">
+  <div id="nt-on-mobile" style="background-color:;"  class="optimise-mobile trim-edges anim not-on-mobile">
+     <img style="height:inherit" class="inherent" alt="young-hustlers-climbing-for-success" src="static/images/youth-tht.jpeg" />
+<!--           <img class="inherent" alt="the-hustlers-time-young-professionals" src="static/icons/young-people-analysing-jobs-online.png" />-->
+</div>
+<div style="position:" class="topics">
+    <div style="background-color:"  class="paras-subtopics  caption">
+        <h1 id="main-welcome" class="h1-tag">If you are fresh from college, you might need to polish-up your skills.<br>
+        <span style="color:coral;"  class="spans">Explore online internships that could elevate your career to new heights.</span><br></h1>
+    </div>
+</div>
+<!--              <button class="next-btns"  onclick="showNextSection()"> + </button>-->
+</section><br><br>
+
+<div class="tags">
+    <div class="row-flex">
+    <a href="https://www.kone.com/en/careers/students-and-graduates/?rdrsrc=/en/careers/students-and-graduates/international-trainee-program/&rdrtrg=/en/careers/students-and-graduates/?utm_source=goabroad.com&utm_medium=referral&utm_campaign=article-feature">
+        <div class="big-ibtns">
+            Kone<br>
+            <label class="labels">Trainee & Internships Programs</label>
+            <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/kone_logo.png"/>
+        </div></a>
+        <a href="https://www.goldmansachs.com/careers/students/programs/index.html">
+        <div class="big-ibtns">
+            goldmansachs<br>
+            <label class="labels">Internships Programs</label>
+            <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/goldmansachs_logo.svg"/>
+        </div></a>
+    <a href="https://www.deloitte.com/ie/en/careers/explore-your-fit/students.html">
+        <div class="big-ibtns">
+            Deloitte<br>
+            <label class="labels">Internships Programs</label>
+            <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/deloitte_logo.svg"/>
+        </div></a>
+    <a href="https://www.oysterworldwide.com/search?s_term=internship">
+        <div class="big-ibtns">
+            Oysterworldwide<br>
+            <label class="labels">Internships & Volunteer Programs</label>
+            <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/oyster_logo.png"/>
+        </div></a>
+    <a href="https://career.hm.com/sg-en/blog/job-family/student-early-career/">
+        <div class="big-ibtns">
+            hm<br>
+            <label class="labels">Internships Programs</label>
+            <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/h&m_logo.png"/>
+        </div></a>
+    <a href="https://www.worldbank.org/en/about/careers/programs-and-internships/internship?utm_source=goabroad.com&utm_medium=referral&utm_campaign=article-feature">
+        <div class="big-ibtns">
+            World Bank<br>
+            <label class="labels">Internships</label><br>
+            <label class="labels">Opens Jan 2025</label>
+            <img style="position:absolute;left:25px;bottom:0px;height:30px" class="" src="static/images/worldbank_logo.svg"/>
+        </div></a>
+    <a href="https://www.kpmguscareers.com/early-career/">
+        <div class="big-ibtns">
+            kpmg<br>
+            <label class="labels">Internships</label><br>
+<!--            <label class="labels">Opens Jan 2025</label>-->
+            <img style="position:absolute;left:25px;bottom:0px;height:30px" class="" src="static/images/kpmg_logo.svg"/>
+        </div></a>
+    <a href="https://www.google.com/about/careers/applications/students/">
+        <div class="big-ibtns">
+            google<br>
+            <label class="labels">Internships</label>
+            <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/google-icon.png"/>
+        </div></a>
+    <a href="https://www.indeed.com/jobs?q=internship+abroad+2024&sc=0kf%3Aattr%28DSQF7%29%3B&vjk=170db211504117c2">
+        <div class="big-ibtns">
+            indeed<br>
+            <label class="labels">Internships</label>
+            <img style="position:absolute;left:25px;bottom:0px;height:50px" class="" src="static/images/indeed_logo.png"/>
+        </div></a>
+    </div>
+</div><br>
+<div class="ad-parent gen-flex">
+    <div class="monento"><img src="static/images/woman-pc.jpg" class="course-ad-mainp" /></div>
+    <div class="sub-ad-parent">
+        <div style="color:coral">Are you ready to elevate your skills and boost your knowledge?</div>
+        <div style="font-weight:500;color:#777;font-size:13px ;">Explore a wide range of topics that spark your interest and align with your career goals</div>
+        <div><a href="/online_courses" ><button class="btns explore-btn">Explore</button></a></div>
+    </div>
+</div>
+<br>
+
+
+<br>
+<script>
+    var container = document.querySelector(".updates-popup");
+    var closeBtn=document.querySelector("#got-it");
+    closeBtn.addEventListener('click', function(){
+        console.log("Check Closing")
+        container.classList.remove("display-updates");
+        // container.forEach(element => {
+        //     element.style.display="none";
+        // });
+        
+    });
+</script>
+
+{% endblock %}
