@@ -3058,7 +3058,7 @@ display:none
 }
 
 .menu-card:hover{
-    background-color: coral;
+    background-color: #ff7f50;
     cursor:pointer
 }
 
