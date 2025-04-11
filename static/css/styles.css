@@ -59,7 +59,7 @@ body{
     padding:15px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.20);
     border-radius:15px ;
-    
+    transition: all 0.5s ease-out;
 }
 
 #featured_jobs{
