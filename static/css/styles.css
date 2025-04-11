@@ -3142,11 +3142,26 @@ display:none
 
 @media all and (max-width: 700px) {
 
+    .menu-card{
+        transform: scale(0.9) !important;
+        gap:15px;
+    }
+
+    .slideshow-container{
+        gap:0;
+    }
+
     .menu-nav-cont{
         width:95%;
+        padding:0;
+        gap:0;
     }
     .scrolla{
         width:100%;
+    }
+
+    .scrolla-img{
+        opacity: 0;
     }
 
     #menu-modal{
