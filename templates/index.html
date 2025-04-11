@@ -468,7 +468,7 @@ var myDiv = document.querySelector(".updates-popup"); // or document.querySelect
         var cards = document.querySelectorAll(".menu-card")
         cards.forEach(el => {
             setTimeout(() => {
-                el.style.transform = 'scale(1)'; 
+                if(innerWidth <= 700){el.style.transform = 'scale(0.9)'; }else{el.style.transform = 'scale(1)';}
                 el.style.opacity = '1'; // Trigger transition after delay
             }, defaultIncrease+=250); // Change to 0ms or leave out if you want immediate change
         });

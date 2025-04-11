@@ -3143,12 +3143,12 @@ display:none
 @media all and (max-width: 700px) {
 
     .menu-card{
-        transform: scale(0.9) !important;
+        transition: all 0.5s ease;
         gap:15px;
     }
 
     .slideshow-container{
-        gap:0;
+        gap:2px;
     }
 
     .menu-nav-cont{
@@ -3156,6 +3156,7 @@ display:none
         padding:0;
         gap:0;
     }
+
     .scrolla{
         width:100%;
     }
