@@ -182,13 +182,13 @@
             
             <div class="menu-nav-cont gen-flex">
                 <a href="/job_boards">
-                    <div class="menu-card gen-flex-col">
+                    <div id="card-1" class="menu-card gen-flex-col">
                         <img class="menu-card-icon" src="static/icons/briefcase2-icon.png" />
                         <span>Job Boards</span>
                     </div>
                 </a>
                 <a href="/featured_jobs">
-                    <div class="menu-card gen-flex-col">
+                    <div id="card-2"  class="menu-card gen-flex-col">
                         <img class="menu-card-icon" src="static/icons/featured2-icon.png" />
                         <span>Featured Jobs</span>
                     </div>
@@ -441,13 +441,50 @@
 
 <br>
 <script>
-    var container = document.querySelector(".updates-popup");
-    var closeBtn=document.querySelector("#got-it");
-    closeBtn.addEventListener('click', function(){
-        console.log("Check Closing")
-        container.classList.remove("display-updates");
-        
+        // Replace 'myDiv' with the ID or selector of your div
+var myDiv = document.querySelector(".updates-popup"); // or document.querySelector('.my-div-class');
+
+    if (myDiv) { // Check if the element is present in the DOM
+        var container = document.querySelector(".updates-popup");
+        var closeBtn=document.querySelector("#got-it");
+        closeBtn.addEventListener('click', function(){
+            console.log("Check Closing")
+            container.classList.remove("display-updates");
+            
+        });
+        // var style = window.getComputedStyle(myDiv); // Get the computed style of the element
+        // if (style.display === 'none') {
+        //     console.log('The div is present but has display: none;');
+        // } else {
+        //     console.log('The div is present and visible.');
+        // }
+    } else {
+        console.log('The div is not present in the DOM.');
+    }
+
+    defaultIncrease = 20
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var cards = document.querySelectorAll(".menu-card")
+        cards.forEach(el => {
+            setTimeout(() => {
+                el.style.transform = 'scale(1)'; 
+                el.style.opacity = '1'; // Trigger transition after delay
+            }, defaultIncrease+=250); // Change to 0ms or leave out if you want immediate change
+        });
+
     });
+
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     var menuCard = document.querySelectorAll(".menu-card");
+    //     menuCard.forEach(card =>{
+    //         console.log("Dom Called");
+    //         card.classList.add("opac");
+    //     });
+
+        
+    // })
 </script>
 
 {% endblock %}
