@@ -62,6 +62,42 @@ navParent.forEach(nav => {
     });
 });
 
+// Function to handle the intersection event
+function handleIntersection(entries, observer) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      console.log('Element has entered the viewport:', entry.target);
+      entry.target.classList.add("rescaler");
+      // You can add your logic here, for example:
+      // entry.target.classList.add('visible'); // Modify the element's class
+      // observer.unobserve(entry.target); // Stop observing if you only want to detect once
+    }
+  });
+}
+
+// Create an Intersection Observer instance
+const observer = new IntersectionObserver(handleIntersection, {
+  root: null, // Use the viewport as the root
+  rootMargin: '0px', // No margin
+  threshold: 0.8 // Trigger when 10% of the element is in the viewport
+});
+
+// Select the target element(s) you want to observe
+const targetElements = document.querySelectorAll('.big-btns'); // Adjust the selector as needed
+
+// Start observing each target element
+targetElements.forEach(el => {
+  observer.observe(el);
+});
+
+const targetFeatured = document.querySelectorAll('.job-cont-cont'); // Adjust the selector as needed
+
+// Start observing each target element
+targetFeatured.forEach(el => {
+  observer.observe(el);
+});
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
   const myDiv = document.querySelectorAll('.welcome-advert');

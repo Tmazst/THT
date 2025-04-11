@@ -445,11 +445,11 @@
 var myDiv = document.querySelector(".updates-popup"); // or document.querySelector('.my-div-class');
 
     if (myDiv) { // Check if the element is present in the DOM
-        var container = document.querySelector(".updates-popup");
+        // var container = document.querySelector(".updates-popup");
         var closeBtn=document.querySelector("#got-it");
         closeBtn.addEventListener('click', function(){
             console.log("Check Closing")
-            container.classList.remove("display-updates");
+            myDiv.classList.remove("display-updates");
             
         });
         // var style = window.getComputedStyle(myDiv); // Get the computed style of the element

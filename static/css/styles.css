@@ -973,6 +973,19 @@ a{
     height:270px !important;
     position:relative;
     background-color: #ffffff;
+    transform: scale(0.4);
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.hide_el{
+    transform: scale(0.4);
+    opacity: 0;
+}
+
+.rescaler{
+    transform:scale(1) !important;
+    opacity: 1;
 }
 
 .big-btns-invtd a{

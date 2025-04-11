@@ -139,7 +139,7 @@
     <div style="width:inherit;flex-wrap:wrap;gap:15px;justify-content: flex-start;" class="gen-flex">
         {%for job in posted_jobs%}
             {%if job.advert_image%}
-            <div class="job-cont-cont gen-flex-col">
+            <div class="job-cont-cont gen-flex-col hide_el">
                 <div class="share-jb-img-cont gen-flex"><img  src="static/images/{{job.advert_image}}" /></div>
                 <span class="deadln-tag">Posted: {{job.timepstamp.strftime("%d %b %Y")}}</span>
                 <div style="font-weight: 600;" class="details">{{job.details}}...<br>
@@ -171,15 +171,52 @@
 
 <br>
 <script>
-    var container = document.querySelector(".updates-popup");
-    var closeBtn=document.querySelector("#got-it");
-    closeBtn.addEventListener('click', function(){
-        console.log("Check Closing")
-        container.classList.remove("display-updates");
-        // container.forEach(element => {
-        //     element.style.display="none";
-        // });
-        
+    var myDiv = document.querySelector(".updates-popup"); // or document.querySelector('.my-div-class');
+
+    if (myDiv) { // Check if the element is present in the DOM
+        // var container = document.querySelector(".updates-popup");
+        var closeBtn=document.querySelector("#got-it");
+        closeBtn.addEventListener('click', function(){
+            console.log("Check Closing")
+            myDiv.classList.remove("display-updates");
+            
+        });
+        // var style = window.getComputedStyle(myDiv); // Get the computed style of the element
+        // if (style.display === 'none') {
+        //     console.log('The div is present but has display: none;');
+        // } else {
+        //     console.log('The div is present and visible.');
+        // }
+    } else {
+        console.log('The div is not present in the DOM.');
+    }
+
+    // defaultTimeOut = 100;
+    // Function to handle the intersection event
+    function handleIntersection(entries, observer) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+        console.log('Element has entered the viewport:', entry.target);
+        entry.target.classList.add("rescaler");
+        // You can add your logic here, for example:
+        // entry.target.classList.add('visible'); // Modify the element's class
+        // observer.unobserve(entry.target); // Stop observing if you only want to detect once
+        }
+    });
+    }
+
+    // Create an Intersection Observer instance
+    const observer = new IntersectionObserver(handleIntersection, {
+    root: null, // Use the viewport as the root
+    rootMargin: '0px', // No margin
+    threshold: 0.8 // Trigger when 10% of the element is in the viewport
+    });
+
+    const targetFeatured = document.querySelectorAll('.job-cont-cont'); // Adjust the selector as needed
+
+    // Start observing each target element
+    targetFeatured.forEach(el => {
+    observer.observe(el);
     });
 </script>
 
