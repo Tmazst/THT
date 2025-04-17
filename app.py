@@ -417,6 +417,7 @@ def serve_manifest():
 def serve_sw():
     return send_file('sw.js', mimetype='application/javascript')
 
+
 @app.route("/featured_jobs")
 def featured():
      # Make the session permanent so the expiration time is effective

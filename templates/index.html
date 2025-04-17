@@ -318,7 +318,7 @@
     </div><br><br><br>
 </div>
 
-
+<!-- Home Screen  -->
 <div class="add-to-homescreen-cont gen-flex">
     <img class="add-icon-img" src="static/icons/tht_logo.jpg" />
     <div style="width: max-content !important" class="btns add-btn">Add To Homescreen</div>
@@ -490,20 +490,22 @@
     
     let deferredPrompt;
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        console.log("===beforeinstallprompt");
-        container.style.display = "flex";
-        hscrnBtn.addEventListener('click', (e) => {
-            
+    window.addEventListener('load', () => {
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('A2HS event fired');
+            e.preventDefault();
+            deferredPrompt = e;
+            container.style.display = "flex";
+            hscrnBtn.addEventListener('click', () => {
             deferredPrompt.prompt();
-
             deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome == 'accepted'){
-                    console.log('User accepted the A2HS prompt');
+                if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted A2HS prompt');
+                } else {
+                console.log('User dismissed A2HS prompt');
                 }
                 deferredPrompt = null;
+            });
             });
         });
     });

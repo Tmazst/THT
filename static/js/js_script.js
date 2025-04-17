@@ -19,7 +19,14 @@
 //  }
 //}
 
-
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function (reg) {
+        console.log('Service worker registered.', reg);
+      });
+  });
+}
 
 
 var navParent = document.querySelectorAll(".saas-nav-item");
