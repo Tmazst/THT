@@ -10,7 +10,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://storage.googleapis.com/non-spec-apps/mio-icons/latest/outline.css">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#006769"/>
+    <link rel="icon" href="{{url_for('static', filename='icons/icon_144x144.png')}}" type="image/png">
+    <link rel="icon" href="{{url_for('static', filename='icons/icon_192x192.png')}}" type="image/png">
+    <link rel="icon" href="{{url_for('static', filename='icons/icon_512x512.png')}}" type="image/png">
+    <link rel="apple-touch-icon" href="{{url_for('static', filename='icons/icon_144x144.png')}}" type="image/png">
+    <link rel="apple-touch-icon" href="{{url_for('static', filename='icons/icon_192x192.png')}}" type="image/png">
+    <link rel="apple-touch-icon" href="{{url_for('static', filename='icons/icon_512x512.png')}}" type="image/png">
+    <link rel="manifest" href="/manifest.json">
     
     <title>The Hustlers Time</title>
     <link rel="icon" type="image/png" href="static/icons/the-hustlers-time-logo.png">
@@ -238,6 +245,18 @@
         </div>
     </div>
     {%endif%}
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register("/sw.js").then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
 <!--    </div>-->
 
 </head>

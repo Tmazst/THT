@@ -20,6 +20,8 @@
 //}
 
 
+
+
 var navParent = document.querySelectorAll(".saas-nav-item");
 navParent.forEach(nav => {
     nav.addEventListener('click', function(){
@@ -74,6 +76,8 @@ function handleIntersection(entries, observer) {
     }
   });
 }
+
+
 
 // Create an Intersection Observer instance
 const observer = new IntersectionObserver(handleIntersection, {
@@ -139,6 +143,9 @@ document.addEventListener('DOMContentLoaded', function() {
 function closeAdverts(){
   document.querySelector(".welcome-advert").style.display = "none";
 }
+
+
+
 
 
 function openAuthWindow(){

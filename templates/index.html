@@ -119,7 +119,7 @@
         <div style="" class="scroll-enabler">
             <div>
                 <h3 style="color:coral;font-weight:600">🤗Welcome Back!</h3>
-                <h5 style="font-size: 13px;color:#363232" >Job Posts you missed since you last visited, {{days_missed.days}} days ago</h5>
+                <h5 style="font-size: 13px;color:#363232" >Job Posts you missed since you last visited, {{days_missed}} days ago</h5>
                 <div style="gap:5px;display:flex;flex-direction: column;">
                 {%for update in updates%}
                     <div  class="post-container gen-flex">
@@ -317,7 +317,12 @@
 
     </div><br><br><br>
 </div>
-<br><br>
+
+
+<div class="add-to-homescreen-cont gen-flex">
+    <img class="add-icon-img" src="static/icons/tht_logo.jpg" />
+    <div style="width: max-content !important" class="btns add-btn">Add To Homescreen</div>
+</div>
 
 
 {% if posted_jobs%}
@@ -442,8 +447,10 @@
 
 <br>
 <script>
-        // Replace 'myDiv' with the ID or selector of your div
-var myDiv = document.querySelector(".updates-popup"); // or document.querySelector('.my-div-class');
+
+
+    // Replace 'myDiv' with the ID or selector of your div
+    var myDiv = document.querySelector(".updates-popup"); // or document.querySelector('.my-div-class');
 
     if (myDiv) { // Check if the element is present in the DOM
         // var container = document.querySelector(".updates-popup");
@@ -471,10 +478,39 @@ var myDiv = document.querySelector(".updates-popup"); // or document.querySelect
             setTimeout(() => {
                 if(innerWidth <= 700){el.style.transform = 'scale(0.9)'; }else{el.style.transform = 'scale(1)';}
                 el.style.opacity = '1'; // Trigger transition after delay
-            }, defaultIncrease+=250); // Change to 0ms or leave out if you want immediate change
+            }, defaultIncrease+=200); // Change to 0ms or leave out if you want immediate change
         });
 
     });
+
+    
+    var hscrnBtn = document.querySelector('.add-btn');
+    var container = document.querySelector('.add-to-homescreen-cont'); 
+    container.style.display = "none";
+    
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        console.log("===beforeinstallprompt");
+        container.style.display = "flex";
+        hscrnBtn.addEventListener('click', (e) => {
+            
+            deferredPrompt.prompt();
+
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome == 'accepted'){
+                    console.log('User accepted the A2HS prompt');
+                }
+                deferredPrompt = null;
+            });
+        });
+    });
+
+
+
+
 
 
     // document.addEventListener('DOMContentLoaded', function() {
@@ -483,8 +519,6 @@ var myDiv = document.querySelector(".updates-popup"); // or document.querySelect
     //         console.log("Dom Called");
     //         card.classList.add("opac");
     //     });
-
-        
     // })
 </script>
 

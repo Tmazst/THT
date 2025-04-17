@@ -407,6 +407,16 @@ def home():
 
     return render_template("index.html",posted_jobs=posted_jobs,updates=updates, days_missed=days_missed)
 
+
+@app.route('/manifest.json')
+def serve_manifest():
+
+    return send_file('manifest.json', mimetype='application/manifest+json')
+
+@app.route('/sw.js')
+def serve_sw():
+    return send_file('sw.js', mimetype='application/javascript')
+
 @app.route("/featured_jobs")
 def featured():
      # Make the session permanent so the expiration time is effective
@@ -442,6 +452,7 @@ def featured():
     
     return render_template("featured_jobs.html",posted_jobs=posted_jobs, updates=updates, days_missed=days_missed)
 
+
 @app.route("/internships")
 def internships():
      # Make the session permanent so the expiration time is effective
@@ -449,7 +460,6 @@ def internships():
 
     track_visitor()
 
-    
     return render_template("internships.html")
 
 
