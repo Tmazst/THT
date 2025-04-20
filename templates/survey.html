@@ -1,0 +1,83 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .flash-messages{
+        border:none !important;
+    }
+    h1,h2,h3{
+        font-weight: 600;
+    }
+
+    .card{
+        padding:5px;
+        padding-bottom: 15px;
+    }
+</style>
+
+<div  style="margin-bottom:700px;max-width: 1100px;;" class="tags">
+    <div class="flash-messages" class="btns">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for  category, message in messages %}
+                    <div class="flash-messages alert-{{category}}"> {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <h1>Survey: Interest in Freelance and Remote Job Initiatives</h1>
+    <form class="form_container gen-flex-col" method="POST">
+        {{ form.hidden_tag() }}  <!-- CSRF token for security -->
+        
+        {{ form.remote_job_interest.label }}<br>
+        {{ form.remote_job_interest() }}<br>
+        
+        {{ form.support_initiative.label }}<br>
+        {{ form.support_initiative() }}<br>
+        
+        {{ form.revolutionize_job_market.label }}<br>
+        {{ form.revolutionize_job_market() }}<br>
+        
+        {{ form.participate.label }}<br>
+        {{ form.participate() }}<br>
+        
+        {{ form.encourage_companies.label }}<br>
+        {{ form.encourage_companies() }}<br>
+        
+        {{ form.reduce_unemployment.label }}<br>
+        {{ form.reduce_unemployment() }}<br>
+        
+        {{ form.value_experience.label }}<br>
+        {{ form.value_experience() }}<br>
+        
+        {{ form.industry_experience.label }}<br>
+        {{ form.industry_experience() }}<br>
+        
+        {{ form.uncover_hidden_talents.label }}<br>
+        {{ form.uncover_hidden_talents() }}<br>
+        
+        {{ form.work_life_balance.label }}<br>
+        {{ form.work_life_balance() }}<br>
+        
+        {{ form.confidence_participation.label }}<br>
+        {{ form.confidence_participation() }}<br>
+        
+        {{ form.platform_knowledge.label }}<br>
+        {{ form.platform_knowledge() }}<br>
+        
+        {{ form.resources_info.label }}<br>
+        {{ form.resources_info() }}<br>
+
+        <fieldset>
+            <legend>{{ form.job_interest.label }}</legend>
+            {{ form.job_interest(size=50, rows=4) }}
+        </fieldset>
+        
+        <button type="submit">{{ form.submit() }}</button>
+    </form>
+</body>
+</html>
+
+{% endblock %}
