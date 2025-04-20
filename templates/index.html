@@ -217,12 +217,12 @@
                         <div class="coming-soon gen-flex">coming soon</div>
                     </div>
                 </a>
-                <a href="/download_app">
-                    <div class="menu-card gen-flex-col">
-                        <img class="menu-card-icon" src="static/icons/android2_icon.png" />
-                        <span>Install App</span>
-                    </div>
-                </a>
+                    <!-- <a href="/download_app"> -->
+                        <div style="min-width: 160px;" id="menu-card" class="menu-card gen-flex-col">
+                            <img class="menu-card-icon" src="static/icons/android2_icon.png" />
+                            <span>Install App</span>
+                        </div>
+                    <!-- </a> -->
             </div>
         </div>
         <div style="flex-grow:1" class="filler"></div>
@@ -486,26 +486,44 @@
     
     var hscrnBtn = document.querySelector('.add-btn');
     var container = document.querySelector('.add-to-homescreen-cont'); 
+    var menInstBtn = document.querySelector('#menu-card');
     container.style.display = "none";
+    menInstBtn.style.display = "none";
     
     let deferredPrompt;
 
     window.addEventListener('load', () => {
         window.addEventListener('beforeinstallprompt', (e) => {
+
             console.log('A2HS event fired');
             e.preventDefault();
             deferredPrompt = e;
+
             container.style.display = "flex";
+            menInstBtn.style.display = "flex";
+
             hscrnBtn.addEventListener('click', () => {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted A2HS prompt');
-                } else {
-                console.log('User dismissed A2HS prompt');
-                }
-                deferredPrompt = null;
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted A2HS prompt');
+                    } else {
+                    console.log('User dismissed A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                });
             });
+            
+            menInstBtn.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted A2HS prompt');
+                    } else {
+                    console.log('User dismissed A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                });
             });
         });
     });

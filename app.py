@@ -49,6 +49,7 @@ from sqlalchemy.exc import IntegrityError
 # db_sessions = sessionmaker(bind=engine)
 # db = db_sessions()
 import pytz
+from Survey_Forms import SurveyForm
 
 
 def current_time_wlzone():
@@ -152,10 +153,9 @@ if os.path.exists('client.json'):
 app.config['SECURITY_TWO_FACTOR_ENABLED_METHODS'] = ['mail', 'sms']
 app.config['SECURITY_TWO_FACTOR_SECRET'] = 'jhs&h$$sbUE_&WI*(*7hK5S'
 
-# 2FA Auth
-# otp_key = pyotp.random_base32()
-# otp = pyotp.TOTP(otp_key, interval=60)
-# days_to_lauch = datetime.strptime("2024-07-02", "%Y-%m-%d") - current_time_wlzone()
+
+
+
 
 class user_class:
     s = None
@@ -412,6 +412,56 @@ def home():
 def serve_manifest():
 
     return send_file('manifest.json', mimetype='application/manifest+json')
+
+
+# Path to save the responses
+responses_file_path = 'responses.json'
+
+# Load existing responses if the file exists
+if os.path.exists(responses_file_path):
+    with open(responses_file_path, 'r') as file:
+        responses = json.load(file)
+else:
+    responses = []
+
+
+# Define the home route and survey form
+@app.route('/survey', methods=['GET', 'POST'])
+def survey():
+    form = SurveyForm()
+    if request.method == 'POST':
+        # Collect data from the form
+        user_response = {
+            "ip_address": request.remote_addr,
+            "responses": {
+                "remote_job_interest": form.remote_job_interest.data,
+                "support_initiative": form.support_initiative.data,
+                "revolutionize_job_market": form.revolutionize_job_market.data,
+                "participate": form.participate.data,
+                "encourage_companies": form.encourage_companies.data,
+                "reduce_unemployment": form.reduce_unemployment.data,
+                "value_experience": form.value_experience.data,
+                "industry_experience": form.industry_experience.data,
+                "uncover_hidden_talents": form.uncover_hidden_talents.data,
+                "work_life_balance": form.work_life_balance.data,
+                "confidence_participation": form.confidence_participation.data,
+                "platform_knowledge": form.platform_knowledge.data,
+                "resources_info": form.resources_info.data,
+                "job_interest": form.job_interest.data
+            }
+        }
+        
+        # Append the new response to the responses list
+        responses.append(user_response)
+
+        # Save the updated responses to JSON file
+        with open(responses_file_path, 'w') as file:
+            json.dump(responses, file, indent=4)
+
+        return redirect(url_for('thank_you'))
+
+    return render_template('survey.html',form=form)
+
 
 @app.route('/sw.js')
 def serve_sw():

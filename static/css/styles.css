@@ -2930,6 +2930,11 @@ display:none
     height:75px
 }
 
+.homescr-install{
+    width:max-content;
+    height:max-content;
+}
+
 .add-btn{
     background-color: #3a63e9;
     color:white;

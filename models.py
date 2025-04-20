@@ -326,3 +326,6 @@ class visitors(db.Model):
     latest_visit = db.Column(db.DateTime)
     num_visits = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime)
+
+class Survey_Report(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
