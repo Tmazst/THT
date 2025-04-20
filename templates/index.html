@@ -217,28 +217,19 @@
                         <div class="coming-soon gen-flex">coming soon</div>
                     </div>
                 </a>
-                    <!-- <a href="/download_app"> -->
+                    <!-- Download App-->
                         <div style="min-width: 160px;" id="menu-card" class="menu-card gen-flex-col">
                             <img class="menu-card-icon" src="static/icons/android2_icon.png" />
                             <span>Install App</span>
                         </div>
                     <!-- </a> -->
-            </div>
-            <div class="menu-nav-cont gen-flex">
-                <a href="#">
-                    <div style="position: relative;" class="menu-card gen-flex-col">
-                        <img class="menu-card-icon" src="static/icons/remote2-icon.png" />
-                        <span>Remote & Freelance</span>
-                        <span>Eswatini</span>
-                        <div class="coming-soon gen-flex">coming soon</div>
+ 
+                <!-- Notification Enabled-->
+                    <div style="min-width: 160px;display: none;" id="menu-notification" class="menu-card gen-flex-col">
+                        <img class="menu-card-icon" src="static/icons/bell-icon.png" />
+                        <span>Get Job Updates?</span>
                     </div>
-                </a>
-                    <!-- <a href="/download_app"> -->
-                        <div style="min-width: 160px;" id="menu-notification" class="menu-card gen-flex-col">
-                            <img class="menu-card-icon" src="static/icons/android2_icon.png" />
-                            <span>Get Job Updates?</span>
-                        </div>
-                    <!-- </a> -->
+                <!-- </a> -->
             </div>
         </div>
         <div style="flex-grow:1" class="filler"></div>
@@ -509,6 +500,20 @@
     let deferredPrompt;
 
     window.addEventListener('load', () => {
+        function isAppInstalled() {
+        return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+        }
+
+        if (isAppInstalled()) {
+
+            console.log("PWA is installed!");
+            document.querySelector(".menu-notification").classList.add('dis-menu-notifi-btn')
+
+        } else {
+
+        console.log("User is using the web version.");
+
+        
         window.addEventListener('beforeinstallprompt', (e) => {
 
             console.log('A2HS event fired');
@@ -542,10 +547,13 @@
                 });
             });
         });
+        }; //else
     });
+   
+   
+    // window.addEventListener('load', () => {
 
-
-
+    // });
 
 
 

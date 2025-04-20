@@ -3131,6 +3131,10 @@ display:none
     /* important for animation */
 }
 
+.dis-menu-notifi-btn{
+    display: flex !important;
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
