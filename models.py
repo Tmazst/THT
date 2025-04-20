@@ -334,8 +334,8 @@ class Survey_Report(db.Model):
 class NotificationsAccess(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    endpoint = db.Column(db.String())
-    p256dh = db.Column(db.String())
-    auth = db.Column(db.String())
-    ip = db.Column(db.String())
+    endpoint = db.Column(db.String(255))
+    p256dh = db.Column(db.String(255))
+    auth = db.Column(db.String(255))
+    ip = db.Column(db.String(100))
     timestamp = db.Column(db.DateTime)
