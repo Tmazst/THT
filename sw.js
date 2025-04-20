@@ -8,3 +8,12 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
   // console.log('[Service Worker] Fetching something ...', event);
 });
+
+
+self.addEventListener("push", event => {
+  const data = event.data.json();
+  self.registration.showNotification(data.title, {
+      body: data.body,
+      icon: "/static/icons/icon-192x192.png"
+  });
+});

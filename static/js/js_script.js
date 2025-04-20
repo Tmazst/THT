@@ -19,14 +19,45 @@
 //  }
 //}
 
+
+// Check if the browser supports serviceWorker API 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('/sw.js') //Register the sw.js file
       .then(function (reg) {
         console.log('Service worker registered.', reg);
       });
   });
 }
+
+var pushNotBtn = document.querySelector("#menu-notification");
+
+//When the user clicks get notification button
+pushNotBtn.addEventListener("click", function(){
+
+  Notification.requestPermission().then(function (permission) {
+      if(permission !== 'granted'){
+        alert("We can't send notifications without your permission 😢");
+        return;
+      };
+  });
+  // Request push subscription from the browser using our VAPID public key
+  navigator.serviceWorker.register('/sw.js').then(registration => {
+    return registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: 'BKn-Jg1-Yh6ZXFAo7pM2CqifgkTgVp4Q8nxPVssc6L_ClABpjY8idgsFfqZRxT3Wmc496qRsTCB5JCFsC5eLTTA'
+    });
+  }).then(subscription => {
+    // Send to Flask backend to store
+    fetch('/subscribe', {
+        method: 'POST',
+        //Call flask backend & store data in the request.json_data dict
+        body: JSON.stringify(subscription),
+        headers: { 'Content-Type': 'application/json' }
+    });
+  });
+});
+
 
 
 var navParent = document.querySelectorAll(".saas-nav-item");

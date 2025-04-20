@@ -13,6 +13,7 @@ from flask_mail import Mail, Message
 from Advert_Forms import Job_Ads_Form, Company_Register_Form, Company_Login, Company_UpdateAcc_Form, Freelance_Ads_Form, \
     Freelance_Section, Job_Feedback_Form, Approved_Form
 import os
+from pywebpush import webpush, WebPushException
 from PIL import Image
 from sqlalchemy import exc, desc
 import rsa
@@ -154,6 +155,11 @@ app.config['SECURITY_TWO_FACTOR_ENABLED_METHODS'] = ['mail', 'sms']
 app.config['SECURITY_TWO_FACTOR_SECRET'] = 'jhs&h$$sbUE_&WI*(*7hK5S'
 
 
+VAPID_PRIVATE_KEY = """MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgGCUsFJL/62KLtxB9
+3ESUJ/g1a+dUk62jyA2Mn+WhM0yhRANCAASp/iYNfmIemVxQKO6TNgqon4JE4Fae
+EPJ8T1bLHOi/wpQAaY2PInYLBX6mUcU91pnOPeqkbEwgeSQhbAuXi00w"""
+
+VAPID_PUBLIC_KEY = "BKn-Jg1-Yh6ZXFAo7pM2CqifgkTgVp4Q8nxPVssc6L_ClABpjY8idgsFfqZRxT3Wmc496qRsTCB5JCFsC5eLTTA"
 
 
 
@@ -414,6 +420,104 @@ def serve_manifest():
     return send_file('manifest.json', mimetype='application/manifest+json')
 
 
+subscriptions = [] 
+
+# webpush(
+#     subscription_info=sub,
+#     data=json.dumps({
+#         "title": "THT Notifications",
+#         "body": "Don't miss out on new job posts😉"
+#     }),
+#     vapid_private_key=VAPID_PRIVATE_KEY,
+#     vapid_claims={"sub": "mailto:your@email.com"}
+# )
+
+
+# Accept JSON data from frontend subscription and store it
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    data = request.get_json()
+    subscriptions.append({
+        "endpoint": data.get("endpoint"),
+        "keys": {
+            "p256dh": data["keys"]["p256dh"],
+            "auth": data["keys"]["auth"]
+        }
+    })
+
+    save_details = NotificationsAccess(
+        endpoint = data.get("endpoint"),
+        p256dh = data["keys"]["p256dh"],
+        auth = data["keys"]["auth"],
+        ip = request.remote_addr,
+        timestamp = current_time_wlzone()
+    )
+    db.session.add(save_details)
+    db.session.commit()
+
+    return jsonify({'status': 'subscribed'})
+
+
+@app.route('/notify', methods=['GET', 'POST'])
+def notify():
+
+    message = request.args.get("message", "Default message") if request.method == "GET" else request.get_json().get("message", "Default message")
+
+    if request.method == 'POST':
+        data = request.get_json()
+        message = data.get("message", "Hello!")
+    else:
+        message = request.args.get("message", "Hello from GET!")
+
+    for sub in subscriptions:
+        try:
+            webpush(
+                subscription_info=sub,
+                data=json.dumps({
+                    "title": "New Notification",
+                    "body": message
+                }),
+                vapid_private_key=VAPID_PRIVATE_KEY,
+                vapid_claims={"sub": "mailto:info@techxolutions.com"}
+            )
+        except WebPushException as ex:
+            print("Push failed:", repr(ex))
+
+    return jsonify({'status': 'notifications sent'})
+
+
+@app.route('/load_subscriptions')
+def getuser_endpoints():
+    subscriptions.clear()  # clear existing to avoid duplicates
+    endpoints = NotificationsAccess.query.all()
+    for endpoint in endpoints:
+        subscriptions.append({
+            "endpoint": endpoint.endpoint,
+            "keys": {
+                "p256dh": endpoint.p256dh,
+                "auth": endpoint.auth
+            }
+        })
+
+    # Now call notify logic manually
+    message = request.args.get("message", "🚀 You've got a new opportunity!")
+    for sub in subscriptions:
+        try:
+            webpush(
+                subscription_info=sub,
+                data=json.dumps({
+                    "title": "New Notification",
+                    "body": message
+                }),
+                vapid_private_key=VAPID_PRIVATE_KEY,
+                vapid_claims={"sub": "mailto:info@techxolutions.com"}
+            )
+        except WebPushException as ex:
+            print("Push failed:", repr(ex))
+
+    return jsonify({'status': 'notifications sent'})
+
+
 # Path to save the responses
 responses_file_path = 'responses.json'
 
@@ -463,6 +567,7 @@ def survey():
     return render_template('survey.html',form=form)
 
 
+# <script 'sw.js'><script>
 @app.route('/sw.js')
 def serve_sw():
     return send_file('sw.js', mimetype='application/javascript')
@@ -1272,7 +1377,6 @@ def job_ads_form(udi=None):
     #     job_ad = Jobs_Ads.query.filter_by(job_id=ser.loads(request.args.get("jo_id"))['data_11']).first()
 
     return render_template("job_ads_form.html", job_ad_form=job_ad_form, ser=ser, job_ad=job_ad,usr_id=usr_id)
-
 
 
 @app.route("/online_form", methods=["POST", "GET"])

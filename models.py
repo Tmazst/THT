@@ -329,3 +329,13 @@ class visitors(db.Model):
 
 class Survey_Report(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+
+
+class NotificationsAccess(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    endpoint = db.Column(db.String())
+    p256dh = db.Column(db.String())
+    auth = db.Column(db.String())
+    ip = db.Column(db.String())
+    timestamp = db.Column(db.DateTime)
