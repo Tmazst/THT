@@ -89,7 +89,6 @@ function handleIntersection(entries, observer) {
 }
 
 
-
 // Create an Intersection Observer instance
 const observer = new IntersectionObserver(handleIntersection, {
   root: null, // Use the viewport as the root
@@ -154,8 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function closeAdverts(){
   document.querySelector(".welcome-advert").style.display = "none";
 }
-
-
 
 
 

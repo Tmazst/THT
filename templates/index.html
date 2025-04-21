@@ -507,12 +507,11 @@
         if (isAppInstalled()) {
 
             console.log("PWA is installed!");
-            document.querySelector(".menu-notification").classList.add('dis-menu-notifi-btn')
+            document.querySelector("#menu-notification").classList.add('dis-menu-notifi-btn');
 
         } else {
 
         console.log("User is using the web version.");
-
         
         window.addEventListener('beforeinstallprompt', (e) => {
 
