@@ -402,7 +402,7 @@ def home():
             # Use aware datetime for comparison
             time_since_display = datetime.now(timezone.utc) - session["modal_displayed_time"]
             # Determine if the modal should be shown based on expiration
-            if time_since_display < timedelta(minutes=1):  # If less than 24 hours(1440) minutes do not show the modal
+            if time_since_display < timedelta(minutes=1440):  # If less than 24 hours(1440) minutes do not show the modal
                 session["run_modal"] = False  # Don't show modal again
             else:
                 session["run_modal"] = True  # Show modal again after expiration (24 hours elapsed)
