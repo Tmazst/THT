@@ -87,7 +87,7 @@ class company_user(user):
         "polymorphic_identity": 'company_user'
     }
 
-class user_experince_entries(db.Model, UserMixin): #A table form filling prior tht experience
+class user_experince_entries(db.Model, UserMixin): #table form filling prior tht experience
 
     id = db.Column(db.Integer, ForeignKey('job_user.id'), primary_key=True)
     portfolio_pdf = db.Column(db.String(120))
