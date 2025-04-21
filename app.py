@@ -345,8 +345,6 @@ def track_visitor():
 #             missed_posts = jobs_posted.query.filter(jobs_posted.timepstamp > user.latest_visit).all()
 
 
-
-
 def updates_modal(usr_ip=None):
     ifip = None
     if usr_ip:
@@ -534,20 +532,21 @@ def getuser_endpoints():
         }
 
         job_missed, days_missed = updates_modal(usr_ip=ip)
-
-        # if days_missed >= 5 and len(job_missed) > 0:
-        try:
-            webpush(
-                subscription_info=sub,
-                data=json.dumps({
-                    "title": "New Jobs Notification",
-                    "body": f"🚀 You've got {len(job_missed)} new job alerts waiting!"
-                }),
-                vapid_private_key=VAPID_PRIVATE_KEY,
-                vapid_claims={"sub": "mailto:info@techxolutions.com"}
-            )
-        except WebPushException as ex:
-            print("Push failed:", repr(ex))
+        print("Check The Days: ",days_missed)
+        print( "Jobs: ", job_missed )
+        if days_missed >= 5 and len(job_missed) > 0:
+            try:
+                webpush(
+                    subscription_info=sub,
+                    data=json.dumps({
+                        "title": "New Jobs Notification",
+                        "body": f"🚀 You've got {len(job_missed)} new job alerts waiting!"
+                    }),
+                    vapid_private_key=VAPID_PRIVATE_KEY,
+                    vapid_claims={"sub": "mailto:info@techxolutions.com"}
+                )
+            except WebPushException as ex:
+                print("Push failed:", repr(ex))
     print("Notification Pushed")
     # return jsonify({'status': 'notifications sent'})
 
