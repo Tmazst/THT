@@ -519,7 +519,7 @@ def getuser_endpoints():
             }
             
         })
-
+    print("Check Subscriptions: ", subscriptions)
     # Now call notify logic manually
     # if days_missed
     message = request.args.get("message", "🚀 You've got a new opportunity!")
@@ -532,8 +532,8 @@ def getuser_endpoints():
         }
 
         job_missed, days_missed = updates_modal(usr_ip=ip)
-        print("Check The Days: ",days_missed)
-        print( "Jobs: ", job_missed )
+        print("++Check The Days: ",days_missed)
+        print( "+++Jobs: ", job_missed )
         if days_missed >= 5 and len(job_missed) > 0:
             try:
                 webpush(
@@ -547,8 +547,36 @@ def getuser_endpoints():
                 )
             except WebPushException as ex:
                 print("Push failed:", repr(ex))
-    print("Notification Pushed")
+    print("Notification Pushed: ",current_time_wlzone())
     # return jsonify({'status': 'notifications sent'})
+
+
+@app.route("/post_job",methods=["POST","GET"])
+def post_job():
+
+    form = JobPostForm()
+
+    if request.method=="POST":
+        job = jobs_posted(
+            details = form.details.data,
+            deadline = form.deadline.data,
+            link = form.link.data,
+            timepstamp = current_time_wlzone()
+        )
+        print("CHECH IMAGE: ",form.advert_image.data)
+        if form.advert_image.data:
+            print("IMAGE FOUND: ",form.advert_image.data)
+            job.advert_image = save_pic(form.advert_image.data)
+            print("IMAGE SAVED: ",job.advert_image)
+
+        db.session.add(job)
+        db.session.commit()
+        flash("Upload Successful!","success")
+
+        getuser_endpoints()
+        print("Called Notification Feature")
+
+    return render_template('post-a-job-form.html',form=form)
 
 
 # Path to save the responses
@@ -1493,32 +1521,6 @@ def courses(udi=None):
 class jo_id_cls:
     id_ = None
 
-
-@app.route("/post_job",methods=["POST","GET"])
-def post_job():
-
-    form = JobPostForm()
-
-    if request.method=="POST":
-        job = jobs_posted(
-            details = form.details.data,
-            deadline = form.deadline.data,
-            link = form.link.data,
-            timepstamp = current_time_wlzone()
-        )
-        print("CHECH IMAGE: ",form.advert_image.data)
-        if form.advert_image.data:
-            print("IMAGE FOUND: ",form.advert_image.data)
-            job.advert_image = save_pic(form.advert_image.data)
-            print("IMAGE SAVED: ",job.advert_image)
-
-        db.session.add(job)
-        db.session.commit()
-        flash("Upload Successful!","success")
-
-        getuser_endpoints()
-
-    return render_template('post-a-job-form.html',form=form)
 
 
 @app.route("/edit_job_ads_form", methods=["POST", "GET"])
