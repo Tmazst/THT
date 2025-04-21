@@ -391,26 +391,27 @@ def home():
     track_visitor()
     
     # Use the session variable to track modal display
+    #..for new visitors mostly
     if "run_modal" not in session:
         print("Modal Not in Session")
         session["run_modal"] = True  # Set to True (modal shown)
-        session["modal_displayed_time"] = datetime.now(timezone.utc)  # Track the time modal was shown
+        session["modal_displayed_time"] = datetime.now(timezone.utc)  # Track the time modal was shown (The last time it was shown)
     else:
         # Check if modal_displayed_time exists in session
         if "modal_displayed_time" in session:
             # Use aware datetime for comparison
             time_since_display = datetime.now(timezone.utc) - session["modal_displayed_time"]
             # Determine if the modal should be shown based on expiration
-            if time_since_display < timedelta(minutes=1):  # If less than 30 minutes
+            if time_since_display < timedelta(minutes=1):  # If less than 24 hours(1440) minutes do not show the modal
                 session["run_modal"] = False  # Don't show modal again
             else:
-                session["run_modal"] = True  # Show modal again after expiration
-                session["modal_displayed_time"] = datetime.now(timezone.utc)  # Update display time
+                session["run_modal"] = True  # Show modal again after expiration (24 hours elapsed)
+                session["modal_displayed_time"] = datetime.now(timezone.utc)  # Update display time (current time)
         else:
             # If modal_displayed_time is not present, set it and show modal
             session["run_modal"] = True
             session["modal_displayed_time"] = datetime.now(timezone.utc)
-            
+
     with app.app_context():
         db.create_all()
 
