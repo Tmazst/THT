@@ -30,7 +30,9 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-
+function navigateHome(){
+  window.location.href = "/";
+}
 
 
 var navParent = document.querySelectorAll(".saas-nav-item");

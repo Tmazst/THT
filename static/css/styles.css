@@ -3135,6 +3135,22 @@ display:none
     display: flex !important;
 }
 
+#floating-nav {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: none;
+    border-radius: 50%;
+    padding: 15px;
+    
+  }
+
+  #floating-nav button{
+    background: none;
+    border: none;
+  }
+
 .new-btn-ico{
     position:absolute ;
     color: white;
