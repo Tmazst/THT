@@ -504,7 +504,7 @@ def notify():
     return jsonify({'status': 'notifications sent'})
 
 
-@app.route('/load_subscriptions')
+# @app.route('/load_subscriptions')
 def getuser_endpoints():
     
     subscriptions.clear()  # clear existing to avoid duplicates
@@ -548,8 +548,8 @@ def getuser_endpoints():
                 )
             except WebPushException as ex:
                 print("Push failed:", repr(ex))
-
-    return jsonify({'status': 'notifications sent'})
+    print("Notification Pushed 👍")
+    # return jsonify({'status': 'notifications sent'})
 
 
 # Path to save the responses
@@ -1516,6 +1516,8 @@ def post_job():
         db.session.add(job)
         db.session.commit()
         flash("Upload Successful!","success")
+
+        getuser_endpoints()
 
     return render_template('post-a-job-form.html',form=form)
 
