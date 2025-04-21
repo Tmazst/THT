@@ -548,7 +548,7 @@ def getuser_endpoints():
             )
         except WebPushException as ex:
             print("Push failed:", repr(ex))
-    print("Notification Pushed 👍")
+    print("Notification Pushed")
     # return jsonify({'status': 'notifications sent'})
 
 
