@@ -535,19 +535,19 @@ def getuser_endpoints():
 
         job_missed, days_missed = updates_modal(usr_ip=ip)
 
-        if days_missed >= 5 and len(job_missed) > 0:
-            try:
-                webpush(
-                    subscription_info=sub,
-                    data=json.dumps({
-                        "title": "New Jobs Notification",
-                        "body": f"🚀 You've got {len(job_missed)} new job alerts waiting!"
-                    }),
-                    vapid_private_key=VAPID_PRIVATE_KEY,
-                    vapid_claims={"sub": "mailto:info@techxolutions.com"}
-                )
-            except WebPushException as ex:
-                print("Push failed:", repr(ex))
+        # if days_missed >= 5 and len(job_missed) > 0:
+        try:
+            webpush(
+                subscription_info=sub,
+                data=json.dumps({
+                    "title": "New Jobs Notification",
+                    "body": f"🚀 You've got {len(job_missed)} new job alerts waiting!"
+                }),
+                vapid_private_key=VAPID_PRIVATE_KEY,
+                vapid_claims={"sub": "mailto:info@techxolutions.com"}
+            )
+        except WebPushException as ex:
+            print("Push failed:", repr(ex))
     print("Notification Pushed 👍")
     # return jsonify({'status': 'notifications sent'})
 
