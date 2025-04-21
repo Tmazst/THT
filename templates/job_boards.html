@@ -272,6 +272,28 @@
 
 <br>
 <script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const nav = document.createElement("div");
+        nav.id = "floating-nav";
+        nav.innerHTML = `
+            <div id="floating-nav">
+            <button onclick="navigateHome()">
+                <img style="height:40px;box-shadow: 0 0 10px rgba(0,0,0,0.2);border-radius: 50%;" class="social-icon-main" src="static/icons/quick-menu-icon.png" />
+            </button>
+            </div>
+        `;
+        Object.assign(nav.style, {
+            position: "fixed",
+            bottom: "20px",
+            right: "10px",
+            zIndex: "505",
+            background: "none",
+            borderRadius: "50%",
+            padding: "15px",
+        });
+        document.body.appendChild(nav);
+        });
+        
     var container = document.querySelector(".updates-popup");
     var closeBtn=document.querySelector("#got-it");
     closeBtn.addEventListener('click', function(){
@@ -282,6 +304,7 @@
         // });
         
     });
+    
 </script>
 
 {% endblock %}

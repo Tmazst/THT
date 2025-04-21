@@ -90,6 +90,22 @@ function handleIntersection(entries, observer) {
   });
 }
 
+function shareJobPage() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'New Jobs at THT',
+      text: '🚀 Explore new job opportunities!',
+      url: 'https://jobs.techxolutions.com'
+    }).then(() => {
+      console.log('Shared successfully');
+    }).catch((err) => {
+      console.warn('Share cancelled or failed', err);
+    });
+  } else {
+    alert('Sharing is not supported in your browser.');
+  }
+}
+
 
 // Create an Intersection Observer instance
 const observer = new IntersectionObserver(handleIntersection, {
