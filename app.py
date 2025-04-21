@@ -312,9 +312,7 @@ def track_visitor():
 
     reg_visitor = visitors.query.filter_by(ip=visitor_ip).first()
 
-
-
-    if reg_visitor:
+    if reg_visitor and not reg_visitor.ip == "102.212.200.73":
         reg_visitor.num_visits +=1
         reg_visitor.latest_visit = current_time_wlzone()
         print("Tracking  Visitor: ", visitor_ip," ",current_time_wlzone())
@@ -360,7 +358,7 @@ def updates_modal(usr_ip=None):
     if ifip:
         print("Visit Updates: ",ifip.ip )
         print("Check Last visit: ",ifip.latest_visit )
-        print("Checked " )
+        print("Checked ")
         if ifip.latest_visit and today > ifip.latest_visit:
             days_missed = (today - ifip.latest_visit).days
             print("Your last Visit: ",days_missed)
@@ -394,6 +392,7 @@ def home():
     
     # Use the session variable to track modal display
     if "run_modal" not in session:
+        print("Modal Not in Session")
         session["run_modal"] = True  # Set to True (modal shown)
         session["modal_displayed_time"] = datetime.now(timezone.utc)  # Track the time modal was shown
     else:
@@ -402,7 +401,7 @@ def home():
             # Use aware datetime for comparison
             time_since_display = datetime.now(timezone.utc) - session["modal_displayed_time"]
             # Determine if the modal should be shown based on expiration
-            if time_since_display < timedelta(minutes=1440):  # If less than 30 minutes
+            if time_since_display < timedelta(minutes=1):  # If less than 30 minutes
                 session["run_modal"] = False  # Don't show modal again
             else:
                 session["run_modal"] = True  # Show modal again after expiration
@@ -411,6 +410,7 @@ def home():
             # If modal_displayed_time is not present, set it and show modal
             session["run_modal"] = True
             session["modal_displayed_time"] = datetime.now(timezone.utc)
+            
     with app.app_context():
         db.create_all()
 
@@ -437,16 +437,6 @@ def serve_manifest():
 
 
 subscriptions = [] 
-
-# webpush(
-#     subscription_info=sub,
-#     data=json.dumps({
-#         "title": "THT Notifications",
-#         "body": "Don't miss out on new job posts😉"
-#     }),
-#     vapid_private_key=VAPID_PRIVATE_KEY,
-#     vapid_claims={"sub": "mailto:your@email.com"}
-# )
 
 
 # Accept JSON data from frontend subscription and store it

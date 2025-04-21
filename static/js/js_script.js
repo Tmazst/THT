@@ -93,8 +93,8 @@ function handleIntersection(entries, observer) {
 function shareJobPage() {
   if (navigator.share) {
     navigator.share({
-      title: 'New Jobs at THT',
-      text: '🚀 Explore new job opportunities!',
+      title: 'Find Jobs at THT',
+      text: "Explore Local & International Job Boards for Your Dream Job",
       url: 'https://jobs.techxolutions.com'
     }).then(() => {
       console.log('Shared successfully');
