@@ -3135,6 +3135,19 @@ display:none
     display: flex !important;
 }
 
+.new-btn-ico{
+    position:absolute ;
+    color: white;
+    padding:2px 7px;
+    background: linear-gradient(-45deg,#616bfa,#0616f7);
+    animation: gradient 2s ease infinite;
+    background-size: 200% 200%; 
+    top:5px;
+    right:10px;
+    border-radius: 15px;
+}
+
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;

@@ -332,10 +332,28 @@ def track_visitor():
         print("Tracking New Visitor: ", visitor_ip," ",visit.timestamp)
     db.session.commit()
 
+#upload users with more than 5 days last visitation
+# last_visits =[]
+# def get_last_visits():
+#     today = datetime.now() 
+#     users = visitors.query.all()
 
-def updates_modal():
-    visitor_addr = request.remote_addr
-    ifip = visitors.query.filter_by(ip=visitor_addr).first()
+#     for user in users:
+#         days_ago = (today - user.latest_visit).days
+#         if days_ago >= 5:
+#             last_visits.append(user.ip)
+#             missed_posts = jobs_posted.query.filter(jobs_posted.timepstamp > user.latest_visit).all()
+
+
+
+
+def updates_modal(usr_ip=None):
+    ifip = None
+    if usr_ip:
+        ifip = visitors.query.filter_by(ip=usr_ip).first()
+    else:
+        visitor_addr = request.remote_addr
+        ifip = visitors.query.filter_by(ip=visitor_addr).first()
 
     days_missed = 0
     missed_posts = None
@@ -488,32 +506,48 @@ def notify():
 
 @app.route('/load_subscriptions')
 def getuser_endpoints():
+    
     subscriptions.clear()  # clear existing to avoid duplicates
     endpoints = NotificationsAccess.query.all()
+    
+    # Get all the endpoints registered or who granted notification permittion
     for endpoint in endpoints:
         subscriptions.append({
             "endpoint": endpoint.endpoint,
+            "ip":endpoint.ip,
             "keys": {
                 "p256dh": endpoint.p256dh,
                 "auth": endpoint.auth
             }
+            
         })
 
     # Now call notify logic manually
+    # if days_missed
     message = request.args.get("message", "🚀 You've got a new opportunity!")
-    for sub in subscriptions:
-        try:
-            webpush(
-                subscription_info=sub,
-                data=json.dumps({
-                    "title": "New Notification",
-                    "body": message
-                }),
-                vapid_private_key=VAPID_PRIVATE_KEY,
-                vapid_claims={"sub": "mailto:info@techxolutions.com"}
-            )
-        except WebPushException as ex:
-            print("Push failed:", repr(ex))
+    
+    for subscriber in subscriptions:
+        ip = subscriber.get("ip")  # get IP from dictionary
+        sub = {
+            "endpoint": subscriber["endpoint"],
+            "keys": subscriber["keys"]
+        }
+
+        job_missed, days_missed = updates_modal(usr_ip=ip)
+
+        if days_missed >= 5 and len(job_missed) > 0:
+            try:
+                webpush(
+                    subscription_info=sub,
+                    data=json.dumps({
+                        "title": "New Jobs Notification",
+                        "body": f"🚀 You've got {len(job_missed)} new job alerts waiting!"
+                    }),
+                    vapid_private_key=VAPID_PRIVATE_KEY,
+                    vapid_claims={"sub": "mailto:info@techxolutions.com"}
+                )
+            except WebPushException as ex:
+                print("Push failed:", repr(ex))
 
     return jsonify({'status': 'notifications sent'})
 
