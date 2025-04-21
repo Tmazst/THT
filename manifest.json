@@ -43,5 +43,26 @@
         "sizes": "428x818",
         "type": "image/png"
       }
-  ]
+  ],
+  "shortcuts": [
+  
+  {
+    "name": "Quick Menu",
+    "short_name": "Menu",
+    "url": "/",
+    "icons": [{ "src": "/static/icons/quick-menu-icon.png", "sizes": "192x192" }]
+  },
+  {
+    "name": "Jobs Boards",
+    "short_name": "Jobs",
+    "url": "/job_boards",
+    "icons": [{ "src": "/static/icons/briefcase2-icon.png", "sizes": "192x192" }]
+  },
+  {
+    "name": "Featured Jobs",
+    "short_name": "Featured",
+    "url": "/featured_jobs",
+    "icons": [{ "src": "/static/icons/featured2-icon.png", "sizes": "192x192" }]
+  }
+]
 }
