@@ -215,6 +215,19 @@ class hired(db.Model, UserMixin):
     #I need to add a pending entry checker; a current job of the job_user to identify entry here   ----pending
 
 
+class page_activity_analytics(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    page_name = db.Column(db.String(120))
+    page_url = db.Column(db.String(120))
+    event_type = db.Column(db.String(120))
+    event_data = db.Column(db.String(120))
+    page_visited_by = db.Column(db.String(120))
+    page_visited_time = db.Column(db.DateTime())
+    page_visited_ip = db.Column(db.String(120))
+    page_visited_device = db.Column(db.String(120))
+    page_visited_browser = db.Column(db.String(120))
+
+
 class Hire_Freelancer(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     employer_id = db.Column(db.Integer, ForeignKey('user.id'))

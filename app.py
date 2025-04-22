@@ -437,8 +437,23 @@ def serve_manifest():
     return send_file('manifest.json', mimetype='application/manifest+json')
 
 
-subscriptions = [] 
+@app.route('/activity_tracker', methods=['POST'])
+def track():
+    data = request.json
+    print(f"[{datetime.now()}] Event received:", data)
+    activity = page_activity_analytics(
+        page_name = data.get("page"),
+        event_type = data.get("eventType"),
+        # event_data = data.get("eventData"),
+        page_visited_ip = request.remote_addr,
+        page_visited_time = current_time_wlzone()
+    )
+    db.session.add(activity)
+    db.session.commit()
+    # You can write this to a DB or log it
+    return jsonify({"status": "success"}), 200
 
+subscriptions = [] 
 
 # Accept JSON data from frontend subscription and store it
 @app.route('/subscribe', methods=['POST'])

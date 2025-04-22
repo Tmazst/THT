@@ -254,7 +254,7 @@
 <body style="background-color;width:100%;overflow:auto;position:relative">
   <!-- In your PWA's main HTML -->
     <div id="floating-share">
-      <button onclick="shareJobPage()">
+      <button id="shareBtn" onclick="shareJobPage()">
         <img style="height:40px;box-shadow: 0 0 10px rgba(0,0,0,0.2);border-radius: 50%;" class="social-icon-main" src="static/icons/share-icon.png" />
       </button>
     </div>
@@ -270,6 +270,8 @@
     <div id="loadingOverlay" style="display: none;">
         <div class="spinner"></div>
     </div>
+
+    <script src="/static/js/activity_tracker_manager.js"></script>
 
     <script>
       function showLoader() {
@@ -288,6 +290,20 @@
           });
         });
       });
+
+      // Function pushes the events data initUserTracker for events tracking
+      initUserTracker({
+        trackPageView: true,
+        events: [
+          { name: "share_button", selector: "#share_btn", on: "click", meta: { location: "hero" } },
+          { name: "app_download_btn_menu", selector: "#menu-card", on: "click" },
+          { name: "add_homescreen", selector: ".add-to-homescreen-cont", on: "click" },
+          // { name: "job_boards_page", selector: "#card-1", on: "click" },
+          // { name: "featured_jobs_page", selector: "#card-2", on: "click" },
+          // { name: "get_notifications_page", selector: "#menu-notification", on: "click" }
+        ]
+      });
+
     </script>
 
     <script src="static/js/js_script.js">
