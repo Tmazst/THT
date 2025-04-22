@@ -106,6 +106,10 @@ function shareJobPage() {
   }
 }
 
+function openTechX(){
+  window.location.href = "https://techxolutions.com"
+}
+
 
 // Create an Intersection Observer instance
 const observer = new IntersectionObserver(handleIntersection, {
