@@ -214,7 +214,7 @@ def block_non_browsers():
         print("Blocked non-browser request", request.remote_addr)
         forbedden_requests(
             ip = request.remote_addr,
-            time_stamp = current_time_wlzone(),
+            timestamp = current_time_wlzone(),
             other = request.headers.get("User-Agent", ""),
             reason = "Blocked non-browser request"
         )
