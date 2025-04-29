@@ -1,7 +1,7 @@
 import secrets
 import random
 import requests
-from flask import Flask, render_template, url_for, redirect, request, flash, session, make_response, send_from_directory,jsonify, send_file
+from flask import Flask, render_template, url_for, redirect, request, flash, session, make_response, send_from_directory,jsonify, send_file, abort
 # from flask_basicauth import BasicAuth
 # from alchemy_db import engine
 from sqlalchemy.orm import sessionmaker
@@ -205,6 +205,21 @@ def custom_404(error):
 @app.errorhandler(500)
 def custom_404(error):
     return render_template("500_handler.html"), 500
+
+#Security
+@app.before_request
+def block_non_browsers():
+    # Check if the request is from a browser (not a bot or script)
+    if "Mozilla" not in request.headers.get("User-Agent", ""):
+        print("Blocked non-browser request", request.remote_addr)
+        forbedden_requests(
+            ip = request.remote_addr,
+            time_stamp = current_time_wlzone(),
+            other = request.headers.get("User-Agent", ""),
+            reason = "Blocked non-browser request"
+        )
+
+        abort(403)
 
 def resize_img(img, size_x=30, size_y=30):
     i = Image.open(img)

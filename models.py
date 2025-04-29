@@ -228,6 +228,8 @@ class page_activity_analytics(db.Model):
     page_visited_browser = db.Column(db.String(120))
 
 
+
+
 class Hire_Freelancer(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     employer_id = db.Column(db.Integer, ForeignKey('user.id'))
@@ -352,3 +354,11 @@ class NotificationsAccess(db.Model):
     auth = db.Column(db.String(255))
     ip = db.Column(db.String(100))
     timestamp = db.Column(db.DateTime)
+
+class forbedden_requests(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String(100))
+    reason = db.Column(db.String(255))
+    timestamp = db.Column(db.DateTime)
+    other = db.Column(db.String(255))
