@@ -51,6 +51,9 @@ from sqlalchemy.exc import IntegrityError
 # db = db_sessions()
 import pytz
 from Survey_Forms import SurveyForm
+from werkzeug.middleware.proxy_fix import ProxyFix
+
+
 
 
 def current_time_wlzone():
@@ -74,6 +77,10 @@ def current_time_wlzone():
 # Applications
 app = Flask(__name__)
 # sitemap = Sitemap(app=app)
+
+
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1) # Set x_proto to 1 to trust the first proxy in the chain
+
 
 app.config['SECRET_KEY'] = 'f9ec9f35fbf2a9d8b95f9bffd18ba9a1'
 
@@ -209,17 +216,39 @@ def custom_404(error):
 #Security
 @app.before_request
 def block_non_browsers():
+    # Abort all ip addresses that are stored in forbedden_requests table
+    if request.remote_addr in [ip_obj.ip for ip_obj in forbedden_requests.query.all()]:
+        print("Blocked IP Address: ", request.remote_addr)
+        abort(403)
+
     # Check if the request is from a browser (not a bot or script)
     if "Mozilla" not in request.headers.get("User-Agent", ""):
         print("Blocked non-browser request", request.remote_addr)
-        forbedden_requests(
+        forbidden = forbedden_requests(
             ip = request.remote_addr,
             timestamp = current_time_wlzone(),
             other = request.headers.get("User-Agent", ""),
             reason = "Blocked non-browser request"
         )
 
+        db.session.add(forbidden)
+        db.session.commit()
+
         abort(403)
+
+
+#Security
+@app.before_request
+def enforce_https(): 
+    if not request.is_secure:
+        return redirect(request.url.replace("http://", "https://"), code=301)
+    
+
+app.config.update(
+    SESSION_COOKIE_SECURE=True,     # Only sent over HTTPS
+    SESSION_COOKIE_HTTPONLY=True,   # Not accessible via JS
+    SESSION_COOKIE_SAMESITE='Strict'  # Blocks CSRF from other domains
+)
 
 def resize_img(img, size_x=30, size_y=30):
     i = Image.open(img)
@@ -260,9 +289,9 @@ def inject_ser():
     ser = Serializer(app.config['SECRET_KEY'])  # Define or retrieve the value for 'ser'
     count_jobs = count_ads()
 
-    
 
     return dict(ser=ser, count_jobs=count_jobs)
+
 
 def save_pic(picture, size_x=300, size_y=300):
     _img_name, _ext = os.path.splitext(picture.filename)
@@ -304,7 +333,6 @@ def save_pdf(pdf_file):
     pdf_file.save(file_path)
 
     return new_file_name_ext
-
 
 
 def delete_pdf(file_name):
