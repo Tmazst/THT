@@ -979,12 +979,10 @@ a{
 }
 
 .hide_el{
-    transform: scale(0.4);
     opacity: 0;
 }
 
-.rescaler{
-    transform:scale(1) !important;
+.show-el{
     opacity: 1;
 }
 

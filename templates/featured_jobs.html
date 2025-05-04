@@ -197,7 +197,7 @@
     entries.forEach(entry => {
         if (entry.isIntersecting) {
         console.log('Element has entered the viewport:', entry.target);
-        entry.target.classList.add("rescaler");
+        entry.target.classList.add("show-el");
         // You can add your logic here, for example:
         // entry.target.classList.add('visible'); // Modify the element's class
         // observer.unobserve(entry.target); // Stop observing if you only want to detect once
