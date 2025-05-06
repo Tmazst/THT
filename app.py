@@ -234,7 +234,8 @@ def block_non_browsers():
         db.session.add(forbidden)
         db.session.commit()
 
-        abort(403)
+        if "facebookexternalhit/1.1" not in request.headers.get("User-Agent", ""): 
+            abort(403)
 
 
 #Security
