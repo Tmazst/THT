@@ -219,7 +219,7 @@ def block_non_browsers():
     # Abort all ip addresses that are stored in forbedden_requests table
     if request.remote_addr in [ip_obj.ip for ip_obj in forbedden_requests.query.all()]:
         print("Blocked IP Address: ", request.remote_addr)
-        abort(403)
+        # abort(403)
 
     # Check if the request is from a browser (not a bot or script)
     if "Mozilla" not in request.headers.get("User-Agent", ""):
@@ -235,7 +235,8 @@ def block_non_browsers():
         db.session.commit()
 
         if "facebookexternalhit/1.1" not in request.headers.get("User-Agent", ""): 
-            abort(403)
+            pass
+        #     abort(403)
 
 
 #Security
@@ -2159,7 +2160,6 @@ def job_adverts_filtered():
     return render_template("job_ads_filtered.html", job_ads=job_ads, job_ads_form=job_ads_form, db=db,
                            company_user=company_user, user=usr, no_image_fl=no_image_fl, ser=ser,
                            category_set=category_set)
-
 
 
 @app.route("/freelance_job_ads", methods=["GET", "POST"])
