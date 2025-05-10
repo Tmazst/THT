@@ -213,7 +213,7 @@ def custom_404(error):
 def custom_404(error):
     return render_template("500_handler.html"), 500
 
-#Security
+# Security
 @app.before_request
 def block_non_browsers():
     # Abort all ip addresses that are stored in forbedden_requests table
@@ -236,14 +236,14 @@ def block_non_browsers():
 
         if "facebookexternalhit/1.1" not in request.headers.get("User-Agent", ""): 
             pass
-        #     abort(403)
+            # abort(403)
 
 
 #Security
 @app.before_request
-def enforce_https(): 
-    if not request.is_secure:
-        return redirect(request.url.replace("http://", "https://"), code=301)
+def enforce_http():
+    if request.is_secure:
+        return redirect(request.url.replace("https://", "http://"), code=301)
     
 
 app.config.update(

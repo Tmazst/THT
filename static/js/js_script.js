@@ -110,6 +110,12 @@ function openTechX(){
   window.location.href = "https://techxolutions.com"
 }
 
+function handleIntersection(entries, observer){
+  entries.forEach(entry => {
+    entry.target.classList.add("show-el");
+  })
+};
+
 
 // Create an Intersection Observer instance
 const observer = new IntersectionObserver(handleIntersection, {
@@ -126,12 +132,12 @@ targetElements.forEach(el => {
   observer.observe(el);
 });
 
-const targetFeatured = document.querySelectorAll('.job-cont-cont'); // Adjust the selector as needed
+// const targetFeatured = document.querySelectorAll('.job-cont-cont'); // Adjust the selector as needed
 
-// Start observing each target element
-targetFeatured.forEach(el => {
-  observer.observe(el);
-});
+// // Start observing each target element
+// targetFeatured.forEach(el => {
+//   observer.observe(el);
+// });
 
 
 

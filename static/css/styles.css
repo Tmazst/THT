@@ -973,7 +973,7 @@ a{
     height:270px !important;
     position:relative;
     background-color: #ffffff;
-    transform: scale(0.4);
+    /* transform: scale(0.4); */
     opacity: 0;
     transition: all 0.5s ease-out;
 }
