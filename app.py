@@ -214,28 +214,28 @@ def custom_404(error):
     return render_template("500_handler.html"), 500
 
 # Security
-@app.before_request
-def block_non_browsers():
-    # Abort all ip addresses that are stored in forbedden_requests table
-    if request.remote_addr in [ip_obj.ip for ip_obj in forbedden_requests.query.all()]:
-        print("Blocked IP Address: ", request.remote_addr)
-        # abort(403)
+# @app.before_request
+# def block_non_browsers():
+#     # Abort all ip addresses that are stored in forbedden_requests table
+#     if request.remote_addr in [ip_obj.ip for ip_obj in forbedden_requests.query.all()]:
+#         print("Blocked IP Address: ", request.remote_addr)
+#         # abort(403)
 
-    # Check if the request is from a browser (not a bot or script)
-    if "Mozilla" not in request.headers.get("User-Agent", ""):
-        print("Blocked non-browser request", request.remote_addr)
-        forbidden = forbedden_requests(
-            ip = request.remote_addr,
-            timestamp = current_time_wlzone(),
-            other = request.headers.get("User-Agent", ""),
-            reason = "Blocked non-browser request"
-        )
+#     # Check if the request is from a browser (not a bot or script)
+#     if "Mozilla" not in request.headers.get("User-Agent", ""):
+#         print("Blocked non-browser request", request.remote_addr)
+#         forbidden = forbedden_requests(
+#             ip = request.remote_addr,
+#             timestamp = current_time_wlzone(),
+#             other = request.headers.get("User-Agent", ""),
+#             reason = "Blocked non-browser request"
+#         )
 
-        db.session.add(forbidden)
-        db.session.commit()
+#         db.session.add(forbidden)
+#         db.session.commit()
 
-        if "facebookexternalhit/1.1" not in request.headers.get("User-Agent", ""): 
-            pass
+#         if "facebookexternalhit/1.1" not in request.headers.get("User-Agent", ""): 
+#             pass
             # abort(403)
 
 
@@ -243,7 +243,7 @@ def block_non_browsers():
 @app.before_request
 def enforce_http():
     if request.is_secure:
-        return redirect(request.url.replace("https://", "http://"), code=301)
+        return redirect(request.url.replace("http://","https://"), code=301)
     
 
 app.config.update(
