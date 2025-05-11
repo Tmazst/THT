@@ -240,10 +240,10 @@ def custom_404(error):
 
 
 #Security
-@app.before_request
-def enforce_http():
-    if request.is_secure:
-        return redirect(request.url.replace("http://","https://"), code=301)
+# @app.before_request
+# def enforce_http():
+#     if request.is_secure:
+#         return redirect(request.url.replace("http://","https://"), code=301)
     
 
 app.config.update(
