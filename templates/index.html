@@ -96,14 +96,14 @@
 <div class="gen-flex-col cel-main-pic " style="">
     <div style="font-size:30px" class="freel_rem_title">Search, Apply, & Land your Perfect Job </div>
     <div class="freel_rem_subtitle">Your Dream Job Awaits – Locally or Globally!</div>
-    <a href="/freelance_job_ads">
+    <a href="/freelance_ad">
         <div class="freel_rem_subtitle"><button style="font-size:18px;padding:10px;text-wrap: nowrap;" class="btns">Remote Eswatini</button></div>
     </a>
 </div>
 
-<section style="background-color:" class="flex-justify-align profile-sections">
-        <div style="position:;background-color:" class="topics">
-            <div style="background-color:;padding:5px;"  class="paras-subtopics  caption">
+<section class="flex-justify-align profile-sections">
+        <div  class="topics">
+            <div style="padding:5px;"  class="paras-subtopics  caption">
                 <h3 id="main-welcome-h1" class="h1-tag">
                     <span class="spans">Whether it’s right around the corner or halfway across the world. 
                         Local or remote, full-time or freelance, we’ve got you covered.
@@ -176,7 +176,7 @@
     <div class="gen-flex-col scrolla" style="height:max-content">
         <img class="scrolla-img" style="height: 100px;width:100px" src="static/icons/tht_logo_icon.png" />
         
-        <h3 class="advert">THT - Quik Menu
+        <h3 class="advert">THT - Quick Menu
         </h3>
         <h5 style="margin-top:0" onclick="openTechX()" id="powered">powered by Tech Xolutions - TechX</h5>
         <div class="slideshow-container gen-flex-col">
@@ -348,7 +348,10 @@
             <div class="job-cont-cont gen-flex-col">
                 <div class="share-jb-img-cont gen-flex"><img  src="static/images/{{job.advert_image}}" /></div>
                 <span class="deadln-tag">Posted: {{job.timepstamp.strftime("%d %b %Y")}}</span>
-                <div style="font-weight: 600;" class="details">{{job.details}}...<br>
+                {%if job.job_title %}
+                <div style="font-weight: 600;" class="details">{{job.job_title}}</div>
+                {%endif%}
+                <div style="font-weight: 500;" class="details">{{job.details}}...<br>
                     {%if job.deadline%}
                         <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
                     {%endif%}

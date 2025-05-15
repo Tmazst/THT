@@ -99,6 +99,7 @@ class user_experince_entries(db.Model, UserMixin): #table form filling prior tht
 class jobs_posted(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     advert_image = db.Column(db.String(120))
+    job_title = db.Column(db.String(60))
     details = db.Column(db.String(60))
     deadline = db.Column(db.Date)
     timepstamp = db.Column(db.DateTime)

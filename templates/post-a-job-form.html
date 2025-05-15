@@ -55,6 +55,17 @@
             {% endif %}
         </div>
 
+         <!-------JOB TITLE-------->
+             <div class="job-ad-group marginise-bottom">
+                 {{ form.job_title.label(class="labels")}}<br>
+                  {{ form.job_title(class="form-control adj-width-60",placeholder="Additional Info")}}
+                  {% if form.job_title.errors %}
+                    {% for error in form.job_title.errors %}
+                        <span class="span-error" >*{{error}}</span>
+                    {% endfor %}
+                 {% endif %}
+             </div>
+
             <!-------DETAILS-------->
              <div class="job-ad-group marginise-bottom">
                  {{ form.details.label(class="labels")}}<br>

@@ -142,6 +142,9 @@
             <div class="job-cont-cont gen-flex-col hide_el">
                 <div class="share-jb-img-cont gen-flex"><img  src="static/images/{{job.advert_image}}" /></div>
                 <span class="deadln-tag">Posted: {{job.timepstamp.strftime("%d %b %Y")}}</span>
+                {%if job.job_title %}
+                <div style="font-weight: 600;color:white;background-color:#006769;" class="details">{{job.job_title}}</div>
+                {%endif%}
                 <div style="font-weight: 600;" class="details">{{job.details}}...<br>
                     {%if job.deadline%}
                         <span class="deadln-tag">Deadline: {{job.deadline.strftime("%d %B %Y")}}</span>
@@ -233,14 +236,15 @@
             position: "fixed",
             bottom: "20px",
             right: "10px",
-            zIndex: "501",
+            zIndex: "1600",
             background: "none",
             borderRadius: "50%",
-            padding: "15px",
-            boxShadow: "1px 1px 4px rgba(57, 100, 34, 0.80"
+            padding: "15px"
         });
         document.body.appendChild(nav);
     });
+
+
 </script>
 
 {% endblock %}

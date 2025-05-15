@@ -613,6 +613,7 @@ def post_job():
     if request.method=="POST":
         job = jobs_posted(
             details = form.details.data,
+            job_title = form.job_title.data,
             deadline = form.deadline.data,
             link = form.link.data,
             timepstamp = current_time_wlzone()

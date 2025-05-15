@@ -27,6 +27,7 @@ class Register(FlaskForm):
 
 class JobPostForm(FlaskForm):
     advert_image = FileField("Upload Advert Image")
+    job_title = StringField('Job Title')
     details = TextAreaField('Additional Info', validators=[Optional(),Length(max=64)])
     deadline = DateField('Deadline',validators=[Optional()])
     link = URLField('Paste Link here',validators=[DataRequired(),Length(min=8, max=255)])
@@ -68,7 +69,6 @@ class OnlineCoursesForm(FlaskForm):
     publish = SubmitField('Post')
 
 class Contact_Form(FlaskForm):
-
     name = StringField('name')
     email = StringField('email', validators=[DataRequired(),Email()])
     subject = StringField("subject")
