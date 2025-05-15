@@ -54,8 +54,6 @@ from Survey_Forms import SurveyForm
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 
-
-
 def current_time_wlzone():
     # Get the current UTC time
     timestamp = datetime.now(pytz.utc)
@@ -524,6 +522,11 @@ def subscribe():
 
     return jsonify({'status': 'subscribed'})
 
+
+@app.route('/freelance_ad')
+def freelance_ad():
+
+    return render_template("freelance_ad.html")
 
 @app.route('/notify', methods=['GET', 'POST'])
 def notify():

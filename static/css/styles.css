@@ -51,6 +51,8 @@ body{
 .main{
     width:100%;
 }
+
+
 /* H1T CSS */
 
 .job-cont-cont{
@@ -60,6 +62,7 @@ body{
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.20);
     border-radius:15px ;
     transition: all 0.5s ease-out;
+    background-color: #e6e6e6;
 }
 
 #featured_jobs{
@@ -947,7 +950,6 @@ a{
 .btns-cont{
     width:20%;
     margin:0 auto;
-    //background-color:#eee;
     height:30px;
     display:flex;
     justify-content:center;
@@ -962,6 +964,38 @@ a{
     width:300px;
     height:270px !important;
     position:relative;
+}
+
+.ad-cards h1{
+    color:rgb(255, 255, 254);
+    text-align: center;
+}
+
+.freel_container{
+    width:100%;
+    /* height:100vh; */
+    background-color: #006769;
+    background-image: url("../images/a_rounded_wood_pot.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: -2;
+    overflow: auto;
+}
+
+.main-cont{
+    z-index: 5;
+}
+
+.overlay{
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: rgba(0, 103, 105,0.8);
+    z-index:-1;
 }
 
 
@@ -1112,10 +1146,10 @@ ul.paras-subtopics{
 
 .tags h1,h2,h3{
     
-    color:#404040;
+    color:#141414 !important;
 }
 .spans{
-    color:#006769;
+    color:#141414 !important;
 }
 
 span.spans{
@@ -1341,11 +1375,37 @@ font-weight:400;
     border-radius: 10px;
 }
 
+body {
+    background-attachment: fixed;
+}
+body {
+    position: relative;
+}
+
+
+.overlayer{
+    position: absolute;
+    background: rgba(0, 103, 105,0.7);
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index: -1;
+}
+
+.blocks{
+    z-index: 1;
+}
 
 body{
     /* padding-left: 15px;
     padding-right: 15px; */
+    background-image: url("../images/a_rounded_wood_pot.png") !important;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
+
 .couser-tab{
     border:1px solid #4b5858;
     border-radius: 12px;
@@ -1381,7 +1441,7 @@ body{
 
 .h1-tag span{
     font-weight:500 !important;
-    color:rgb(36, 30, 27)
+    color:rgb(235, 235, 235) !important
 }
 
 
@@ -1743,8 +1803,7 @@ body{
 .tags{
 
     margin:70px auto  0px auto ;
-    width:70%;
-    //background-color:#eee;
+    width:80%;
 
 }
 .main{
@@ -1994,6 +2053,13 @@ h2{
     gap:10px
 }
 
+.gen-flex-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px
+}
+
 .gen-flex-col{
     display: flex;
     flex-direction: column;
@@ -2003,15 +2069,13 @@ h2{
 }
 
 .step-2{
-    //position:absolute;
     top:650px;
-    //background-color:#ffa;
     width:100%;
 }
 
-.inf-step-odd{
+/* .inf-step-odd{
     //left:40%;
-}
+} */
 
 .info-graph{
     display:flex;
@@ -2163,6 +2227,46 @@ h2{
     border-right:2px solid red;
 }
 
+.line{
+    background-color: coral;
+    border-radius: 15px;
+    height:3px;
+    width:40%;
+    align-self: flex-start;
+
+}
+
+.ad-cards{
+    width:350px;
+    justify-content: flex-start;
+    background: rgba(252, 252, 252, 0.1);
+    padding:10px;
+    border-radius: 15px;
+
+}
+
+.freel-icons{
+    height:70px;
+}
+
+.tag-line{
+    font-size: 25px;
+    align-self:flex-start;
+}
+
+
+.page-intro-info{
+    font-weight: 900;
+    font-size:40px !important;
+}
+
+.main-cont{
+    width:95%;
+    margin:0 auto;
+    max-width:900px;
+
+}
+
 .titles{
     float:left;
     display:flex;
@@ -2173,7 +2277,7 @@ h2{
 .title-bar-cont{
     display:flex;
     background: var(--main-color) !important;
-    box-shadow: 2px 2px 10px 2px rgba(0, 103, 105,1);
+    box-shadow: 2px 1px 4px 2px rgba(14, 14, 14,0.2);
     position:fixed;
     top:0;
     height:77px;
@@ -2746,17 +2850,15 @@ display:none
 
 .hide-alink{
     display:none;
-    //visibility:hidden;
 }
 
 .steps-cont label{
-    //display:none;
     visibility:hidden;
 }
 
 .row-flex{
     display:flex;
-    align-items:flex-start;
+    align-items:center;
     justify-content:center;
 }
 
@@ -2952,6 +3054,7 @@ display:none
     padding:15px;
     margin:10px auto;
     display: none;
+    background-color: #e6e6e6;
 }
 
 /* Show the first slide initially */
@@ -3014,7 +3117,7 @@ display:none
 }
 
 .ad-parent{
-    background:linear-gradient(45deg,rgba(248, 104, 7, 0.2),50%, rgba(255,255,255,0) 100%);
+    background:linear-gradient(45deg,rgba(248, 104, 7, 0.5),50%, rgba(255,255,255,0) 100%);
     padding:5px 0;
     height:150px;
     width:70%;
@@ -3285,6 +3388,17 @@ display:none
 
 
 @media all and (max-width: 700px) {
+
+    .page-intro-info{
+        font-size: 25px !important;
+        font-weight: 700 !important;
+    }
+    .teamw-image{
+        height: 300px !important;
+    }
+    .genner{
+        flex-direction: column !important;
+    }
 
     .add-to-homescreen-cont{
         display: flex;
