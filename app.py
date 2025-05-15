@@ -247,7 +247,7 @@ def custom_404(error):
 app.config.update(
     SESSION_COOKIE_SECURE=True,     # Only sent over HTTPS
     SESSION_COOKIE_HTTPONLY=True,   # Not accessible via JS
-    SESSION_COOKIE_SAMESITE='Strict'  # Blocks CSRF from other domains
+    SESSION_COOKIE_SAMESITE='Strict'  # Blocks CSRF from other domainss
 )
 
 def resize_img(img, size_x=30, size_y=30):
