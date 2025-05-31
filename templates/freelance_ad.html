@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    div,h1,h2,p,small,label{
+        color:white;
+
+    }
+    .hire-btn{
+        height:150px;
+        width:150px;
+        background-color: coral;
+        color:white;
+        font-size: 20px;
+        font-weight: 600;
+        border-radius: 15px;
+        padding: 10px;
+        align-self: start;
+    }
+    .hire-btn:hover{
+        opacity: 0.8;
+    }
+    #loadingOverlay{
+        display: none !important;
+    }
+    .freel_container{
+        z-index: 0 !important;
+    }
+</style>
+<div style="position: relative;" class="freel_container">
+    <div style="height:100px"></div>
+    <div class="overlay"></div>
+    <div style="position: fixed;top:100px;left:20px;z-index: 1000px;color:coral">Launch by: 31 July 2025</div> 
+    <!-- <div style="height: auto;"> -->
+    <div class="main-cont gen-flex-col">
+        <div class="page-intro-info">
+            Revolutionizing Eswatini’s Job Market with Freelance and Remote Opportunities.
+            
+        </div><br>
+        <div onclick="window.location.href='/fl_job_ads_form'" class="hire-btn">Advertise Freelance Job</div>
+        <div class="line"></div><br>
+        <div class="tag-line">Find The Best Talent - Get a Professional Touch to Increase Speed & Efficiency amongst your team</div>
+        <div style="margin:0 auto"><img style="height:500px" src="static/icons/teamwork.png" class="teamw-image"/></div><br>
+         <div class="page-intro-info">
+            Avoid Overloads and Manage Workload Fluctuations by Leveraging Remote
+and Freelance Work & Save Costs👍.
+        </div>
+        <div class="line"></div><br>
+        <div class="ad-cont gen-flex-col">
+            <div style="align-items: stretch;gap:20px" class="genner gen-flex">
+                <div class="ad-cards gen-flex-col">
+                    <div><img src="static/icons/speed-icon.png" class="freel-icons" /></div>
+                    <h1>Increase Speed & Agility</h1>
+                    <div class="benefit-content">With the ability to post immediate job openings, you can
+    quickly respond to fluctuating workloads - bringing in freelancers who can start almost
+    instantly.</div>
+                </div>
+                <div class="ad-cards gen-flex-col">
+                    <div><img src="static/icons/mission-icon.png" class="freel-icons" /></div>
+                    <h1>Focus on Core Activities</h1>
+                    <div class="benefit-content">Delegate urgent tasks to freelancers - concentrate on strategic initiatives, thereby
+    increasing overall productivity.</div>
+                </div>
+            </div>
+            <div style="align-items: stretch;gap:20px" class="genner gen-flex">
+                <div class="ad-cards gen-flex-col">
+                    <div><img src="static/icons/flexibility-icon.png" class="freel-icons" /></div>
+                    <h1>Increase Flexibility</h1>
+                    <div class="benefit-content">Fill short-term positions urgently without the need for 
+                        long-term commitment.
+                    </div>
+                </div>
+                <div class="ad-cards gen-flex-col">
+                    <div><img src="static/icons/specialized-skills.png" class="freel-icons" /></div>
+                    <h1>Access to Specialized Skills</h1>
+                    <div class="benefit-content">Tap into a broad network of ambitious talents with specific
+    expertise who can manage one-off tasks or projects.</div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+<!-- </div> -->
+</div>
+
+
+{%endblock%}
