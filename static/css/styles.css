@@ -3261,6 +3261,26 @@ display:none
   #floating-share:hover{
     cursor:pointer; 
   }
+
+  .form-step{
+    transition: all 0.3s ease-in 0.3s ;
+  }
+
+  .form-step.active{
+    animation: fade-in 0.5s ease-in 0.3s forwards !important;
+  }
+
+  @keyframes fade-in {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity:0.5;
+    
+    }100%{
+        opacity: 1;
+    }
+  }
   
 
   /* Spinner  */

@@ -530,6 +530,7 @@ def freelance_ad():
 
 @app.route('/notify', methods=['GET', 'POST'])
 def notify():
+    print("Get Notified: ", request.remote_addr)
 
     message = request.args.get("message", "Default message") if request.method == "GET" else request.get_json().get("message", "Default message")
 
@@ -588,7 +589,7 @@ def getuser_endpoints():
         job_missed, days_missed = updates_modal(usr_ip=ip)
         print("++Check The Days: ",days_missed)
         print( "+++Jobs: ", job_missed )
-        if days_missed >= 5 and len(job_missed) > 0:
+        if days_missed >= 1 and len(job_missed) > 0:
             try:
                 webpush(
                     subscription_info=sub,
@@ -1662,32 +1663,30 @@ def fl_job_ads_form():
     fl_job_ad_form = Freelance_Ads_Form()
     fl_job_ads_model = Freelance_Jobs_Ads
 
+    form = request.form
+
     db.create_all()
 
     if request.method == 'POST':
+        if current_user and not current_user.is_authenticated:
+            flash("You are not registered in the system", "warning")
+            return redirect(url_for("fl_job_ads_form"))
         if fl_job_ad_form.validate_on_submit():
             job_post1 = fl_job_ads_model(
-                service_title=fl_job_ad_form.service_title.data,
-                specialty=request.form.get('speciality'),
+                service_title = fl_job_ad_form.service_title.data,
                 description=fl_job_ad_form.description.data,
                 project_duration=fl_job_ad_form.start_date.data,
-                project_duration2=fl_job_ad_form.end_date.data,
-                project_prerequits=fl_job_ad_form.project_prerequits.data,
-                working_days=fl_job_ad_form.working_days.data,
-                service_category=request.form.get('field_category_sel'),
-                contact_person=fl_job_ad_form.posted_by.data,
+                working_days=fl_job_ad_form.days_of_work.data,
+                job_posted_by=fl_job_ad_form.posted_by.data,
                 # date_posted = datetime.utcnow(),
                 application_deadline=fl_job_ad_form.application_deadline.data,
-                job_posted_by=current_user.id
+                contact_person=current_user.id
             )
 
             # if bools are True
-            if not request.form.get('speciality'):
-                job_post1.service_title = fl_job_ad_form.speciality.data
-            if not request.form.get('field_category_sel'):
-                job_post1.service_category = fl_job_ad_form.service_category.data
-            if fl_job_ad_form.benefits_bl.data:
-                job_post1.benefits = fl_job_ad_form.benefits.data
+            if not form.get("job_title"):
+                job_post1.service_title = fl_job_ad_form.other_job.data
+               
 
             db.session.add(job_post1)
             db.session.commit()

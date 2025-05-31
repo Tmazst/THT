@@ -230,7 +230,6 @@ class page_activity_analytics(db.Model):
 
 
 
-
 class Hire_Freelancer(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     employer_id = db.Column(db.Integer, ForeignKey('user.id'))
@@ -302,6 +301,7 @@ class FreeL_Applications(db.Model, UserMixin):
     time_stamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     closed = db.Column(db.String(200))
 
+
 class Freelance_Jobs_Ads(db.Model, UserMixin):
 
     __tablename__ = "freelance_job_ads"
@@ -342,6 +342,27 @@ class visitors(db.Model):
     latest_visit = db.Column(db.DateTime)
     num_visits = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime)
+    page_stats_id = relationship("page_visits_stats",backref="visitors",lazy=True)
+    sources_stats_id = relationship("page_visits_sources",backref="visitors",lazy=True)
+
+
+class page_visits_stats(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    visitor_id = db.Column(db.Integer, ForeignKey("visitors.id"))
+    home = db.Column(db.Integer)
+    featured = db.Column(db.Integer)
+    freelance = db.Column(db.Integer)
+    courses = db.Column(db.Integer)
+    jo_boards = db.Column(db.Integer)
+    other = db.Column(db.Integer)
+    last_visit = db.Column(db.DateTime)
+
+class page_visits_sources(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    visitor_id = db.Column(db.Integer, ForeignKey("visitors.id"))
+    source = db.Column(db.String(122))
+    timestamp = db.Column(db.DateTime)
+
 
 class Survey_Report(db.Model):
     id = db.Column(db.Integer, primary_key=True)

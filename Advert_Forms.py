@@ -37,24 +37,19 @@ class Job_Ads_Form(FlaskForm):
 
     publish = SubmitField("Publish")
 
+
 class Freelance_Ads_Form(FlaskForm):
 
-    service_title = StringField('Project Title:', validators=[DataRequired(), Length(min=2, max=120)])
-    speciality = StringField('Expertise or Skill:')
-    category = StringField('Category:')
-    description = TextAreaField('Project Description:', validators=[DataRequired(), Length(min=5, max=400)])
+    service_title = StringField('Project Title:')
+    other_job = StringField('Other:')
+    days_of_work = StringField('How Many Days?:')
+    description = TextAreaField('Job Description:', validators=[DataRequired(), Length(min=10, max=500)])
     start_date = DateField('Project Starts:',format="%Y-%m-%d")
-    end_date = DateField('Ends:',format="%Y-%m-%d")
-    project_duration = StringField('Project Duration (Start - End):')
-    working_days = StringField('Project Working Days:')
-    project_prerequits = TextAreaField('Pre-requisites for Project:', validators=[DataRequired(), Length(min=5, max=500)])
-    benefits_bl = BooleanField('Include Benefits?:')
-    benefits = TextAreaField('Benefits: (Tick To Include)')
     application_deadline = DateField('Application Deadline:', format="%Y-%m-%d" )
-    # application_details = TextAreaField('Application Details', validators=[DataRequired(), Length(min=2, max=20)])
     posted_by = StringField('Posted By:')
 
     publish = SubmitField("Publish")
+
 
 class Company_Register_Form(FlaskForm):
 
@@ -124,9 +119,7 @@ class Reset(FlaskForm):
     reset = SubmitField('Reset')
 
 class Reset_Request(FlaskForm):
-
     email = StringField('email', validators=[DataRequired(), Email()])
-
     reset = SubmitField('Submit')
 
 class Work_Feedback(FlaskForm):
@@ -134,7 +127,6 @@ class Work_Feedback(FlaskForm):
     submit = SubmitField('Submit')
 
 class Approved_Form(FlaskForm):
-
     submit = SubmitField('Approve')
 
 class Freelance_Section(FlaskForm):
