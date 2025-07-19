@@ -528,6 +528,7 @@ def freelance_ad():
 
     return render_template("freelance_ad.html")
 
+
 @app.route('/notify', methods=['GET', 'POST'])
 def notify():
     print("Get Notified: ", request.remote_addr)
@@ -2698,7 +2699,6 @@ def job_reports():
 
 
 @app.route("/easy_apply", methods=["GET", "POST"])
-@login_required
 def easy_apply():
 
     form = EasyApplyForm()

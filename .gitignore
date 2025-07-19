@@ -1,0 +1,22 @@
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore credential and key files
+client.json
+keys.txt
+
+# Ignore static user files (CVs, images, PDFs, etc.)
+static/files/*
+static/images/*
+static/icons/*.jpg
+static/icons/*.webp
+
+# Don't ignore versioned icons you want
+!static/icons/icon_*.png
+!static/icons/android-icon.png
+
+# Ignore editor/system files
+*.DS_Store
+*.swp
+Thumbs.db
