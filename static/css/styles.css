@@ -3793,6 +3793,17 @@ display:none
   margin-bottom:10px;
 }
 
+.notif-modal{
+  background-color: rgba(0,103,105,0.3) !important;
+  backdrop-filter: blur(5px) !important;
+  border: 1px solid var(--main-color) !important;
+}
+
+#notif-modal{
+background-color:var(--main-color) !important;
+color:white    !important;
+}
+
 .nav-links a:hover{
   letter-spacing: 5px;
   border-bottom:1px solid coral;

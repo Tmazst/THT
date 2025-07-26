@@ -522,6 +522,37 @@ def subscribe():
 
     return jsonify({'status': 'subscribed'})
 
+@app.route('/check_subscriptions', methods=['GET'])
+def check_subscriptions():
+    ip = request.remote_addr
+    sub_status = NotificationsAccess.query.filter_by(ip=ip).first()
+
+    if sub_status:
+        print("User Subscribed: ", request.remote_addr, " - ", sub_status.endpoint, " - ", sub_status.timestamp)
+        return jsonify({'status': True})
+    else:
+        return jsonify({'status': False})
+
+@app.route('/update_subscription', methods=['POST'])
+def update_subscription():
+    data = request.get_json()
+    ip = data.get('ip')
+
+    if ip:
+        subscription_entry = NotificationsAccess.query.filter_by(ip=ip).first()
+        if subscription_entry:
+            subscription_entry.endpoint=data.get("endpoint")
+            subscription_entry.p256dh=data["keys"]["p256dh"]
+            subscription_entry.auth=data["keys"]["auth"]
+            subscription_entry.timestamp=current_time_wlzone()
+
+            db.session.commit()
+            print("Subscription Updated: ", ip, " - ", subscription_entry.endpoint, " - ", subscription_entry.timestamp)
+            return jsonify({'status': 'updated'})
+        else:
+            return jsonify({'status': 'not_found'})
+
+    return jsonify({'status': 'error'})
 
 @app.route('/freelance_ad')
 def freelance_ad():
