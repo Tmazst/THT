@@ -88,7 +88,7 @@ if os.environ.get('EMAIL_INFO') == 'info@techxolutions.com':
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tht_db.db"
 else:#Online
     app.config[
-    "SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://techtlnf_tmaz:!Tmazst4185#@localhost/techtlnf_tht_db"
+    "SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:!Tmazst4185#@localhost/techtlnf_tht_db"
 
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_recycle': 280}
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
