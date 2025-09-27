@@ -106,6 +106,7 @@ app.config['FOLDER']='attachments'
 
 db.init_app(app)
 
+app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 oauth = OAuth(app)
 
