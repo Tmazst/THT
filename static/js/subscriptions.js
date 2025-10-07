@@ -8,7 +8,7 @@ addEventListener('DOMContentLoaded', function() {
 
                 if (!data.status) {
                     // If not subscribed, show the subscription modal
-                    showSubscriptionModal();
+                    // showSubscriptionModal();
                 }
             } catch (error) {
                 console.error('Error checking subscription status:', error);
@@ -79,9 +79,9 @@ addEventListener('DOMContentLoaded', function() {
         }
 
         // Check subscription status on page load
-        window.onload = function() {
-            setTimeout(checkSubscriptionStatus, 6000); // Wait for 3 seconds before running the function
-        };
+        // window.onload = function() {
+        //     setTimeout(checkSubscriptionStatus, 6000); // Wait for 3 seconds before running the function
+        // };
 
     async function checkAndUpdateSubscription() {
         try {
@@ -115,6 +115,6 @@ addEventListener('DOMContentLoaded', function() {
     }
 
     // Run the check and update function
-    checkAndUpdateSubscription();
+    // checkAndUpdateSubscription();
 
 });
