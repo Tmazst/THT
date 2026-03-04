@@ -43,10 +43,8 @@
             {% endif %}
         {% endwith %}
     </div>
-  <!--<h3>Password Reset<br> <span class="spans"></span></h3>--->
-
-
-    <!----FORM----->
+  
+  <!----FORM----->
   <div style="min-width:border:none;" class="form_container">
     <div class="row justify-content-center">
     <div class="col-md-5">
@@ -58,12 +56,12 @@
         <form style="background-color: f8db5a;width:;"  _lpchecked="1" action="" method="post">
 
             <div style="background-color: f8f95a;" class="job-ad-group marginise-bottom">
-                  {{fl_job_ad_form.hidden_tag()}}
+                 {{fl_job_ad_form.hidden_tag()}}
                  {{fl_job_ad_form.csrf_token}}
             </div>
 
-             <!-------JOB TYPE--------->
-             <div class="form-step active">
+            <!-------JOB TYPE--------->
+            <div class="form-step active">
                 <div class="job-ad-group marginise-bottom ">
                     <label for="Expertise" class="labels ">Job Title: </label>
                     <select onchange="changeOther(event)" class="form-control" style="margin-bottom:10px;width:40%;" id="job_title" name="job_title" inputmode="text">
@@ -109,7 +107,6 @@
                 <button type="button" class="btns" onclick="nextStep()">Next</button>
             </div>
             
-
             <!-------JOB DESCRIPTION--------->
             <div class="form-step">
                 <div class="job-ad-group marginise-bottom">

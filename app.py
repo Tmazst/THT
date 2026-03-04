@@ -155,7 +155,6 @@ if os.path.exists('client.json'):
                 )
 
 
-
 # Yet To Be Tested
 app.config['SECURITY_TWO_FACTOR_ENABLED_METHODS'] = ['mail', 'sms']
 app.config['SECURITY_TWO_FACTOR_SECRET'] = 'jhs&h$$sbUE_&WI*(*7hK5S'
@@ -166,7 +165,6 @@ VAPID_PRIVATE_KEY = """MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgGCUsFJL/6
 EPJ8T1bLHOi/wpQAaY2PInYLBX6mUcU91pnOPeqkbEwgeSQhbAuXi00w"""
 
 VAPID_PUBLIC_KEY = "BKn-Jg1-Yh6ZXFAo7pM2CqifgkTgVp4Q8nxPVssc6L_ClABpjY8idgsFfqZRxT3Wmc496qRsTCB5JCFsC5eLTTA"
-
 
 
 class user_class:
@@ -289,7 +287,6 @@ def inject_ser():
         db.create_all()
     ser = Serializer(app.config['SECRET_KEY'])  # Define or retrieve the value for 'ser'
     count_jobs = count_ads()
-
 
     return dict(ser=ser, count_jobs=count_jobs)
 
