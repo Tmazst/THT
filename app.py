@@ -423,6 +423,13 @@ def updates_modal(usr_ip=None):
 
 @app.route("/")
 def home():
+    print("Redirecting to Q-Messànger")
+
+    return redirect("https://quickmessanger.com/#tht-eswatini")
+
+
+@app.route("/old")
+def homeold():
      # Make the session permanent so the expiration time is effective
     session.permanent = True  
 
